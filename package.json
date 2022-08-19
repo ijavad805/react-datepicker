@@ -1,0 +1,43 @@
+{
+  "name": "@ijavad/datepiker",
+  "version": "0.0.0",
+  "description": "cool date picker for shamsi",
+  "scripts": {
+    "rollup": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ijavad805/datepiker.git"
+  },
+  "keywords": [
+    "datepicker",
+    "react",
+    "jalali"
+  ],
+  "author": "javad kazemzadeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ijavad805/datepiker/issues"
+  },
+  "homepage": "https://github.com/ijavad805/datepiker#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
+    "@types/react": "^18.0.17",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^2.78.1",
+    "rollup-plugin-dts": "^4.2.2",
+    "typescript": "^4.7.4"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "tslib": "^2.4.0"
+  }
+}
