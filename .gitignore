@@ -1,2 +1,4 @@
 /node_modules
 /dist
+.npmrc
+/src/stories

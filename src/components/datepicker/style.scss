@@ -1,0 +1,58 @@
+.__datepicker {
+    position: relative;
+
+    * {
+        --holiday: rgba(234, 43, 9, 0.829);
+        --light-border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    &.__datepicker-theme-blue {
+        * {
+            --primary: rgb(0, 102, 255);
+            --secondary: rgb(55, 135, 255);
+        }
+    }
+
+    &.__datepicker-theme-red {
+        * {
+            --primary: rgb(255, 55, 0);
+            --secondary: rgb(255, 91, 46);
+        }
+    }
+
+    &.__datepicker-theme-papular {
+        * {
+            --primary: rgb(140, 6, 218);
+            --secondary: rgba(0, 0, 0, 0.125);
+        }
+    }
+
+    &.__datepicker-theme-orange {
+        * {
+            --primary: rgb(255, 102, 0);
+            --secondary: rgba(0, 0, 0, 0.125);
+        }
+    }
+
+    &.__datepicker-theme-yellow {
+        * {
+            --primary: rgb(255, 195, 31);
+            --secondary: rgba(0, 0, 0, 0.125);
+        }
+    }
+
+    &.__datepicker-theme-green {
+        * {
+            --primary: rgb(111, 255, 0);
+            --secondary: rgba(0, 0, 0, 0.125);
+        }
+    }
+
+    &.__datepicker-theme-mode-dark {
+        * {
+            --background: rgb(51, 51, 51);
+            --color: #fff;
+            --light-border: 1px solid rgba(0, 0, 0, 0.8);
+        }
+    }
+}

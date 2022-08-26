@@ -1,0 +1,69 @@
+.__datepicker-pick-day-container {
+    width: 270px;
+    margin: auto;
+
+    .__datepicker-weak {
+        display: flex;
+        margin: 0 10px;
+        align-items: center;
+        flex-direction: row-reverse;
+        background-color: var(--primary);
+        border-radius: 5px;
+
+        .__datepicker-weak-item {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color);
+            font-size: 12px;
+            margin: 5px;
+
+            &.__datepicker-holiday {
+                color: var(--holiday);
+            }
+        }
+    }
+
+    .__datepicker-pick-day {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 5px 10px;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+
+        .__datepicker-days {
+            width: 23px;
+            height: 23px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            user-select: none;
+
+            &:hover {
+                background-color: var(--secondary);
+            }
+
+            &.__datepicker-day-disabled {
+                opacity: 0.4;
+            }
+
+            &.__datepicker-today {
+                color: var(--primary);
+                border: 1px solid var(--primary);
+                ;
+            }
+
+            &.__datepicker-selected {
+                background-color: var(--primary);
+                color: #fff;
+            }
+        }
+    }
+}
