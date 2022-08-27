@@ -4,6 +4,9 @@
     * {
         --holiday: rgba(234, 43, 9, 0.829);
         --light-border: 1px solid rgba(0, 0, 0, 0.125);
+        --corner: 5px;
+        font-family: "IRANSans";
+        font-size: 12px;
     }
 
     &.__datepicker-theme-blue {
@@ -23,28 +26,28 @@
     &.__datepicker-theme-papular {
         * {
             --primary: rgb(140, 6, 218);
-            --secondary: rgba(0, 0, 0, 0.125);
+            --secondary: rgba(0, 0, 0, 0.3);
         }
     }
 
     &.__datepicker-theme-orange {
         * {
             --primary: rgb(255, 102, 0);
-            --secondary: rgba(0, 0, 0, 0.125);
+            --secondary: rgba(0, 0, 0, 0.3);
         }
     }
 
     &.__datepicker-theme-yellow {
         * {
-            --primary: rgb(255, 195, 31);
-            --secondary: rgba(0, 0, 0, 0.125);
+            --primary: rgb(215, 160, 8);
+            --secondary: rgba(0, 0, 0, 0.3);
         }
     }
 
     &.__datepicker-theme-green {
         * {
-            --primary: rgb(111, 255, 0);
-            --secondary: rgba(0, 0, 0, 0.125);
+            --primary: rgb(91, 203, 6);
+            --secondary: rgb(103, 223, 12);
         }
     }
 

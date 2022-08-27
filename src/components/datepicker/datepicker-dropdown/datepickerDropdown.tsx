@@ -9,10 +9,7 @@ import useDateTools from "../../../hooks/useDateTools";
 
 interface IProps {
     open: boolean;
-    footer?: (
-        moment: moment.Moment,
-        setValue?: (val?: moment.Moment) => void
-    ) => JSX.Element | JSX.Element[] | string;
+    footer?: (moment: Function, setValue?: any) => JSX.Element | JSX.Element[] | string;
 }
 const DatepickerDropdown = ({ open, footer }: IProps) => {
     const dropdownRef = useRef(null);

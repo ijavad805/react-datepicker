@@ -31,6 +31,19 @@ export const English = Template.bind({});
 English.args = {
     theme: "blue",
     lang: "en",
+    modeTheme: "dark",
+    footer: (moment, setValue) => {
+        return (
+            <>
+                <div
+                    onClick={() => {
+                        if (setValue) setValue(moment());
+                    }}>
+                    Today
+                </div>
+            </>
+        );
+    },
 };
 
 export const Persian = Template.bind({});
@@ -44,9 +57,40 @@ Persian.args = {
             <>
                 <div
                     onClick={() => {
-                        setValue(moment());
+                        if (setValue) setValue(moment());
                     }}>
                     امروز
+                </div>
+            </>
+        );
+    },
+};
+
+export const AllParams = Template.bind({});
+
+AllParams.args = {
+    theme: "blue",
+    lang: "en",
+    modeTheme: "dark",
+    dayEffects: [
+        {
+            day: "2022-08-26",
+            title: "Custom day",
+            color: "red",
+            dotColor: "red",
+        },
+    ],
+    disabledDate: (moment) => {
+        return true;
+    },
+    footer: (moment, setValue) => {
+        return (
+            <>
+                <div
+                    onClick={() => {
+                        if (setValue) setValue(moment());
+                    }}>
+                    Today
                 </div>
             </>
         );

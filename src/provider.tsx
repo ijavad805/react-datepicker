@@ -13,6 +13,13 @@ export interface IConfigDatePicker {
     setDate?: Function;
     setValue?: Function;
     value?: moment.Moment;
+    dayEffects?: {
+        title?: string;
+        color?: string;
+        dotColor?: string;
+        day: string;
+    }[];
+    disabledDate?: (date: moment.Moment) => Boolean;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -28,6 +35,13 @@ interface IProps {
     config: {
         lang: keyof typeof EnumLang;
         theme: keyof typeof EnumTheme;
+        dayEffects: {
+            title?: string;
+            color?: string;
+            dotColor?: string;
+            day: string;
+        }[];
+        disabledDate?: (date: moment.Moment) => Boolean;
     };
     input: any;
     format: string;

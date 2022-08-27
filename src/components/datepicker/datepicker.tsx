@@ -11,13 +11,22 @@ export interface IPropsDatepicker {
     input?: JSX.Element;
     format?: string;
     footer?: (
-        moment?: moment.Moment,
+        moment?: any,
         setValue?: (val?: moment.Moment) => void
     ) => JSX.Element | JSX.Element[] | string;
     onChange?: (val?: moment.Moment) => void;
     value?: moment.Moment;
     defaultValue?: moment.Moment;
     modeTheme?: "dark" | "light";
+    dayEffects?: {
+        title?: string;
+        color?: string;
+        dotColor?: string;
+        day: string;
+    }[];
+    disabledDate?: (date: moment.Moment) => Boolean;
+    disabled?: boolean;
+    loading?: boolean;
 }
 
 const Datepicker = ({
@@ -30,6 +39,10 @@ const Datepicker = ({
     value,
     defaultValue,
     modeTheme = "light",
+    dayEffects,
+    disabled,
+    disabledDate,
+    loading,
 }: IPropsDatepicker) => {
     const [open, setOpen] = useState<boolean>(true);
     const ref = useRef(null);
@@ -39,6 +52,7 @@ const Datepicker = ({
     const Input = React.cloneElement(input, {
         ref: refInput,
         onFocus: () => setOpen(true),
+        disabled: disabled,
     });
 
     useOutsideClick(ref, () => {
@@ -51,6 +65,8 @@ const Datepicker = ({
             config={{
                 lang: lang,
                 theme: theme,
+                disabledDate,
+                dayEffects,
             }}
             format={format}
             onChange={onChange}

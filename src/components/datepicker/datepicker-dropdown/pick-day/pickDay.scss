@@ -45,13 +45,25 @@
             cursor: pointer;
             border: 1px solid transparent;
             user-select: none;
+            position: relative;
 
-            &:hover {
+            .__datepicker-day-effect {
+                width: 3px;
+                height: 3px;
+                border-radius: 10px;
+                position: absolute;
+                bottom: 1px;
+                left: 50%;
+                transform: translate3d(-50%, 0, 0);
+            }
+
+            &:hover:not(.__datepicker-day-disabled) {
                 background-color: var(--secondary);
             }
 
             &.__datepicker-day-disabled {
                 opacity: 0.4;
+                cursor: no-drop;
             }
 
             &.__datepicker-today {
