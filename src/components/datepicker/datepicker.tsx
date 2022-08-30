@@ -44,7 +44,7 @@ const Datepicker = ({
     disabledDate,
     loading,
 }: IPropsDatepicker) => {
-    const [open, setOpen] = useState<boolean>(true);
+    const [open, setOpen] = useState<boolean>(false);
     const ref = useRef(null);
 
     const refInput = useRef();

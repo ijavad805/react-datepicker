@@ -6,7 +6,7 @@ moment_jalali.locale("fa");
 
 export interface IConfigDatePicker {
     lang: "fa" | "en";
-    theme: EnumTheme;
+    theme: keyof typeof EnumTheme;
     pick?: "day" | "month" | "year";
     setPick?: (val: "day" | "month" | "year") => void;
     date: moment.Moment;
@@ -35,7 +35,7 @@ interface IProps {
     config: {
         lang: keyof typeof EnumLang;
         theme: keyof typeof EnumTheme;
-        dayEffects: {
+        dayEffects?: {
             title?: string;
             color?: string;
             dotColor?: string;
@@ -66,7 +66,7 @@ const DatepickerProvider = ({
 
     useEffect(() => {
         if (value) input.current.value = value.format(format);
-        if (onChange) onChange(value);
+        if (onChange && value !== undefined) onChange(value.clone().locale("en"));
         if (value) setDate(value);
     }, [value]);
 
