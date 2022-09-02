@@ -1,7 +1,7 @@
 {
-  "name": "@ijavad805/datepiker",
-  "version": "0.0.3",
-  "description": "cool date picker for miladi and shamsi",
+  "name": "@ijavad805/react-datepicker",
+  "version": "0.0.5",
+  "description": "cool date picker for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
     "test": "jest",
@@ -15,7 +15,13 @@
   "keywords": [
     "datepicker",
     "react",
-    "jalali"
+    "jalali",
+    "date picker",
+    "date",
+    "react-component",
+    "persian",
+    "shamsi",
+    "farsi"
   ],
   "author": "Javad kazemzadeh",
   "license": "ISC",
@@ -71,6 +77,6 @@
     "react-dom": "^18.2.0"
   },
   "publishConfig": {
-    "registry": "https://pkgs.dev.azure.com/ijavad805/_packaging/REACT/npm/registry/"
+    "registry": "https://npm.pkg.github.com/ijavad805"
   }
 }

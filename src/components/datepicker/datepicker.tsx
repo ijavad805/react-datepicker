@@ -111,7 +111,10 @@ const Datepicker = ({
                     width: refInput.current?.offsetWidth,
                 }}
                 ref={ref}>
-                <div className={"__datepicker-input"}>{Input}</div>
+                <div className={"__datepicker-input"}>
+                    {Input}
+                    {/* TODO :: add delete icon if user select a date and if not show date icon */}
+                </div>
                 {open && (
                     <DatepickerDropdown
                         open={open}

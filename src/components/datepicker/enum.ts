@@ -10,7 +10,7 @@ export enum EnumLang {
     fa = "fa",
     en = "en",
 }
-
+    
 export enum EnumPosition {
     auto = "auto",
     rightTop = "rightTop",
