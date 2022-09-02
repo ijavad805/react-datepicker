@@ -28,10 +28,10 @@
 
     .__datepicker-pick-day {
         display: flex;
-        flex-wrap: wrap;
         margin: 5px 10px;
         flex-wrap: wrap;
         flex-direction: row-reverse;
+        justify-content: space-around;
 
         .__datepicker-days {
             width: 23px;
