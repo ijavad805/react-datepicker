@@ -7,7 +7,7 @@ A cool datepicker for english and persian you can see some features here :
  <li>Show loading... and you can change it to whatever you want :)</li>
  <li>You can use any input component for this datepicker</li>
  <li>You can set event for days and make them different vs normal days</li>
- <li>Change your input format (example </li>
+ <li>Change your input format </li>
  <li>Disable some date</li>
  <li>Set your custom footer for datepicker</li>
  </ul>
