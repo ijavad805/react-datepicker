@@ -1,6 +1,6 @@
 {
   "name": "@ijavad805/react-datepicker",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "cool date picker for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
