@@ -1,14 +1,27 @@
 .__datepicker-loading-container {
     position: relative;
-    
+
     .__datepicker-loading {
-        width: 48px;
-        height: 48px;
-        display: inline-block;
-        position: relative;
-        background: #FFF;
-        box-sizing: border-box;
-        animation: flipX 1s linear infinite;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: var(--corner);
+
+        .__datepicker-loading-spin {
+            width: 48px;
+            height: 48px;
+            display: inline-block;
+            background: #FFF;
+            position: relative;
+            box-sizing: border-box;
+            animation: flipX 1s linear infinite;
+        }
     }
 }
 

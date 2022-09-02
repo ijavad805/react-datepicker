@@ -16,7 +16,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color);
+            color: #fff;
             font-size: 12px;
             margin: 5px;
 
@@ -57,13 +57,12 @@
                 transform: translate3d(-50%, 0, 0);
             }
 
-            &:hover:not(.__datepicker-day-disabled) {
+            &:hover:not(.__datepicker-day-disabled):not(.__datepicker-today):not(.__datepicker-selected) {
                 background-color: var(--secondary);
             }
 
             &.__datepicker-day-disabled {
                 opacity: 0.4;
-                cursor: no-drop;
             }
 
             &.__datepicker-today {

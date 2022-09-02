@@ -72,6 +72,7 @@ AllParams.args = {
     theme: "blue",
     lang: "en",
     modeTheme: "dark",
+    loading:true,
     dayEffects: [
         {
             day: "2022-08-26",
@@ -80,9 +81,6 @@ AllParams.args = {
             dotColor: "red",
         },
     ],
-    disabledDate: (moment) => {
-        return true;
-    },
     footer: (moment, setValue) => {
         return (
             <>

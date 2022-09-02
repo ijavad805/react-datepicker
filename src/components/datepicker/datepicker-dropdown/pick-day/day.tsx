@@ -1,15 +1,19 @@
 import React from "react";
 import { useContext } from "react";
 import useDateTools from "../../../../hooks/useDateTools";
+import usePersian from "../../../../hooks/usePersian";
 import { DatepickerContext } from "../../../../provider";
 
 interface IProps {
     day: string;
     date: moment.Moment;
+    onClick?: () => void;
+    disabled?: boolean;
 }
-const Day = ({ day, date }: IProps) => {
+const Day = ({ day, date, disabled, onClick }: IProps) => {
     const config = useContext(DatepickerContext);
     const { moment } = useDateTools();
+    const { convertNumbers } = usePersian();
 
     const findEffect = () => {
         return config.dayEffects?.find(
@@ -25,7 +29,7 @@ const Day = ({ day, date }: IProps) => {
         if (day === config.value?.format("YYYY-MM-D")) {
             class_ += " __datepicker-selected";
         }
-        if (config?.disabledDate && config?.disabledDate(moment(day))) {
+        if ((config?.disabledDate && config?.disabledDate(moment(day))) || disabled) {
             class_ += " __datepicker-day-disabled";
         }
 
@@ -40,14 +44,15 @@ const Day = ({ day, date }: IProps) => {
             }}
             onClick={() => {
                 if (config.setValue) {
-                    if (config?.disabledDate && config?.disabledDate(moment(day))) {
+                    if (onClick) onClick();
+                    if ((config?.disabledDate && config?.disabledDate(moment(day))) || disabled) {
                         return false;
                     }
                     config.setValue(moment(day));
                 }
             }}
             title={findEffect()?.title}>
-            {moment(day).format("D")}
+            {convertNumbers(moment(day).format("D"))}
             {findEffect() && (
                 <span
                     className="__datepicker-day-effect"

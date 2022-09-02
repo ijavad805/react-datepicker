@@ -48,6 +48,8 @@ interface IProps {
     onChange?: (val?: moment.Moment) => void;
     value?: moment.Moment;
     defaultValue?: moment.Moment;
+    closeWhenSelectADay?: boolean;
+    setOpen: Function;
 }
 
 const DatepickerProvider = ({
@@ -58,6 +60,8 @@ const DatepickerProvider = ({
     onChange,
     value: value_,
     defaultValue,
+    setOpen,
+    closeWhenSelectADay,
 }: IProps) => {
     const moment_ = config.lang === "fa" ? moment_jalali : moment;
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
@@ -65,7 +69,10 @@ const DatepickerProvider = ({
     const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {
-        if (value) input.current.value = value.format(format);
+        if (value && document.activeElement !== input.current) {
+            input.current.value = value.format(format);
+            if (closeWhenSelectADay) setOpen(false);
+        }
         if (onChange && value !== undefined) onChange(value.clone().locale("en"));
         if (value) setDate(value);
     }, [value]);
