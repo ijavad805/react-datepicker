@@ -1,6 +1,6 @@
 {
   "name": "@ijavad805/react-datepicker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "cool date picker for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
@@ -25,7 +25,7 @@
     "farsi"
   ],
   "author": "Javad kazemzadeh",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ijavad805/react-datepicker/issues"
   },
