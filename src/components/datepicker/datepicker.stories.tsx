@@ -12,10 +12,6 @@ export default {
             control: "select",
             options: ["blue", "red", "orange", "yellow", "green"],
         },
-        lang: {
-            control: "select",
-            options: ["fa", "en"],
-        },
         modeTheme: {
             control: "select",
             options: ["dark", "light"],
