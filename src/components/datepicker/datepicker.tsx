@@ -5,12 +5,14 @@ import { useOutsideClick } from "../../hooks/useOutSideClick";
 import moment from "moment";
 import "./style.scss";
 import { EnumLang, EnumTheme } from "./enum";
+import { EDropdownPositions } from "./datepicker-dropdown/useDropdownRoles";
 var moment_jalali = require("jalali-moment");
 moment_jalali.locale("fa");
 
 export interface IPropsDatepicker {
     theme?: keyof typeof EnumTheme;
     lang?: keyof typeof EnumLang;
+    adjustPosition?: typeof EDropdownPositions | "modal" | "auto";
     input?: JSX.Element;
     format?: string;
     footer?: (
@@ -52,6 +54,7 @@ const Datepicker = ({
     closeWhenSelectADay = true,
     onOpen,
     spinnerComponent,
+    adjustPosition = "auto",
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
@@ -121,6 +124,9 @@ const Datepicker = ({
                         footer={footer}
                         loading={loading}
                         spinnerComponent={spinnerComponent}
+                        adjustPosition={adjustPosition}
+                        refMain={ref}
+                        setOpen={setOpen}
                     />
                 )}
             </div>

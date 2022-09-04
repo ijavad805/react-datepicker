@@ -1,3 +1,13 @@
+.__datepicker-modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10001;
+    background-color: rgba($color: #000000, $alpha: 0.425);
+}
+
 .__datepicker-dropdown {
     width: 260px;
     position: absolute;
@@ -6,6 +16,39 @@
     background: var(--background);
     border: 1px solid rgba($color: #000000, $alpha: 0.125);
     border-radius: var(--corner);
+
+    &.right-top {
+        bottom: 100%;
+        right: 0;
+    }
+
+    &.left-top {
+        bottom: 100%;
+        left: 0;
+    }
+
+    &.right-bottom {
+        right: 0;
+    }
+
+    &.left-bottom {
+        left: 0;
+    }
+
+    &.fix-top {
+        position: fixed;
+        top: 0;
+        right: unset;
+        left: unset;
+    }
+
+    &.modal {
+        position: fixed;
+        top: 50%;
+        right: 50%;
+        transform: translate3d(50%, -50%, 0);
+        z-index: 10002;
+    }
 
     * {
         color: var(--color);

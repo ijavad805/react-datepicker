@@ -28,11 +28,19 @@ export default {
             control: "string",
             defaultValue: "YYYY-MM-DD",
         },
+        adjustPosition: {
+            control: "select",
+            options: ["right-top", "left-top", "right-bottom", "left-bottom", "modal", "auto"],
+        },
     },
 } as ComponentMeta<typeof Datepicker>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Datepicker> = args => <Datepicker {...args} />;
+const Template: ComponentStory<typeof Datepicker> = args => (
+    <div style={{ height: 1500, direction: "ltr"}}>
+        <Datepicker {...args} />
+    </div>
+);
 
 export const English = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
