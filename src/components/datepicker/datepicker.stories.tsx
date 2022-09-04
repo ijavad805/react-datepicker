@@ -20,6 +20,14 @@ export default {
             control: "select",
             options: ["dark", "light"],
         },
+        loading: {
+            control: "select",
+            options: [true, false],
+        },
+        format: {
+            control: "string",
+            defaultValue: "YYYY-MM-DD",
+        },
     },
 } as ComponentMeta<typeof Datepicker>;
 
@@ -72,7 +80,7 @@ AllParams.args = {
     theme: "blue",
     lang: "en",
     modeTheme: "dark",
-    loading:true,
+    loading: true,
     dayEffects: [
         {
             day: "2022-08-26",
