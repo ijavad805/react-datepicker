@@ -89,7 +89,7 @@ This is my todo list for feature :
 </ul>
 
 ## Report issues
-My friend, if you see any bugs, please tell me, I check my mails more then my SMS: 
+My friend, if you see any bugs, please tell me: 
 <ul>
 <li>Email: ijavad805@gmail.com</li>
 <li>Github issues: <a href="https://github.com/ijavad805/react-datepicker/issues" target="_blank">https://github.com/ijavad805/react-datepicker/issues</a></li>
