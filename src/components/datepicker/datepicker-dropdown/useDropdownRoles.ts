@@ -21,17 +21,19 @@ const useDropdownRoles = (ref: any, open: boolean) => {
             scroll: window.scrollX,
         };
 
+        console.log(rect);
+        
         if (rect.top < 0) setFix("fix-top");
         else setFix(undefined);
         
         if (rect.right > windowOffsets.width - rect.left) {
-            if (rect.top < rect.bottom) {
+            if (rect.top <= windowOffsets.height - rect.bottom) {
                 setPosition(EDropdownPositions.rightBottom);
             } else {
                 setPosition(EDropdownPositions.rightTop);
             }
         } else {
-            if (rect.top < rect.bottom) {
+            if (rect.top < windowOffsets.height - rect.bottom) {
                 setPosition(EDropdownPositions.leftBottom);
             } else {
                 setPosition(EDropdownPositions.leftTop);

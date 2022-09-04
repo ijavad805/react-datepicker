@@ -37,7 +37,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Datepicker> = args => (
-    <div style={{ height: 1500, direction: "ltr"}}>
+    <div style={{ height: 400, direction: "ltr"}}>
         <Datepicker {...args} />
     </div>
 );
