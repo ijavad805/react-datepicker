@@ -68,7 +68,7 @@ function App() {
     modeTheme={"dark"} // dark and light
     theme={"blue"} // blue , orange , red , green , yellow
     defaultValue={moment()}
-    adjustPosition={"auto"} // auto, right-top, left-top, right-bottom, left-bottom
+    adjustPosition={"auto"} // auto, right-top, left-top, right-bottom, left-bottom, modal
     onChange={(val: any) => {
       console.log(val.format());
     }} />
