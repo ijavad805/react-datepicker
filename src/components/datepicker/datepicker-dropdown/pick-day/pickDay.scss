@@ -9,6 +9,7 @@
         flex-direction: row-reverse;
         background-color: var(--primary);
         border-radius: 5px;
+        user-select: none;
 
         .__datepicker-weak-item {
             width: 25px;
