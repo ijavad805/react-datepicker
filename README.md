@@ -13,6 +13,7 @@ A cool datepicker for english and persian you can see some features here :
  <li>Auto adjust position</li>
  </ul>
 
+&#127775; If you like this Datepicker, Please give me a start on my github
 ## Installation
 
 Use the package manager [npm](https://npmjs.com) to install @ijavad805/react-datepicker.
