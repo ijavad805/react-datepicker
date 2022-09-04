@@ -74,7 +74,7 @@ const Datepicker = ({
             }
 
             if (date && date.isValid()) {
-                setValue(date);
+                if (lang === "en" || date.year() >= 1000) setValue(date);
             }
         },
     });
