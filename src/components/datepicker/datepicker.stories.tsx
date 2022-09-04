@@ -12,6 +12,9 @@ export default {
             control: "select",
             options: ["blue", "red", "orange", "yellow", "green"],
         },
+        lang: {
+            control: "disabled",
+        },
         modeTheme: {
             control: "select",
             options: ["dark", "light"],
@@ -33,7 +36,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Datepicker> = args => (
-    <div style={{ height: 400, direction: "ltr"}}>
+    <div style={{ height: 400, direction: "ltr" }}>
         <Datepicker {...args} />
     </div>
 );
