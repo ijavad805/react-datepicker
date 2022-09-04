@@ -10,6 +10,7 @@ A cool datepicker for english and persian you can see some features here :
  <li>Change your input format </li>
  <li>Disable some date</li>
  <li>Set your custom footer for datepicker</li>
+ <li>Auto adjust position</li>
  </ul>
 
 ## Installation
@@ -66,6 +67,8 @@ function App() {
     loading={false} // show loading in datepicker if is open
     modeTheme={"dark"} // dark and light
     theme={"blue"} // blue , orange , red , green , yellow
+    defaultValue={moment()}
+    adjustPosition={"auto"} // auto, right-top, left-top, right-bottom, left-bottom
     onChange={(val: any) => {
       console.log(val.format());
     }} />
@@ -77,7 +80,6 @@ function App() {
 ## Coming soon ...
 This is my todo list for feature :
 <ul>
-<li>Auto adjust</li>
 <li>Pick year</li>
 <li>Pick month</li>
 <li>Pick weak</li>
