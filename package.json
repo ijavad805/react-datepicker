@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/ijavad805/react-datepicker/issues"
   },
-  "homepage": "https://github.com/ijavad805/react-datepicker#readme",
+  "homepage": "https://ijavad805.github.io/react-datepicker/",
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@rollup/plugin-commonjs": "^22.0.2",
