@@ -37,7 +37,11 @@ const DatepickerDropdown = ({
             )}
             <div
                 className={`__datepicker-dropdown ${open ? "__datepicker-dropdown-active" : ""} ${
-                    adjustPosition !== "auto" ? adjustPosition : position
+                    adjustPosition !== "auto"
+                        ? adjustPosition === "modal"
+                            ? "__datepicker-modal"
+                            : adjustPosition
+                        : position
                 } ${fix ? fix : ""}`}>
                 <Loading loading={loading} spinnerComponent={spinnerComponent}>
                     <>

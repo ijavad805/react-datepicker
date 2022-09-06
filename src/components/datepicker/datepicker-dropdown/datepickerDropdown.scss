@@ -16,6 +16,8 @@
     background: var(--background);
     border: 1px solid rgba($color: #000000, $alpha: 0.125);
     border-radius: var(--corner);
+    font-size: 12px;
+    z-index: 1000;
 
     &.right-top {
         bottom: 100%;
@@ -43,7 +45,7 @@
         left: unset;
     }
 
-    &.modal {
+    &.__datepicker-modal {
         position: fixed;
         top: 50%;
         right: 50%;

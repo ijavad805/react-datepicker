@@ -20,8 +20,6 @@ const useDropdownRoles = (ref: any, open: boolean) => {
             width: window.innerWidth,
             scroll: window.scrollX,
         };
-
-        console.log(rect);
         
         if (rect.top < 0) setFix("fix-top");
         else setFix(undefined);

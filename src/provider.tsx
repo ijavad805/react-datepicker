@@ -69,11 +69,14 @@ const DatepickerProvider = ({
     const [value, setValue] = useState(moment_(defaultValue));
 
     useEffect(() => {
-        if (value && document.activeElement !== input.current) {
-            input.current.value = value.format(format);
+        if (value && document.activeElement !== input && input) {
+            // if (input !== null && input !== undefined) {
+            //     input.value = value.format(format);
+            // } else {
+            //     console.log("input is null ", input);
+            // }
             if (closeWhenSelectADay) setOpen(false);
         }
-        if (onChange && value !== undefined) onChange(value.clone().locale("en"));
         if (value) setDate(value);
     }, [value]);
 
@@ -93,6 +96,7 @@ const DatepickerProvider = ({
                 },
                 value,
                 setValue: (i: moment.Moment) => {
+                    if (onChange && i !== undefined) onChange(i.clone().locale("en"));
                     setValue(i);
                 },
             }}>

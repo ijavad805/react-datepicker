@@ -59,12 +59,14 @@ const Datepicker = ({
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
     const [value, setValue] = useState(value_);
-    const ref = useRef(null);
-    const refInput = useRef<any>();
+    const ref = useRef<any>(null);
+    const refInput = ref.current !== null ? ref.current.querySelector("input") : undefined;
+
     const Input = React.cloneElement(input, {
-        ref: refInput,
         onFocus: () => setOpen(true),
         disabled: disabled,
+        autoComplete: "disabled",
+        value,
         onChange: (e: any) => {
             let date;
             if (typeof e === "string") {
@@ -109,9 +111,9 @@ const Datepicker = ({
             closeWhenSelectADay={closeWhenSelectADay}
             input={refInput}>
             <div
-                className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme}`}
+                className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme} `}
                 style={{
-                    width: refInput.current?.offsetWidth,
+                    width: refInput ? refInput?.offsetWidth : "unset",
                 }}
                 ref={ref}>
                 <div className={"__datepicker-input"}>
