@@ -98,9 +98,6 @@ const Datepicker = ({
             input={refInput}>
             <div
                 className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme} `}
-                style={{
-                    width: refInput.current !== null ? refInput?.current?.offsetWidth : "unset",
-                }}
                 ref={ref}>
                 <div className={"__datepicker-input"}>
                     {cloneInputRef === undefined && <div style={{ display: "none" }}>{input}</div>}
