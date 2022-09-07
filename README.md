@@ -2,7 +2,7 @@
 ![alt text](./poster.jpg?raw=true)
 A cool datepicker for english and persian you can see some features here :
  <ul>
- <li>You can choice betweens 5 color.</li>
+ <li>You can choosing between 5 colors.</li>
  <li>Dark mode and Light mode</li>
  <li>Show loading... and you can change it to whatever you want :)</li>
  <li>You can use any input component for this datepicker</li>
