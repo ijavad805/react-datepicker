@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Datepicker from "./datepicker";
+import 'antd/dist/antd.css';
 import { Input } from "antd";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -47,6 +48,7 @@ English.args = {
     theme: "blue",
     lang: "en",
     modeTheme: "dark",
+    input: <Input />,    
     footer: (moment, setValue) => {
         return (
             <>

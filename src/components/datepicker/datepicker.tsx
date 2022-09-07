@@ -60,26 +60,8 @@ const Datepicker = ({
     const [open, setOpen] = useState<boolean>(false);
     const [value, setValue] = useState(value_);
     const ref = useRef<any>(null);
-    const refInput = ref.current !== null ? ref.current.querySelector("input") : undefined;
-
-    const Input = React.cloneElement(input, {
-        onFocus: () => setOpen(true),
-        disabled: disabled,
-        autoComplete: "disabled",
-        value,
-        onChange: (e: any) => {
-            let date;
-            if (typeof e === "string") {
-                date = moment_(e);
-            } else if (e.target !== undefined) {
-                date = moment_(e.target.value);
-            }
-
-            if (date && date.isValid()) {
-                if (lang === "en" || date.year() >= 1000) setValue(date);
-            }
-        },
-    });
+    const [cloneInputRef, setCloneRef] = useState<any>();
+    const refInput = useRef<any>(null);
 
     moment.locale(lang);
 
@@ -94,6 +76,10 @@ const Datepicker = ({
     useEffect(() => {
         if (open && onOpen) onOpen();
     }, [open]);
+
+    useEffect(() => {
+        setCloneRef(ref.current !== null ? ref.current.querySelector("input") : undefined);
+    }, [ref]);
 
     return (
         <DatepickerProvider
@@ -113,11 +99,31 @@ const Datepicker = ({
             <div
                 className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme} `}
                 style={{
-                    width: refInput ? refInput?.offsetWidth : "unset",
+                    width: refInput.current !== null ? refInput?.current?.offsetWidth : "unset",
                 }}
                 ref={ref}>
                 <div className={"__datepicker-input"}>
-                    {Input}
+                    {cloneInputRef === undefined && <div style={{ display: "none" }}>{input}</div>}
+                    <input
+                        ref={refInput}
+                        className={cloneInputRef?.getAttribute("class")}
+                        placeholder={cloneInputRef?.getAttribute("placeholder")}
+                        onFocus={() => setOpen(true)}
+                        autoComplete={"disabled"}
+                        disabled={disabled}
+                        onChange={(e: any) => {
+                            let date;
+                            if (typeof e === "string") {
+                                date = moment_(e);
+                            } else if (e.target !== undefined) {
+                                date = moment_(e.target.value);
+                            }
+
+                            if (date && date.isValid()) {
+                                if (lang === "en" || date.year() >= 1000) setValue(date);
+                            }
+                        }}
+                    />
                     {/* TODO :: add delete icon if user select a date and if not show date icon */}
                 </div>
                 {open && (

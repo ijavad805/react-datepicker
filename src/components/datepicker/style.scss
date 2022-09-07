@@ -1,6 +1,10 @@
 .__datepicker {
     position: relative;
 
+    input {
+        transition: unset !important;
+    }
+
     * {
         --holiday: rgba(234, 43, 9, 0.829);
         --light-border: 1px solid rgba(0, 0, 0, 0.125);
