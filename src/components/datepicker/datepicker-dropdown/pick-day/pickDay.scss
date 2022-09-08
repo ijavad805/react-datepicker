@@ -63,18 +63,7 @@
             }
 
             &.__datepicker-day-disabled {
-                opacity: 0.8;
-
-                &:after {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    content: "";
-                    display: block;
-                    background: rgba($color: #000000, $alpha: 0.2);
-                }
+                opacity: 0.4;
             }
 
             &.__datepicker-today {
