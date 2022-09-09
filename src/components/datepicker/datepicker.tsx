@@ -58,7 +58,7 @@ const Datepicker = ({
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState(value_);
+    const [value, setValue] = useState(value_ !== undefined ? moment_(value_) : undefined);
     const ref = useRef<any>(null);
     const [cloneInputRef, setCloneRef] = useState<any>();
     const refInput = useRef<any>(null);
