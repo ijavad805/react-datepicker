@@ -7,7 +7,6 @@ import "./style.scss";
 import { EnumLang, EnumTheme } from "./enum";
 import { EDropdownPositions } from "./datepicker-dropdown/useDropdownRoles";
 var moment_jalali = require("jalali-moment");
-moment_jalali.locale("fa");
 
 export interface IPropsDatepicker {
     theme?: keyof typeof EnumTheme;
@@ -60,19 +59,17 @@ const Datepicker = ({
     moment_jalali.locale(lang);
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState(value_ !== undefined ? moment_(value_) : undefined);
+    const [value, setValue] = useState(value_ !== undefined ? moment_(value_.format()) : undefined);
     const ref = useRef<any>(null);
     const [cloneInputRef, setCloneRef] = useState<any>();
     const refInput = useRef<any>(null);
-
-    moment.locale(lang);
 
     useOutsideClick(ref, () => {
         setOpen(false);
     });
 
     useEffect(() => {
-        if (value_ && value_ !== value) setValue(value_);
+        if (value_ && value_ !== value) setValue(moment_(value_.format()));
     }, [value_]);
 
     useEffect(() => {
