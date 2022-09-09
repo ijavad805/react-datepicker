@@ -56,6 +56,8 @@ const Datepicker = ({
     spinnerComponent,
     adjustPosition = "auto",
 }: IPropsDatepicker) => {
+    moment.locale(lang);
+    moment_jalali.locale(lang);
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
     const [value, setValue] = useState(value_ !== undefined ? moment_(value_) : undefined);

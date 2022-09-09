@@ -66,7 +66,9 @@ const DatepickerProvider = ({
     const moment_ = config.lang === "fa" ? moment_jalali : moment;
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(
+        defaultValue !== undefined ? moment(defaultValue) : undefined
+    );
 
     useEffect(() => {
         if (value && document.activeElement !== input.current && input) {
