@@ -7,6 +7,7 @@ import PickMonth from "./pick-month";
 import moment from "moment";
 import useDateTools from "../../../hooks/useDateTools";
 import Loading from "../../loading/loading";
+import PickYear from "./pick-year/pickYear";
 
 interface IProps {
     open: boolean;
@@ -47,6 +48,7 @@ const DatepickerDropdown = ({
                     <>
                         {step === 0 && <PickDay onStep={setStep} />}
                         {step === 1 && <PickMonth onStep={setStep} />}
+                        {step === 2 && <PickYear onStep={setStep} />}
                         {footer && (
                             <div className={`__datepicker-dropdown-footer`}>
                                 {footer(moment, setValue)}

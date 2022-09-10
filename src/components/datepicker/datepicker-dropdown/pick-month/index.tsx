@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import useDateTools from "../../../../hooks/useDateTools";
+import usePersian from "../../../../hooks/usePersian";
 import { DatepickerContext } from "../../../../provider";
 import { Body } from "../body";
 import "./pickMonth.scss";
@@ -10,6 +11,7 @@ interface IProps {
 const PickMonth = ({ onStep }: IProps) => {
     const { moment, date, getYear, getMonths } = useDateTools();
     const config = useContext(DatepickerContext);
+    const { convertNumbers } = usePersian();
 
     const headerButton =
         (mines: boolean = false, count: number = 1) =>
@@ -21,8 +23,9 @@ const PickMonth = ({ onStep }: IProps) => {
 
     return (
         <Body
-            headerText={`${getYear()}`}
+            headerText={`${convertNumbers(getYear())}`}
             onNext={headerButton(false, 1)}
+            onClick={() => onStep(2)}
             onPrev={headerButton(true, 1)}
             onNextDouble={headerButton(false, 5)}
             onPrevDouble={headerButton(true, 5)}>
