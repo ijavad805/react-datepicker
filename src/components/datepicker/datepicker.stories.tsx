@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Datepicker from "./datepicker";
 import "antd/dist/antd.css";
 import { Input } from "antd";
-import moment from "jalali-moment";
+import moment from "moment";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: "Datepicker",

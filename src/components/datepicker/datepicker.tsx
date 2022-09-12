@@ -55,11 +55,11 @@ const Datepicker = ({
     spinnerComponent,
     adjustPosition = "auto",
 }: IPropsDatepicker) => {
-    moment.locale(lang);
-    moment_jalali.locale(lang);
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState(value_ !== undefined ? moment_(value_.format()) : undefined);
+    const [value, setValue] = useState(
+        value_ !== undefined ? moment_(value_).locale(lang) : undefined
+    );
     const ref = useRef<any>(null);
     const [cloneInputRef, setCloneRef] = useState<any>();
     const refInput = useRef<any>(null);
@@ -69,7 +69,7 @@ const Datepicker = ({
     });
 
     useEffect(() => {
-        if (value_ && value_ !== value) setValue(moment_(value_.format()));
+        if (value_ && value_ !== value) setValue(moment_(value_).locale(lang));
     }, [value_]);
 
     useEffect(() => {

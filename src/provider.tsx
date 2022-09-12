@@ -62,9 +62,8 @@ const DatepickerProvider = ({
     setOpen,
     closeWhenSelectADay,
 }: IProps) => {
-    moment_jalali.locale(config.lang);
-
     const moment_ = config.lang === "fa" ? moment_jalali : moment;
+    moment_.locale(config.lang);
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
     const [value, setValue] = useState(
