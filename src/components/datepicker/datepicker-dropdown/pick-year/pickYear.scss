@@ -1,0 +1,21 @@
+.__datepicker-pick-year {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .__datepicker-year {
+        padding: 5px 10px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        margin-bottom: 10px;
+
+        &:hover {
+            border: 1px solid var(--primary);
+            border-radius: var(--corner);
+        }
+
+        &.__datepicker-controller {
+            opacity: 0.4;
+        }
+    }
+}

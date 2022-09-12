@@ -17,7 +17,11 @@
         .__datepicker-dropdown-header-text {
             cursor: pointer;
 
-            &:hover {
+            &.__datepicker-unclickabled {
+                cursor: auto;
+            }
+
+            &:not(.__datepicker-unclickabled):hover {
                 color: var(--primary);
             }
         }

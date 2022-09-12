@@ -21,24 +21,8 @@ const Body = ({
 }: IProps) => {
     return (
         <div className={`__datepicker-dropdown-body`}>
-            {headerText && (
+            {headerText !== undefined && (
                 <div className={`__datepicker-dropdown-body-header`}>
-                    <div className={`__datepicker-dropdown-body-controller`}>
-                        {onNextDouble && (
-                            <div className={`__datepicker-icon`} onClick={onNextDouble}>
-                                <CaretIcon />
-                                <CaretIcon />
-                            </div>
-                        )}
-                        {onNext && (
-                            <div className={`__datepicker-icon`} onClick={onNext}>
-                                <CaretIcon />
-                            </div>
-                        )}
-                    </div>
-                    <div onClick={onClick} className={`__datepicker-dropdown-header-text`}>
-                        {headerText}
-                    </div>
                     <div className={`__datepicker-dropdown-body-controller`}>
                         {onPrevDouble && (
                             <div className={`__datepicker-icon`} onClick={onPrevDouble}>
@@ -48,6 +32,27 @@ const Body = ({
                         )}
                         {onNext && (
                             <div className={`__datepicker-icon`} onClick={onPrev}>
+                                <CaretIcon />
+                            </div>
+                        )}
+                    </div>
+                    <div
+                        onClick={onClick}
+                        className={`__datepicker-dropdown-header-text ${
+                            !onClick ? "__datepicker-unclickabled" : ""
+                        }`}>
+                        {headerText}
+                    </div>
+
+                    <div className={`__datepicker-dropdown-body-controller`}>
+                        {onNextDouble && (
+                            <div className={`__datepicker-icon`} onClick={onNextDouble}>
+                                <CaretIcon />
+                                <CaretIcon />
+                            </div>
+                        )}
+                        {onNext && (
+                            <div className={`__datepicker-icon`} onClick={onNext}>
                                 <CaretIcon />
                             </div>
                         )}
