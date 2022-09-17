@@ -2,7 +2,6 @@ import moment from "moment";
 import { useContext } from "react";
 import { DatepickerContext } from "../provider";
 var moment_jalali = require("jalali-moment");
-moment_jalali.locale("fa");
 
 const useDateTools = () => {
     const config = useContext(DatepickerContext);
@@ -35,7 +34,7 @@ const useDateTools = () => {
     };
     const getMonths = () => {
         if (config.lang === "fa") {
-            return momentDatePicker()().localeData().jMonths();
+            return momentDatePicker()().locale("fa").localeData().jMonths();
         }
 
         return momentDatePicker()().localeData().monthsShort();
@@ -55,7 +54,7 @@ const useDateTools = () => {
         maxWeak: 7,
         getYear,
         getMonthStartWith,
-        date,
+        date: date,
         value,
         getMonths,
         setValue: config.setValue,

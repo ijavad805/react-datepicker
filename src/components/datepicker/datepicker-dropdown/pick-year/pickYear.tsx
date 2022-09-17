@@ -14,7 +14,7 @@ const PickYear = ({ onStep }: IProps) => {
     const config = useContext(DatepickerContext);
     const { convertNumbers } = usePersian();
 
-    const between = [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const between = [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     const handlePrevAndNext = (prev: boolean) => () => {
         if (config.setDate) {
@@ -29,13 +29,8 @@ const PickYear = ({ onStep }: IProps) => {
         <Body
             onNext={handlePrevAndNext(false)}
             onPrev={handlePrevAndNext(true)}
-            headerText={`${convertNumbers(date.year() - 10)} - ${convertNumbers(date.year() + 9)}`}>
+            headerText={`${convertNumbers(date.year() - 9)} - ${convertNumbers(date.year() + 10)}`}>
             <div className="__datepicker-pick-year">
-                <div
-                    className="__datepicker-year __datepicker-controller"
-                    onClick={handlePrevAndNext(true)}>
-                    {convertNumbers(date.year() - 10)}
-                </div>
                 {between.map(i => (
                     <div
                         className="__datepicker-year"
@@ -48,11 +43,6 @@ const PickYear = ({ onStep }: IProps) => {
                         {convertNumbers(date.year() + i)}
                     </div>
                 ))}
-                <div
-                    className="__datepicker-year __datepicker-controller"
-                    onClick={handlePrevAndNext(false)}>
-                    {convertNumbers(date.year() + 9)}
-                </div>
             </div>
         </Body>
     );
