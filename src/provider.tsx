@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { createContext, useEffect, useState } from "react";
+import { IEvent } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 var moment_jalali = require("jalali-moment");
 
@@ -19,6 +20,11 @@ export interface IConfigDatePicker {
         day: string;
     }[];
     disabledDate?: (date: moment.Moment) => Boolean;
+
+    // calendar
+    events?: IEvent[];
+    onClickEvent?: (item: IEvent) => void;
+    onDoubleClickEvent?: (item: IEvent) => void;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -32,23 +38,31 @@ const DatepickerContext = createContext<IConfigDatePicker>({
 interface IProps {
     children: React.ReactNode;
     config: {
+        // share
         lang: keyof typeof EnumLang;
         theme: keyof typeof EnumTheme;
+        disabledDate?: (date: moment.Moment) => Boolean;
+
+        // datepicker
         dayEffects?: {
             title?: string;
             color?: string;
             dotColor?: string;
             day: string;
         }[];
-        disabledDate?: (date: moment.Moment) => Boolean;
+
+        // calendar
+        events?: IEvent[];
+        onClickEvent?: (item: IEvent) => void;
+        onDoubleClickEvent?: (item: IEvent) => void;
     };
-    input: any;
-    format: string;
+    input?: any;
+    format?: string;
     onChange?: (val?: moment.Moment) => void;
     value?: moment.Moment;
     defaultValue?: moment.Moment;
     closeWhenSelectADay?: boolean;
-    setOpen: Function;
+    setOpen?: Function;
 }
 
 const DatepickerProvider = ({
@@ -77,7 +91,7 @@ const DatepickerProvider = ({
             } else {
                 console.log("input is null ", input);
             }
-            if (closeWhenSelectADay) setOpen(false);
+            if (closeWhenSelectADay && setOpen) setOpen(false);
         }
         if (value) setDate(value);
     }, [value]);

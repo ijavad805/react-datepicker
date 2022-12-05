@@ -17,6 +17,7 @@ const useDateTools = () => {
         return {
             countDay: cloneDate.daysInMonth(),
             name: cloneDate.format("MMM"),
+            fullName: cloneDate.format("MMMM"),
         };
     };
 

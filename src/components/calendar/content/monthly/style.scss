@@ -1,0 +1,64 @@
+.__calender-table-tr {
+    border: 1px solid rgba($color: #000000, $alpha: 0.125);
+    position: relative;
+
+    .__calendar-table-tr-body {
+        width: calc(var(--width) / 7);
+        min-height: calc(var(--width) / 7);
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+
+        .__calendar-table-tr-body-date {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 11px;
+        }
+
+        .__calendar-table-tr-body-events {
+            flex-grow: 1;
+            flex: 1;
+            margin-top: 20px;
+
+            .__calendar-table-tr-body-events-item {
+                display: flex;
+                align-items: center;
+                margin: 1px;
+                font-size: 10px;
+                padding: 0 3px;
+                border-radius: 3px;
+
+                .__calendar-table-tr-body-events-item-circle {
+                    min-width: 3px;
+                    min-height: 3px;
+                    border-radius: 10px;
+                    background: rgba($color: #291afe, $alpha: 1);
+                    margin-right: 5px;
+                }
+
+                &:hover {
+                    background-color: rgba($color: #000000, $alpha: 0.125);
+                }
+            }
+        }
+    }
+
+    &.__calender-disabled-cell {
+        opacity: .7;
+        background-color: #f7f7f7;
+    }
+}
+
+.__calender-month-header {
+    text-align: center;
+    margin-bottom: 10px;
+
+    .__calender-header-title {
+        font-size: 22px;
+    }
+
+    .__calender-header-subtitle {
+        color: rgb(123, 123, 123);
+    }
+}

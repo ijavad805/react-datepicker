@@ -1,0 +1,25 @@
+.__calendar-body {
+    width: var(--width);
+
+    .__calendar-header {
+        display: flex;
+        justify-content: space-between;
+
+        .__calender-header-controllers {
+            display: flex;
+            align-items: center;
+
+            .__calendar-controller {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: rgb(59, 59, 59);
+                margin: 0 20px;
+
+                &:nth-last-child(1) {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}

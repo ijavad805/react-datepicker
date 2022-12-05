@@ -63,8 +63,11 @@ const Body = ({
         </div>
     );
 };
+interface IProps {
+    color?: string;
+}
 
-const CaretIcon = () => {
+export const CaretIcon = ({ color = "#FFF" }: IProps) => {
     return (
         <svg
             width="25px"
@@ -76,7 +79,7 @@ const CaretIcon = () => {
                 <g
                     id="ui-gambling-website-lined-icnos-casinoshunter"
                     transform="translate(-1913.000000, -158.000000)"
-                    fill="#fff"
+                    fill={color}
                     fill-rule="nonzero">
                     <g id="1" transform="translate(1350.000000, 120.000000)">
                         <path
