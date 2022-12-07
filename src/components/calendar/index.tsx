@@ -5,15 +5,15 @@ import MonthCalendar from "./content/monthly";
 import "./style.scss";
 
 export interface IEvent {
-    id?: number;
+    id: number;
     title: React.ReactNode | string;
     date:
-        | moment.Moment
-        | moment.MomentInput
-        | string
-        | moment.Moment[]
-        | string[]
-        | moment.MomentInput[];
+    | moment.Moment
+    | moment.MomentInput
+    | string
+    | moment.Moment[]
+    | string[]
+    | moment.MomentInput[];
     style?: React.CSSProperties;
     className?: string;
     dotColor?: string;
@@ -28,13 +28,13 @@ export interface IProps {
     disabledDate?: (date: moment.Moment) => Boolean;
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
+    onDropEvent?: (item: IEvent) => void;
     // TODO :: hoverEventComponent?: React.ReactNode;
-    // TODO :: onDropEvent?: () => void;
 }
 
-const Calender = ({ lang = "en", theme = "blue", events }: IProps) => {
+const Calender = ({ lang = "en", theme = "blue", events, onDropEvent, onClickEvent, onDoubleClickEvent }: IProps) => {
     return (
-        <DatepickerProvider config={{ lang, theme, events }}>
+        <DatepickerProvider config={{ lang, theme, events, onDropEvent, onClickEvent, onDoubleClickEvent }}>
             <div className="__calendar">
                 <MonthCalendar />
             </div>

@@ -24,6 +24,7 @@ English.args = {
     lang: "en",
     events: [
         {
+            id: 1,
             title: "Holiday",
             date: moment().format(),
             style: {
@@ -31,8 +32,12 @@ English.args = {
             },
         },
         {
+            id: 2,
             title: "Holiday",
             date: moment().format(),
         },
     ],
+    onDropEvent: (item) => {
+        console.log(item);
+    }
 };

@@ -23,8 +23,10 @@ export interface IConfigDatePicker {
 
     // calendar
     events?: IEvent[];
+    setEvents?: any;
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
+    onDropEvent?: (item: IEvent) => void;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -55,6 +57,7 @@ interface IProps {
         events?: IEvent[];
         onClickEvent?: (item: IEvent) => void;
         onDoubleClickEvent?: (item: IEvent) => void;
+        onDropEvent?: (item: IEvent) => void;
     };
     input?: any;
     format?: string;
@@ -80,6 +83,7 @@ const DatepickerProvider = ({
     moment_.locale(config.lang);
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
+    const [events, setEvents] = useState(config.events);
     const [value, setValue] = useState(
         defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
     );
@@ -115,6 +119,8 @@ const DatepickerProvider = ({
                     if (onChange && i !== undefined) onChange(i.clone().locale("en"));
                     setValue(i);
                 },
+                events,
+                setEvents
             }}>
             {children}
         </DatepickerContext.Provider>
