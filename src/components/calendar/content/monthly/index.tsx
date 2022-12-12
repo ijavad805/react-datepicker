@@ -1,17 +1,29 @@
 import useDateTools from "../../../../hooks/useDateTools";
 import Body from "../body";
-import React from "react";
+import React, { useContext } from "react";
 import Table from "../../../table";
 import Cell from "./cell";
 import usePersian from "../../../../hooks/usePersian";
+import { DatepickerContext } from "../../../../provider";
 
 const MonthCalendar = () => {
     const { getWeakDayName, getMonth, getMonthStartWith, moment, date, getYear } = useDateTools();
     const { convertNumbers } = usePersian();
+    const config = useContext(DatepickerContext);
 
     const countTr = Math.ceil(getMonth().countDay / 7);
+
+    const handleNextPrev =
+        (mines: boolean, year: boolean = false) =>
+        () => {
+            if (config.setDate) {
+                config.setDate(date.add(mines ? -1 : 1, year ? "year" : "month"));
+            }
+        };
     return (
         <Body
+            onNextClick={handleNextPrev(false)}
+            onPrevClick={handleNextPrev(true)}
             header={
                 <div className="__calender-month-header">
                     <div className="__calender-header-title">{getMonth()?.fullName}</div>

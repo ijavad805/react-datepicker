@@ -3,8 +3,6 @@
     position: relative;
 
     .__calendar-table-tr-body {
-        width: calc(var(--width) / 7);
-        min-height: calc(var(--width) / 7);
         padding: 0px;
         display: flex;
         flex-direction: column;
@@ -20,6 +18,7 @@
             flex-grow: 1;
             flex: 1;
             margin-top: 20px;
+            min-height: 2em;
 
             .__calendar-table-tr-body-events-item {
                 display: flex;

@@ -11,11 +11,7 @@ export default {
 } as ComponentMeta<typeof Calender>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Calender> = args => (
-    <div style={{ direction: "ltr" }}>
-        <Calender {...args} />
-    </div>
-);
+const Template: ComponentStory<typeof Calender> = args => <Calender {...args} />;
 
 export const English = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -37,7 +33,7 @@ English.args = {
             date: moment().format(),
         },
     ],
-    onDropEvent: (item) => {
+    onDropEvent: item => {
         console.log(item);
-    }
+    },
 };
