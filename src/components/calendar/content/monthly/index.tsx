@@ -11,7 +11,7 @@ const MonthCalendar = () => {
     const { convertNumbers } = usePersian();
     const config = useContext(DatepickerContext);
 
-    const countTr = Math.ceil(getMonth().countDay / 7);
+    const countTr = Math.ceil((getMonth().countDay + getMonthStartWith()) / 7);
 
     const handleNextPrev =
         (mines: boolean, year: boolean = false) =>
@@ -97,13 +97,13 @@ const FillEnd = () => {
 
     const getMonthCountToEnd = () => {
         const countNow = getMonthStartWith() + getMonth().countDay;
-        return Math.ceil(countNow / 7) * 7 - countNow;
+        const res = Math.ceil(countNow / 7) * 7 - countNow;
+        return res;
     };
 
     const getEndOfPrevMonth = (index: number) => {
         const day = index + 1;
         const date_ = date.clone().add(1);
-
         return date_.format("YYYY-MM-") + day;
     };
 
