@@ -7,13 +7,7 @@ import "./style.scss";
 export interface IEvent {
     id: number;
     title: React.ReactNode | string;
-    date:
-    | moment.Moment
-    | moment.MomentInput
-    | string
-    | moment.Moment[]
-    | string[]
-    | moment.MomentInput[];
+    date: string;
     style?: React.CSSProperties;
     className?: string;
     dotColor?: string;
@@ -32,10 +26,18 @@ export interface IProps {
     // TODO :: hoverEventComponent?: React.ReactNode;
 }
 
-const Calender = ({ lang = "en", theme = "blue", events, onDropEvent, onClickEvent, onDoubleClickEvent }: IProps) => {
+const Calender = ({
+    lang = "en",
+    theme = "blue",
+    events,
+    onDropEvent,
+    onClickEvent,
+    onDoubleClickEvent,
+}: IProps) => {
     return (
-        <DatepickerProvider config={{ lang, theme, events, onDropEvent, onClickEvent, onDoubleClickEvent }}>
-            <div className="__calendar">
+        <DatepickerProvider
+            config={{ lang, theme, events, onDropEvent, onClickEvent, onDoubleClickEvent }}>
+            <div className={`__calendar __calendar-theme-${theme}`}>
                 <MonthCalendar />
             </div>
         </DatepickerProvider>

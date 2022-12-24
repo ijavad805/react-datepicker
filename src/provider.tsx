@@ -83,7 +83,13 @@ const DatepickerProvider = ({
     moment_.locale(config.lang);
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
-    const [events, setEvents] = useState(config.events);
+    const [events, setEvents] = useState(
+        config.events?.map(item => ({
+            ...item,
+            date: moment(item.date).format("YYYY-MM-DD"),
+        }))
+    );
+
     const [value, setValue] = useState(
         defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
     );
@@ -104,6 +110,10 @@ const DatepickerProvider = ({
         if (value_) setValue(value_);
     }, [value_]);
 
+    useEffect(() => {
+        setEvents(config.events);
+    }, [config.events]);
+
     return (
         <DatepickerContext.Provider
             value={{
@@ -120,7 +130,7 @@ const DatepickerProvider = ({
                     setValue(i);
                 },
                 events,
-                setEvents
+                setEvents,
             }}>
             {children}
         </DatepickerContext.Provider>

@@ -65,13 +65,15 @@ const Body = ({
 };
 interface IProps {
     color?: string;
+    width?: string;
+    height?: string;
 }
 
-export const CaretIcon = ({ color = "#FFF" }: IProps) => {
+export const CaretIcon = ({ color = "#FFF", width = "25px", height = "25px" }: IProps) => {
     return (
         <svg
-            width="25px"
-            height="25px"
+            width={width}
+            height={height}
             viewBox="-5 0 25 25"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg">

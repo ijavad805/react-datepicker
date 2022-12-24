@@ -24,10 +24,16 @@ const MonthCalendar = () => {
         <Body
             onNextClick={handleNextPrev(false)}
             onPrevClick={handleNextPrev(true)}
+            onTodayClick={() => {
+                if (config.setDate) {
+                    config.setDate(moment());
+                }
+            }}
             header={
                 <div className="__calender-month-header">
-                    <div className="__calender-header-title">{getMonth()?.fullName}</div>
-                    <div className="__calender-header-subtitle">{convertNumbers(getYear())}</div>
+                    <div className="__calender-header-title">
+                        {convertNumbers(getYear())} {getMonth()?.fullName}
+                    </div>
                 </div>
             }>
             <Table>
