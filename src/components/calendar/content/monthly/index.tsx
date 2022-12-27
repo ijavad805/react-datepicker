@@ -84,7 +84,7 @@ const FillStart = () => {
 
     const getEndOfPrevMonth = (index: number) => {
         const day = getPrevMonthCount() - (getMonthStartWith() - (index + 1));
-        const date_ = date.clone().add(-1);
+        const date_ = date.clone().add(-1, "month");
 
         return date_.format("YYYY-MM-") + day;
     };
@@ -109,7 +109,7 @@ const FillEnd = () => {
 
     const getEndOfPrevMonth = (index: number) => {
         const day = index + 1;
-        const date_ = date.clone().add(1);
+        const date_ = date.clone().add(1, "month");
         return date_.format("YYYY-MM-") + day;
     };
 

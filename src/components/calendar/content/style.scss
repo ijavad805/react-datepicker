@@ -1,5 +1,6 @@
 .__calendar-body {
     width: var(--width);
+    height: 100%;
 
     .__calendar-header {
         display: flex;
@@ -40,5 +41,9 @@
                 cursor: pointer;
             }
         }
+    }
+
+    .__calender-content {
+        height: 100%;
     }
 }

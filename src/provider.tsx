@@ -27,6 +27,7 @@ export interface IConfigDatePicker {
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
     onDropEvent?: (item: IEvent) => void;
+    onDateClick?: (date: moment.Moment) => void;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -58,6 +59,7 @@ interface IProps {
         onClickEvent?: (item: IEvent) => void;
         onDoubleClickEvent?: (item: IEvent) => void;
         onDropEvent?: (item: IEvent) => void;
+        onDateClick?: (date: moment.Moment) => void;
     };
     input?: any;
     format?: string;

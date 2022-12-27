@@ -36,6 +36,7 @@ const Cell = ({ date, disabled, onClick }: IProps) => {
         <td
             onClick={() => {
                 if (onClick) onClick();
+                if (config.onDateClick) config.onDateClick(moment(date));
             }}
             className={`__calender-table-tr ${disabled ? "__calender-disabled-cell" : ""}`}
             onDragOver={e => {

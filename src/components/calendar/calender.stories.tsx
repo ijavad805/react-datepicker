@@ -11,28 +11,9 @@ export default {
 } as ComponentMeta<typeof Calender>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Calender> = args => <Calender {...args} />;
-
-export const Persian = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Persian.args = {
-    lang: "fa",
-    events: [
-        {
-            id: 1,
-            title: "Holiday",
-            date: moment().format(),
-        },
-        {
-            id: 2,
-            title: "Holiday",
-            date: moment().format(),
-        },
-    ],
-    onDropEvent: item => {
-        console.log(item);
-    },
-};
+const Template: ComponentStory<typeof Calender> = args => (
+    <Calender {...args} style={{ height: 600 }} />
+);
 
 export const English = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -46,6 +27,27 @@ English.args = {
             style: {
                 background: "rgba(0,0,0,0.125)",
             },
+        },
+        {
+            id: 2,
+            title: "Holiday",
+            date: moment().format(),
+        },
+    ],
+    onDropEvent: item => {
+        console.log(item);
+    },
+};
+
+export const Persian = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Persian.args = {
+    lang: "fa",
+    events: [
+        {
+            id: 1,
+            title: "Holiday",
+            date: moment().format(),
         },
         {
             id: 2,

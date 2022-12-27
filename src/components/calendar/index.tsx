@@ -23,6 +23,8 @@ export interface IProps {
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
     onDropEvent?: (item: IEvent) => void;
+    onDateClick?: (date: moment.Moment) => void;
+    style?: React.CSSProperties;
     // TODO :: hoverEventComponent?: React.ReactNode;
 }
 
@@ -33,11 +35,21 @@ const Calender = ({
     onDropEvent,
     onClickEvent,
     onDoubleClickEvent,
+    style,
+    onDateClick,
 }: IProps) => {
     return (
         <DatepickerProvider
-            config={{ lang, theme, events, onDropEvent, onClickEvent, onDoubleClickEvent }}>
-            <div className={`__calendar __calendar-theme-${theme}`}>
+            config={{
+                lang,
+                theme,
+                events,
+                onDropEvent,
+                onClickEvent,
+                onDoubleClickEvent,
+                onDateClick,
+            }}>
+            <div className={`__calendar __calendar-theme-${theme}`} style={style}>
                 <MonthCalendar />
             </div>
         </DatepickerProvider>
