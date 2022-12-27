@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { createContext, useEffect, useState } from "react";
+import { IEvent } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 var moment_jalali = require("jalali-moment");
 
@@ -19,6 +20,14 @@ export interface IConfigDatePicker {
         day: string;
     }[];
     disabledDate?: (date: moment.Moment) => Boolean;
+
+    // calendar
+    events?: IEvent[];
+    setEvents?: any;
+    onClickEvent?: (item: IEvent) => void;
+    onDoubleClickEvent?: (item: IEvent) => void;
+    onDropEvent?: (item: IEvent) => void;
+    onDateClick?: (date: moment.Moment) => void;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -32,23 +41,33 @@ const DatepickerContext = createContext<IConfigDatePicker>({
 interface IProps {
     children: React.ReactNode;
     config: {
+        // share
         lang: keyof typeof EnumLang;
         theme: keyof typeof EnumTheme;
+        disabledDate?: (date: moment.Moment) => Boolean;
+
+        // datepicker
         dayEffects?: {
             title?: string;
             color?: string;
             dotColor?: string;
             day: string;
         }[];
-        disabledDate?: (date: moment.Moment) => Boolean;
+
+        // calendar
+        events?: IEvent[];
+        onClickEvent?: (item: IEvent) => void;
+        onDoubleClickEvent?: (item: IEvent) => void;
+        onDropEvent?: (item: IEvent) => void;
+        onDateClick?: (date: moment.Moment) => void;
     };
-    input: any;
-    format: string;
+    input?: any;
+    format?: string;
     onChange?: (val?: moment.Moment) => void;
     value?: moment.Moment;
     defaultValue?: moment.Moment;
     closeWhenSelectADay?: boolean;
-    setOpen: Function;
+    setOpen?: Function;
 }
 
 const DatepickerProvider = ({
@@ -66,6 +85,13 @@ const DatepickerProvider = ({
     moment_.locale(config.lang);
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
+    const [events, setEvents] = useState(
+        config.events?.map(item => ({
+            ...item,
+            date: moment(item.date).format("YYYY-MM-DD"),
+        }))
+    );
+
     const [value, setValue] = useState(
         defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
     );
@@ -77,7 +103,7 @@ const DatepickerProvider = ({
             } else {
                 console.log("input is null ", input);
             }
-            if (closeWhenSelectADay) setOpen(false);
+            if (closeWhenSelectADay && setOpen) setOpen(false);
         }
         if (value) setDate(value);
     }, [value]);
@@ -85,6 +111,10 @@ const DatepickerProvider = ({
     useEffect(() => {
         if (value_) setValue(value_);
     }, [value_]);
+
+    useEffect(() => {
+        setEvents(config.events);
+    }, [config.events]);
 
     return (
         <DatepickerContext.Provider
@@ -101,6 +131,8 @@ const DatepickerProvider = ({
                     if (onChange && i !== undefined) onChange(i.clone().locale("en"));
                     setValue(i);
                 },
+                events,
+                setEvents,
             }}>
             {children}
         </DatepickerContext.Provider>

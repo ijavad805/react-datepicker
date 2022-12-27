@@ -1,6 +1,8 @@
 # react-datepicker
+
 ![alt text](./poster.jpg?raw=true)
 A cool datepicker for english and persian you can see some features here :
+
  <ul>
  <li>You can choosing between 5 colors.</li>
  <li>Dark mode and Light mode</li>
@@ -14,6 +16,7 @@ A cool datepicker for english and persian you can see some features here :
  </ul>
 
 &#127775; If you like this Datepicker, Please give me a start on my github
+
 ## Installation
 
 Use the package manager [npm](https://npmjs.com) to install @ijavad805/react-datepicker.
@@ -28,58 +31,109 @@ npm install @ijavad805/react-datepicker
 import { Datepicker } from '@ijavad805/react-datepicker';
 // simple
 function AppSimple() {
-  return (
-    <Datepicker />
-    )
+  return <Datepicker />;
 }
 
 // full options
 function App() {
   return (
-    <Datepicker footer={(moment, setValue) => {
+    <Datepicker
+      footer={(moment, setValue) => {
         return (
-           <>
-             <div
+          <>
+            <div
               onClick={() => {
-                  if (setValue) setValue(moment());
-                }}>
-                Today
-             </div>
-            </>
-        )
-    }}
-    closeWhenSelectADay={true} // boolean
-    dayEffects={[
-      {
-        day: "2022-09-12",
-        color: "red",
-        dotColor: "red",
-        title: "What ever you want"
-      }
-    ]} 
-    disabled={false} // disable input
-    disabledDate={(day) => day === moment()} // today should be disabled
-    format={"YYYY-MM-DD"}
-    input={<input placeholder='Select a date'/>} // whatever you want
-    onOpen={() => {
-      console.log("datepicker is open");
-    }} 
-    lang={"en"} // en and fa
-    loading={false} // show loading in datepicker if is open
-    modeTheme={"dark"} // dark and light
-    theme={"blue"} // blue , orange , red , green , yellow
-    defaultValue={moment()}
-    adjustPosition={"auto"} // auto, right-top, left-top, right-bottom, left-bottom, modal
-    onChange={(val: any) => {
-      console.log(val.format());
-    }} />
+                if (setValue) setValue(moment());
+              }}
+            >
+              Today
+            </div>
+          </>
+        );
+      }}
+      closeWhenSelectADay={true} // boolean
+      dayEffects={[
+        {
+          day: '2022-09-12',
+          color: 'red',
+          dotColor: 'red',
+          title: 'What ever you want',
+        },
+      ]}
+      disabled={false} // disable input
+      disabledDate={(day) => day === moment()} // today should be disabled
+      format={'YYYY-MM-DD'}
+      input={<input placeholder="Select a date" />} // whatever you want
+      onOpen={() => {
+        console.log('datepicker is open');
+      }}
+      lang={'en'} // en and fa
+      loading={false} // show loading in datepicker if is open
+      modeTheme={'dark'} // dark and light
+      theme={'blue'} // blue , orange , red , green , yellow
+      defaultValue={moment()}
+      adjustPosition={'auto'} // auto, right-top, left-top, right-bottom, left-bottom, modal
+      onChange={(val: any) => {
+        console.log(val.format());
+      }}
+    />
   );
+}
+```
+
+## Calendar
+
+the first version of calendar is ready but it just v1 and yes it maybe have some bugs please report bugs i will fix it, i working on design in v2 you will see a beautifully calendar
+
+### en
+
+![alt text](./calendar-en.png?raw=true)
+
+### fa
+
+![alt text](./calendar-fa.png?raw=true)
+
+## Usage Calendar
+
+```javascript
+const App = () => {
+  return (
+      <Calendar
+         lang = "en"
+         theme = "blue"
+         events={[
+          {
+            id: 1, // it should unique
+            title: "Test",
+            date: "2022-12-27",
+            style: {
+              // what ever you want
+            }
+            className: "test",
+            dotColor: "#000",
+            disabled: false,
+            icon: "$", // also you can use component
+          }
+         ]}
+         onDropEvent={(item: IEvent) => {
+          console.log(item);
+         }}
+         onClickEvent={(item: IEvent) => console.log(item)}
+         onDoubleClickEvent={(item: IEvent) => console.log(item)}
+         style={{
+          height: 600
+         }}
+         onDateClick={(date: moment.Moment) => console.log(date)}
+    />
+  )
 }
 
 ```
 
 ## Coming soon ...
+
 This is my todo list for feature :
+
 <ul>
 <li>Pick year</li>
 <li>Pick month</li>
@@ -90,7 +144,9 @@ This is my todo list for feature :
 </ul>
 
 ## Report issues
-My friend, if you see any bugs, please tell me: 
+
+My friend, if you see any bugs, please tell me:
+
 <ul>
 <li>Email: ijavad805@gmail.com</li>
 <li>Github issues: <a href="https://github.com/ijavad805/react-datepicker/issues" target="_blank">https://github.com/ijavad805/react-datepicker/issues</a></li>

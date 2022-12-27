@@ -1,0 +1,58 @@
+.__calendar {
+    width: 100%;
+    height: 100%;
+
+    * {
+        --border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    &.__calendar-theme-blue {
+        * {
+            --primary: rgb(0, 102, 255);
+            --secondary: rgb(55, 135, 255);
+        }
+    }
+
+    &.__calendar-theme-red {
+        * {
+            --primary: rgb(255, 55, 0);
+            --secondary: rgb(255, 91, 46);
+        }
+    }
+
+    &.__calendar-theme-papular {
+        * {
+            --primary: rgb(140, 6, 218);
+            --secondary: rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &.__calendar-theme-orange {
+        * {
+            --primary: rgb(255, 102, 0);
+            --secondary: rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &.__calendar-theme-yellow {
+        * {
+            --primary: rgb(215, 160, 8);
+            --secondary: rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &.__calendar-theme-green {
+        * {
+            --primary: rgb(91, 203, 6);
+            --secondary: rgb(103, 223, 12);
+        }
+    }
+
+    &.__calendar-theme-mode-dark {
+        * {
+            --background: rgb(51, 51, 51);
+            --color: #fff;
+            --light-border: 1px solid rgba(0, 0, 0, 0.8);
+        }
+    }
+}
