@@ -20,13 +20,15 @@ const Cell = ({ date, disabled, onClick }: IProps) => {
             typeof item.date === "string" ||
             typeof item.date === "number"
         ) {
-            return (
-                moment
-                    .from(item.date, "en")
-                    .local("en")
-                    .format(config.lang === "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD") ===
-                moment(date).format("YYYY-MM-DD")
-            );
+            if (config.lang === "fa")
+                return (
+                    moment
+                        .from(item.date, "en")
+                        .local("en")
+                        .format(config.lang === "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD") ===
+                    moment(date).format("YYYY-MM-DD")
+                );
+            return moment(item.date).format("YYYY-MM-DD") === moment(date).format("YYYY-MM-DD");
         }
 
         return false;

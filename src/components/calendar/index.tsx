@@ -13,7 +13,7 @@ export interface IEvent {
     dotColor?: string;
     disabled?: boolean;
     icon?: React.ReactNode;
-    extraData?: any;
+    // extraData?: any;
 }
 export interface IProps {
     lang?: "en" | "fa";
