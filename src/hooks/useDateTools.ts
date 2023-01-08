@@ -35,7 +35,25 @@ const useDateTools = () => {
     };
     const getMonths = () => {
         if (config.lang === "fa") {
-            return momentDatePicker()().locale("fa").localeData().jMonths();
+            try {
+                return momentDatePicker()().locale("fa").localeData().jMonths();
+            } catch (e) {
+                console.log("react-datepicker Error:", e);
+                return [
+                    "فروردین",
+                    "اردیبهشت",
+                    "خرداد",
+                    "تیر",
+                    "مرداد",
+                    "شهریور",
+                    "مهر",
+                    "ابان",
+                    "اذر",
+                    "دی",
+                    "بهمن",
+                    "اسفند",
+                ];
+            }
         }
 
         return momentDatePicker()().localeData().monthsShort();
