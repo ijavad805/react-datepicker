@@ -19,7 +19,7 @@ export interface IPropsDatepicker {
         setValue?: (val?: moment.Moment) => void
     ) => JSX.Element | JSX.Element[] | string;
     onChange?: (val?: moment.Moment) => void;
-    value?: moment.Moment;
+    value?: moment.Moment | string;
     defaultValue?: moment.Moment;
     modeTheme?: "dark" | "light";
     dayEffects?: {
@@ -57,9 +57,7 @@ const Datepicker = ({
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState(
-        value_ !== undefined ? moment_(value_).locale(lang) : undefined
-    );
+    const [value, setValue] = useState();
     const ref = useRef<any>(null);
     const [cloneInputRef, setCloneRef] = useState<any>();
     const refInput = useRef<any>(null);
@@ -69,7 +67,11 @@ const Datepicker = ({
     });
 
     useEffect(() => {
-        if (value_ && value_ !== value) setValue(moment_(value_).locale(lang));
+        let v = moment_(value_);
+        if (lang === "fa") {
+            v = moment_.from(value_, "en");
+        }
+        if (value_ && value_ !== value) setValue(v.locale(lang));
     }, [value_]);
 
     useEffect(() => {

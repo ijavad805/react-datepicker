@@ -32,6 +32,7 @@ const PickMonth = ({ onStep }: IProps) => {
             <div className={`__datepicker-pick-month`}>
                 {getMonths().map((month: string, index: number) => (
                     <div
+                        key={index}
                         className={`__datepicker-pick-month-item ${
                             date.format("YYYY-") + (index + 1) === moment().format("YYYY-M")
                                 ? "__datepicker-today"

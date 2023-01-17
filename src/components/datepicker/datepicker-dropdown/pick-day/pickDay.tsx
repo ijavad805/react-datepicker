@@ -33,8 +33,10 @@ const PickDay = ({ onStep }: IProps) => {
             onPrev={handleNextPrev(true)}>
             <div className={`__datepicker-pick-day-container`}>
                 <div className="__datepicker-weak">
-                    {getWeakDayName().map(item => (
-                        <div className={`__datepicker-weak-item`}>{item}</div>
+                    {getWeakDayName().map((item, index) => (
+                        <div className={`__datepicker-weak-item`} key={index}>
+                            {item}
+                        </div>
                     ))}
                 </div>
                 <div className={`__datepicker-pick-day`}>
@@ -95,6 +97,7 @@ const FillEndAndStart = ({ start, onNext, onPrev }: IPropsFillEndAndStart) => {
                         disabled={true}
                         date={date}
                         day={day(index)}
+                        key={index}
                     />
                 ))}
         </>

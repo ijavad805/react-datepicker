@@ -20,13 +20,13 @@ const Body = ({ children, onNextClick, onPrevClick, header, side, onTodayClick }
             <div className={`__calendar-header`}>
                 <div className={`__calender-header-controllers`}>
                     <div className={`__calender-header-children`}>{header}</div>
-                    <div className={`__calendar-controller`} onClick={onNextClick}>
+                    <div className={`__calendar-controller`} onClick={onPrevClick}>
                         <CaretIcon color="rgba(59, 59, 59,0.8)" height="15px" width={"15px"} />
                     </div>
                     <div className={`__calendar-header-today`} onClick={onTodayClick}>
                         {_t("Today")}
                     </div>
-                    <div className={`__calendar-controller`} onClick={onPrevClick}>
+                    <div className={`__calendar-controller`} onClick={onNextClick}>
                         <CaretIcon color="rgba(59, 59, 59,0.8)" height="15px" width={"15px"} />
                     </div>
                 </div>
