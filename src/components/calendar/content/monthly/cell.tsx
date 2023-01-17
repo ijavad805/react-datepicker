@@ -51,10 +51,14 @@ const Cell = ({ date, disabled, onClick }: IProps) => {
                     let clone = [...prev];
                     const find = prev.findIndex(i => i.id === parseInt(id));
                     if (find !== -1) {
-                        clone[find].date = moment
-                            .from(date, config.lang)
-                            .locale("en")
-                            .format("YYYY-MM-DD");
+                        if (config.lang === "fa") {
+                            clone[find].date = moment
+                                .from(date, config.lang)
+                                .locale("en")
+                                .format("YYYY-MM-DD");
+                        } else {
+                            clone[find].date = moment(date).locale("en").format("YYYY-MM-DD");
+                        }
                         if (config.onDropEvent) config.onDropEvent(clone[find]);
                         const item: any = clone.splice(find, 1);
                         clone.push(item[0]);
