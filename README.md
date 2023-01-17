@@ -13,9 +13,10 @@ A cool datepicker for english and persian you can see some features here :
  <li>Disable some date</li>
  <li>Set your custom footer for datepicker</li>
  <li>Auto adjust position</li>
+ <li>Calendar</li>
  </ul>
 
-&#127775; If you like this Datepicker, Please give me a start on my github
+&#127775; If you like this Datepicker, please bookmark it on your github with the star button.
 
 ## Installation
 
@@ -83,7 +84,7 @@ function App() {
 
 ## Calendar
 
-the first version of calendar is ready but it just v1 and yes it maybe have some bugs please report bugs i will fix it, i working on design in v2 you will see a beautifully calendar
+The first version of the calendar is ready but it is just v1 and, yes, it may have some bugs. Please report bugs. I will fix it. I am working on design in v2. You will see a beautiful calendar.
 
 ### en
 
@@ -135,12 +136,8 @@ const App = () => {
 This is my todo list for feature :
 
 <ul>
-<li>Pick year</li>
-<li>Pick month</li>
-<li>Pick weak</li>
-<li>Pick time</li>
 <li>Range picker</li>
-<li>Calender</li>
+<li>Calender new ui</li>
 </ul>
 
 ## Report issues
