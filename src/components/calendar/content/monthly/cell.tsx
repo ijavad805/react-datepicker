@@ -66,9 +66,10 @@ const Cell = ({ date, disabled, onClick }: IProps) => {
             <div className="__calendar-table-tr-body">
                 <div className={`__calendar-table-tr-body-date`}>{moment(date).format("DD")}</div>
                 <div className={`__calendar-table-tr-body-events`}>
-                    {config.events?.filter(handleFilterEvents)?.map(item => {
+                    {config.events?.filter(handleFilterEvents)?.map((item, index) => {
                         return (
                             <div
+                                key={index}
                                 draggable={config.onDropEvent !== undefined}
                                 onDrag={(e: any) => {
                                     e.target.style.opacity = 0;

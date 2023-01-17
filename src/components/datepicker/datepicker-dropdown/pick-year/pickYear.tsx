@@ -31,8 +31,9 @@ const PickYear = ({ onStep }: IProps) => {
             onPrev={handlePrevAndNext(true)}
             headerText={`${convertNumbers(date.year() - 9)} - ${convertNumbers(date.year() + 10)}`}>
             <div className="__datepicker-pick-year">
-                {between.map(i => (
+                {between.map((i, index) => (
                     <div
+                        key={index}
                         className="__datepicker-year"
                         onClick={() => {
                             if (config.setDate) {

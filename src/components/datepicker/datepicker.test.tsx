@@ -39,14 +39,23 @@ test("send incurrent milady date to get invalid date", async () => {
     expect(screen.getByPlaceholderText("datepicker")).toHaveValue("Invalid Date");
 });
 
-test("test with give jalali date", async () => {
-    render(<Datepicker value={"1401-10-05"} lang={"fa"} />);
+test("test with all attrs en", async () => {
+    render(
+        <Datepicker
+            value={moment()}
+            lang={"en"}
+            loading={true}
+            theme={"blue"}
+            dayEffects={[
+                {
+                    day: moment().format("YYYY-MM-DD"),
+                    dotColor: "red",
+                    title: "Holiday",
+                },
+            ]}
+            format={"LLL"}
+        />
+    );
 
-    expect(screen.getByPlaceholderText("datepicker")).toHaveValue("Invalid Date");
-});
-
-test("test with all attrs", async () => {
-    render(<Datepicker value={"20"} lang={"fa"} />);
-
-    expect(screen.getByPlaceholderText("datepicker")).toHaveValue("Invalid Date");
+    expect(screen.getByPlaceholderText("datepicker")).toHaveValue(moment().format("LLL"));
 });

@@ -39,8 +39,8 @@ const MonthCalendar = () => {
             <Table>
                 <thead>
                     <tr>
-                        {getWeakDayName().map(item => (
-                            <th>{item}</th>
+                        {getWeakDayName().map((item, index) => (
+                            <th key={index}>{item}</th>
                         ))}
                     </tr>
                 </thead>
@@ -57,7 +57,12 @@ const MonthCalendar = () => {
                                 {new Array(7).fill("d").map((i, index) => {
                                     const day = index + 1 + rangeOfDays.start;
                                     if (day <= getMonth().countDay && day > 0)
-                                        return <Cell date={date.format("YYYY-MM-") + day} />;
+                                        return (
+                                            <Cell
+                                                date={date.format("YYYY-MM-") + day}
+                                                key={index}
+                                            />
+                                        );
                                 })}
                                 {index === countTr - 1 && <FillEnd />}
                             </tr>
