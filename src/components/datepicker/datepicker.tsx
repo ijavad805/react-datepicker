@@ -34,6 +34,7 @@ export interface IPropsDatepicker {
     closeWhenSelectADay?: boolean;
     onOpen?: Function;
     spinnerComponent?: JSX.Element | JSX.Element[];
+    name?: string;
 }
 
 const Datepicker = ({
@@ -54,6 +55,7 @@ const Datepicker = ({
     onOpen,
     spinnerComponent,
     adjustPosition = "auto",
+    name,
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     const [open, setOpen] = useState<boolean>(false);
@@ -121,6 +123,7 @@ const Datepicker = ({
                                 if (lang === "en" || date.year() >= 1000) setValue(date);
                             }
                         }}
+                        name={name ? name : cloneInputRef?.getAttribute("name")}
                     />
                     {/* TODO :: add delete icon if user select a date and if not show date icon */}
                 </div>

@@ -59,3 +59,9 @@ test("test with all attrs en", async () => {
 
     expect(screen.getByPlaceholderText("datepicker")).toHaveValue(moment().format("LLL"));
 });
+
+test("allow to set name attribute for input", async () => {
+    const { container } = render(<Datepicker name={"datepicker"} />);
+
+    expect(container.querySelector("input")?.getAttribute("name")).toEqual("datepicker");
+});
