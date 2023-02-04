@@ -82,7 +82,7 @@ function App() {
 }
 ```
 
-## Calendar
+## Calendar ( BETA )
 
 The first version of the calendar is ready but it is just v1 and, yes, it may have some bugs. Please report bugs. I will fix it. I am working on design in v2. You will see a beautiful calendar.
 
