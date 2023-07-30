@@ -19,7 +19,7 @@ export interface IPropsDatepicker {
         setValue?: (val?: moment.Moment) => void
     ) => JSX.Element | JSX.Element[] | string;
     onChange?: (val?: moment.Moment) => void;
-    value?: moment.Moment | string;
+    value?: moment.Moment | string | null;
     defaultValue?: moment.Moment;
     modeTheme?: "dark" | "light";
     dayEffects?: {

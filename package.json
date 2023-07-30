@@ -32,6 +32,9 @@
   "homepage": "https://ijavad805.github.io/react-datepicker/",
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.8",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
@@ -51,6 +54,7 @@
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^29.3.1",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -63,8 +67,7 @@
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4",
-    "jest-environment-jsdom": "^29.3.1"
+    "typescript": "^4.7.4"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

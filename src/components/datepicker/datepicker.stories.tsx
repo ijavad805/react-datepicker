@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Datepicker from "./datepicker";
 import "antd/dist/antd.css";
 import { Input } from "antd";
+import TextField from '@mui/material/TextField';
 import moment from "moment";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -85,7 +86,27 @@ Persian.args = {
         );
     },
 };
+// export const MaterialUI = Template.bind({});
 
+// MaterialUI.args = {
+//     theme: "blue",
+//     lang: "fa",
+//     modeTheme: "dark",
+//     value: moment(),
+//     input: <TextField />,
+//     footer: (moment, setValue) => {
+//         return (
+//             <>
+//                 <div
+//                     onClick={() => {
+//                         if (setValue) setValue(moment());
+//                     }}>
+//                     امروز
+//                 </div>
+//             </>
+//         );
+//     },
+// };
 export const AllParams = Template.bind({});
 
 AllParams.args = {
