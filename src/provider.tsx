@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { IEvent } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 var moment_jalali = require("jalali-moment");
-moment_jalali.locale("fa");
+const mjalali = moment_jalali.locale("fa");
 export interface IConfigDatePicker {
     lang: "fa" | "en";
     theme: keyof typeof EnumTheme;
@@ -81,7 +81,7 @@ const DatepickerProvider = ({
     setOpen,
     closeWhenSelectADay,
 }: IProps) => {
-    const moment_ = config.lang === "fa" ? moment_jalali : moment;
+    const moment_ = config.lang === "fa" ? mjalali : moment;
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
     const [events, setEvents] = useState<IEvent[] | undefined>();

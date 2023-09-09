@@ -30,7 +30,7 @@ const useDateTools = () => {
     };
 
     const momentDatePicker = () => {
-        if (config.lang === "en") return moment;
+        if (config.lang === "en") return moment.locale("en");
         return moment_jalali;
     };
     const getMonths = () => {
