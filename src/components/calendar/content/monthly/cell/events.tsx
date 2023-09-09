@@ -9,10 +9,9 @@ interface IProps {
     date: moment.MomentInput;
     cellIndexInWeek: number;
     cellWith: number;
-    events: IEvent[]
+    events?: IEvent[];
 }
-const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith,events }) => {
-
+const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith, events }) => {
     return (
         <div className={`__calendar-table-td-body-events`}>
             {events

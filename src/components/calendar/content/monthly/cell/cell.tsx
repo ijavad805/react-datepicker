@@ -76,7 +76,7 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                 <Events
                     date={date}
                     cellIndexInWeek={cellIndexInWeek}
-                    cellWith={!!elm ? (elm.clientWidth / window.innerWidth) * 100 : 0}
+                    cellWith={!!elm ? ((elm.clientWidth - 1) / window.innerWidth) * 100 : 0}
                     events={events}
                 />
             </div>
