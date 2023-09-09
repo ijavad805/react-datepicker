@@ -59,8 +59,10 @@ const useDateTools = () => {
         return momentDatePicker()().localeData().monthsShort();
     };
 
-    const getWeakDayName = () => {
-        let dayNames = [...date.localeData().weekdaysMin()];
+    const getWeakDayName = (minName: boolean = true) => {
+        let dayNames = [
+            ...(minName ? date.localeData().weekdaysMin() : date.localeData().weekdays()),
+        ];
         if (config.lang === "fa") {
             dayNames.unshift(dayNames.pop() as any);
         }

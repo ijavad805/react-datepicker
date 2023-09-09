@@ -5,6 +5,7 @@ import useDateTools from "../../../../../hooks/useDateTools";
 import { DatepickerContext } from "../../../../../provider";
 import { IEvent } from "../../..";
 import Events from "./events";
+import useEvents from "./useEvents";
 
 interface IProps {
     date: moment.MomentInput;
@@ -15,6 +16,7 @@ interface IProps {
 const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
     const { moment } = useDateTools();
     const config = useContext(DatepickerContext);
+    const { events } = useEvents(date);
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
@@ -40,9 +42,19 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
         });
     };
     const cellClasses = () => {
-        const classes = [];
-        // classes.push("e")
-    }
+        const classes: string[] = [];
+
+        if (disabled) {
+            classes.push("__calender-disabled-cell");
+        }
+        if (moment(date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD")) {
+            classes.push("__calender-today");
+        }
+        if (moment(date).format("YYYY-MM-DD") < moment().format("YYYY-MM-DD")) {
+            classes.push("__calender-past");
+        }
+        return classes.join(" ");
+    };
     const elm = document.querySelector(".__calender-table-td") as HTMLDivElement;
 
     return (
@@ -51,18 +63,21 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                 if (onClick) onClick();
                 if (config.onDateClick) config.onDateClick(moment(date));
             }}
-            className={`__calender-table-td ${disabled ? "__calender-disabled-cell" : ""}`}
+            className={`__calender-table-td  ${cellClasses()}`}
             onDragOver={e => {
                 e.preventDefault();
             }}
             onDrop={handleDrop}>
             <div className="__calendar-table-td-body">
-                <div className={`__calendar-table-td-body-date`}>{moment(date).format("DD")}</div>
+                <div className={`__calendar-table-td-body-date`}>
+                    {moment(date).format("MMMM DD")}
+                </div>
 
                 <Events
                     date={date}
                     cellIndexInWeek={cellIndexInWeek}
                     cellWith={!!elm ? (elm.clientWidth / window.innerWidth) * 100 : 0}
+                    events={events}
                 />
             </div>
         </td>

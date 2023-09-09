@@ -25,7 +25,6 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
     const calcStyleForRange = (): React.CSSProperties => {
         const calcRight = () => {
             const difDays = moment(item.date.end).diff(moment(date), "days") + 1;
-            console.log(difDays, cellIndexInWeek - 7, difDays - (cellIndexInWeek - 6));
 
             if (7 - cellIndexInWeek > difDays) {
                 return difDays;

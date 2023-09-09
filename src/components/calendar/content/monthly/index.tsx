@@ -39,7 +39,7 @@ const MonthCalendar = () => {
             <Table>
                 <thead>
                     <tr>
-                        {getWeakDayName().map((item, index) => (
+                        {getWeakDayName(false).map((item, index) => (
                             <th key={index}>{item}</th>
                         ))}
                     </tr>
