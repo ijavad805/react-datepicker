@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { IEvent } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 var moment_jalali = require("jalali-moment");
-
+moment_jalali.locale("fa");
 export interface IConfigDatePicker {
     lang: "fa" | "en";
     theme: keyof typeof EnumTheme;
@@ -82,15 +82,9 @@ const DatepickerProvider = ({
     closeWhenSelectADay,
 }: IProps) => {
     const moment_ = config.lang === "fa" ? moment_jalali : moment;
-    moment_.locale(config.lang);
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
-    const [events, setEvents] = useState(
-        config.events?.map(item => ({
-            ...item,
-            date: moment(item.date).format("YYYY-MM-DD"),
-        }))
-    );
+    const [events, setEvents] = useState<IEvent[] | undefined>();
 
     const [value, setValue] = useState(
         defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
@@ -117,7 +111,20 @@ const DatepickerProvider = ({
     }, [value_]);
 
     useEffect(() => {
-        setEvents(config.events);
+        setEvents(
+            config.events?.map(item => {
+                return {
+                    ...item,
+                    date:
+                        typeof item.date === "string"
+                            ? moment(item.date).format("YYYY-MM-DD")
+                            : {
+                                  start: moment(item.date?.start).format("YYYY-MM-DD"),
+                                  end: moment(item.date?.end).format("YYYY-MM-DD"),
+                              },
+                };
+            })
+        );
     }, [config.events]);
 
     return (

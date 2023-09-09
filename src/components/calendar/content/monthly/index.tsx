@@ -2,7 +2,7 @@ import useDateTools from "../../../../hooks/useDateTools";
 import Body from "../body";
 import React, { useContext } from "react";
 import Table from "../../../table";
-import Cell from "./cell";
+import Cell from "./cell/cell";
 import usePersian from "../../../../hooks/usePersian";
 import { DatepickerContext } from "../../../../provider";
 
@@ -60,7 +60,8 @@ const MonthCalendar = () => {
                                         return (
                                             <Cell
                                                 date={date.format("YYYY-MM-") + day}
-                                                key={index}
+                                                key={`${index}-${date.format("YYYY-MM-") + day}`}
+                                                cellIndexInWeek={index}
                                             />
                                         );
                                 })}
@@ -97,7 +98,7 @@ const FillStart = () => {
     return (
         <>
             {new Array(getMonthStartWith()).fill("d").map((i, index) => (
-                <Cell date={getEndOfPrevMonth(index)} disabled={true} />
+                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={index}/>
             ))}
         </>
     );
@@ -121,7 +122,7 @@ const FillEnd = () => {
     return (
         <>
             {new Array(getMonthCountToEnd()).fill("d").map((i, index) => (
-                <Cell date={getEndOfPrevMonth(index)} disabled={true} />
+                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={index}/>
             ))}
         </>
     );

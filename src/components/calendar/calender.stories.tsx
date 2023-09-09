@@ -23,7 +23,7 @@ English.args = {
         {
             id: 1,
             title: "Holiday",
-            date: moment().format(),
+            date: "2023-9-09",
             style: {
                 background: "rgba(0,0,0,0.125)",
             },
@@ -31,7 +31,15 @@ English.args = {
         {
             id: 2,
             title: "Holiday",
-            date: moment().format(),
+            date: "2023-9-09",
+        },
+        {
+            id: 3,
+            title: "Event Range",
+            date: {
+                start: "2023-9-05",
+                end: "2023-9-09",
+            },
         },
     ],
     onDropEvent: item => {
@@ -47,12 +55,23 @@ Persian.args = {
         {
             id: 1,
             title: "Holiday",
-            date: moment().format(),
+            date: "2023-9-09",
+            style: {
+                background: "rgba(0,0,0,0.125)",
+            },
         },
         {
             id: 2,
             title: "Holiday",
-            date: moment().format(),
+            date: "2023-9-09",
+        },
+        {
+            id: 3,
+            title: "Event Range",
+            date: {
+                start: "2023-9-05",
+                end: "2023-9-09",
+            },
         },
     ],
     onDropEvent: item => {

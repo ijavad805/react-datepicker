@@ -1,34 +1,36 @@
-.__calender-table-tr {
+.__calender-table-td {
     border: 1px solid rgba($color: #000000, $alpha: 0.125);
     position: relative;
 
-    .__calendar-table-tr-body {
+    .__calendar-table-td-body {
         padding: 0px;
         display: flex;
         flex-direction: column;
 
-        .__calendar-table-tr-body-date {
+        .__calendar-table-td-body-date {
             position: absolute;
             top: 5px;
             right: 5px;
             font-size: 11px;
         }
 
-        .__calendar-table-tr-body-events {
+        .__calendar-table-td-body-events {
             flex-grow: 1;
             flex: 1;
             margin-top: 20px;
             min-height: 2em;
 
-            .__calendar-table-tr-body-events-item {
+            .__calendar-table-td-body-events-item {
                 display: flex;
                 align-items: center;
                 margin: 1px;
                 font-size: 10px;
                 padding: 0 3px;
                 border-radius: 3px;
+                position: relative;
+                background-color: rgba($color: #000000, $alpha: 0.125);
 
-                .__calendar-table-tr-body-events-item-circle {
+                .__calendar-table-td-body-events-item-circle {
                     min-width: 3px;
                     min-height: 3px;
                     border-radius: 10px;
@@ -38,6 +40,10 @@
 
                 &:hover {
                     background-color: rgba($color: #000000, $alpha: 0.125);
+                }
+
+                &.hide {
+                    visibility: hidden;
                 }
             }
         }

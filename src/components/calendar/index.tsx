@@ -4,10 +4,16 @@ import { DatepickerProvider } from "../../provider";
 import MonthCalendar from "./content/monthly";
 import "./style.scss";
 
+type DateEvent =
+    | string
+    | {
+          start: string;
+          end: string;
+      };
 export interface IEvent {
     id: number;
     title: React.ReactNode | string;
-    date: string;
+    date: DateEvent;
     style?: React.CSSProperties;
     className?: string;
     dotColor?: string;
