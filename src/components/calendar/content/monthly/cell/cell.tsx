@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import moment from "moment";
 import useDateTools from "../../../../../hooks/useDateTools";
 import { DatepickerContext } from "../../../../../provider";
-import { IEvent } from "../../..";
+import { IEvent, IEventLogic } from "../../..";
 import Events from "./events";
 import useEvents from "./useEvents";
 
@@ -16,31 +16,55 @@ interface IProps {
 const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
     const { moment } = useDateTools();
     const config = useContext(DatepickerContext);
-    const { events } = useEvents(date);
+    const { events } = useEvents(moment(date).locale("en").format("YYYY-MM-DD"));
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
-        var id: any = e.dataTransfer.getData("text");
-        config.setEvents((prev: IEvent[]) => {
+        const id: any = e.dataTransfer.getData("text");
+        config.setEvents((prev: IEventLogic[]) => {
             let clone = [...prev];
             const find = prev.findIndex(i => i.id === parseInt(id));
             if (find !== -1) {
-                if (config.lang === "fa") {
-                    clone[find].date = moment
-                        .from(date, config.lang)
-                        .locale("en")
+                const eventToMove = [...clone][find];
+                const newStartDate = moment(date).locale("en").format("YYYY-MM-DD");
+
+                // If it's a range event, update both start and end dates
+                const rangeDuration = moment(eventToMove.date.end, "YYYY-MM-DD").diff(
+                    moment(eventToMove.date.start, "YYYY-MM-DD"),
+                    "days"
+                );
+                eventToMove.date.start = newStartDate;
+                if(rangeDuration > 0){
+                    eventToMove.date.end = moment(newStartDate, "YYYY-MM-DD")
+                        .add(rangeDuration, "days")
                         .format("YYYY-MM-DD");
-                } else {
-                    clone[find].date = moment(date).locale("en").format("YYYY-MM-DD");
+                }else{
+                    eventToMove.date.end = newStartDate;
                 }
-                if (config.onDropEvent) config.onDropEvent(clone[find]);
-                const item: any = clone.splice(find, 1);
-                clone.push(item[0]);
+
+                console.log(eventToMove);
+                
+                if (
+                    eventToMove.date.end !== "Invalid date" &&
+                    eventToMove.date.start !== "Invalid date"
+                ) {
+                    if (config.onDropEvent) config.onDropEvent(eventToMove);
+
+                    // Remove the event from its current position and push it to the end
+                    const item: any = clone.splice(find, 1);
+                    clone.forEach((item, index) => {
+                        clone[index].priority = undefined;
+                    });
+                    clone.push(item[0]);
+                } else {
+                    console.log("calendar error", "the date is invalid!!");
+                }
             }
 
             return clone;
         });
     };
+
     const cellClasses = () => {
         const classes: string[] = [];
 
@@ -74,9 +98,9 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                 </div>
 
                 <Events
-                    date={date}
+                    date={moment(date).locale("en").format("YYYY-MM-DD")}
                     cellIndexInWeek={cellIndexInWeek}
-                    cellWith={!!elm ? ((elm.clientWidth - 1) / window.innerWidth) * 100 : 0}
+                    cellWith={!!elm ? (elm.clientWidth / window.innerWidth) * 100 : 0}
                     events={events}
                 />
             </div>

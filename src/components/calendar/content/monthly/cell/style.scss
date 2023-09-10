@@ -1,6 +1,5 @@
 .__calender-table-td {
     border: 1px solid rgba($color: #000000, $alpha: 0.125);
-    position: relative;
     z-index: 1;
 
     .__calendar-table-td-body {
@@ -8,25 +7,26 @@
         display: flex;
         flex-direction: column;
         height: 100%;
+        position: relative;
 
         .__calendar-table-td-body-date {
             position: absolute;
-            top: 5px;
+            top: 0px;
             right: 5px;
             font-size: 11px;
-            color: #aaa;
             user-select: none;
         }
 
-        &:hover > .__calendar-table-td-body-date {
+        &:hover>.__calendar-table-td-body-date {
             color: #000;
         }
 
         .__calendar-table-td-body-events {
             flex-grow: 1;
             flex: 1;
-            min-height: 2em;
+            min-height: 15vh;
             margin-top: 20px;
+            position: relative;
 
             .__calendar-table-td-body-events-item {
                 display: flex;
@@ -35,10 +35,11 @@
                 font-size: 10px;
                 padding: 0 3px;
                 border-radius: 3px;
-                position: relative;
-                background-color: #aaa;
-                z-index: 3;
+                position: absolute;
+                background-color: #fff;
+                z-index: 10;
                 user-select: none;
+                border: 1px solid rgba($color: #000000, $alpha: 0.125);
 
                 .__calendar-table-td-body-events-item-circle {
                     min-width: 3px;
@@ -49,7 +50,7 @@
                 }
 
                 &:hover {
-                    background-color: rgba($color: #000000, $alpha: 0.125);
+                    opacity: 0.95;
                 }
 
                 &.hide {
@@ -59,9 +60,14 @@
         }
     }
 
+
     &.__calender-past {
         background: url("./past-day.png") repeat;
         background-size: 50px;
+
+        .__calendar-table-td-body-date {
+            color: #aaa;
+        }
     }
 
     &.__calender-disabled-cell {

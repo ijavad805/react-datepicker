@@ -21,6 +21,14 @@ export interface IEvent {
     icon?: React.ReactNode;
     // extraData?: any;
 }
+
+export interface IEventLogic extends IEvent{
+    date: {
+        start: string;
+        end: string;
+    };
+    priority?: number;
+}
 export interface IProps {
     lang?: "en" | "fa";
     theme?: "blue";

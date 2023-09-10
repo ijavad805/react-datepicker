@@ -1,9 +1,9 @@
 import moment from "moment";
 import React, { createContext, useEffect, useState } from "react";
-import { IEvent } from "./components/calendar";
+import { IEvent, IEventLogic } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 var moment_jalali = require("jalali-moment");
-const mjalali = moment_jalali.locale("fa");
+moment_jalali.locale("fa");
 export interface IConfigDatePicker {
     lang: "fa" | "en";
     theme: keyof typeof EnumTheme;
@@ -22,7 +22,7 @@ export interface IConfigDatePicker {
     disabledDate?: (date: moment.Moment) => Boolean;
 
     // calendar
-    events?: IEvent[];
+    events?: IEventLogic[];
     setEvents?: any;
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
@@ -81,10 +81,10 @@ const DatepickerProvider = ({
     setOpen,
     closeWhenSelectADay,
 }: IProps) => {
-    const moment_ = config.lang === "fa" ? mjalali : moment;
+    const moment_ = config.lang === "fa" ? moment_jalali : moment;
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
-    const [events, setEvents] = useState<IEvent[] | undefined>();
+    const [events, setEvents] = useState<IEventLogic[] | undefined>();
 
     const [value, setValue] = useState(
         defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
@@ -117,7 +117,10 @@ const DatepickerProvider = ({
                     ...item,
                     date:
                         typeof item.date === "string"
-                            ? moment(item.date).format("YYYY-MM-DD")
+                            ? {
+                                  start: moment(item.date).format("YYYY-MM-DD"),
+                                  end: moment(item.date).format("YYYY-MM-DD"),
+                              }
                             : {
                                   start: moment(item.date?.start).format("YYYY-MM-DD"),
                                   end: moment(item.date?.end).format("YYYY-MM-DD"),

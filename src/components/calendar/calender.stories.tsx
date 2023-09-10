@@ -63,14 +63,25 @@ Persian.args = {
         {
             id: 2,
             title: "Holiday",
-            date: "2023-9-09",
+            date: "2023-9-10",
+            style: {
+                background: "red",
+            },
         },
         {
             id: 3,
-            title: "Event Range",
+            title: "Event Range 1",
             date: {
                 start: "2023-9-05",
                 end: "2023-9-09",
+            },
+        },
+        {
+            id: 4,
+            title: "Event Range 2",
+            date: {
+                start: "2023-9-06",
+                end: "2023-9-11",
             },
         },
     ],
