@@ -11,8 +11,9 @@ interface IProps {
     date: moment.MomentInput;
     cellIndexInWeek: number;
     cellWith: number;
+    events: any;
 }
-const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cellWith }) => {
+const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cellWith, events }) => {
     const config = useContext(DatepickerContext);
     date = moment(date).locale("en").format("YYYY-MM-DD");
     const hide = cellIndexInWeek !== 0 && item.date.start !== date;
@@ -21,17 +22,20 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
 
     const handlePriority = () => {
         const find = config.events?.findIndex(i => i.id === item.id);
-        const clone = config.events ? [...config.events] : [];
         if (
             find &&
             find !== -1 &&
-            clone[find].priority === undefined &&
+            config.events &&
+            config.events[find].priority === undefined &&
             !hide &&
             item.date.start !== item.date.end
         ) {
-            clone[find].priority = index;
+            config.setEvents(prev => {
+                const clone = prev ? [...prev] : [];
+                clone[find].priority = index;
 
-            config.setEvents(clone);
+                return clone;
+            });
         }
     };
 
@@ -60,7 +64,7 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
             forceUpdate({ update: true });
             handlePriority();
         }
-    }, [ref, config.events]);
+    }, [ref, item]);
 
     return (
         <div

@@ -10,12 +10,6 @@ const useEvents = (date: moment.MomentInput) => {
 
     const handleFilterEvents = (item: IEventLogic) => {
         const selectedDate = moment(date);
-        if (item.id === 2)
-            console.log(
-                selectedDate.locale("en").format("YYYY-MM-DD"),
-                item.date.start,
-                moment(item.date.start).locale("en").format("YYYY-MM-DD")
-            );
 
         const startDate = moment(item.date.start).locale("en").format("YYYY-MM-DD");
         const endDate = moment(item.date.end).locale("en").format("YYYY-MM-DD");
@@ -52,8 +46,6 @@ const useEvents = (date: moment.MomentInput) => {
         const thisDayEventsWithPriority =
             thisDayEvents?.filter(i => i.priority !== undefined) || [];
 
-            console.log(thisDayEvents);
-            
         setEvents(
             [...thisDayEventsWithPriority, ...thisDayEventsWithoutPriority]?.sort((a, b) => {
                 const startA = moment(a.date.start).valueOf();

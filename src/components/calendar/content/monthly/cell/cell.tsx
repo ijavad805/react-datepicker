@@ -20,12 +20,13 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
+        e.stopPropagation()
         const id: any = e.dataTransfer.getData("text");
         config.setEvents((prev: IEventLogic[]) => {
-            let clone = [...prev];
+            let clone = [...prev].map(i => ({ ...i, priority: undefined }));
             const find = prev.findIndex(i => i.id === parseInt(id));
             if (find !== -1) {
-                const eventToMove = [...clone][find];
+                const eventToMove = clone[find];
                 const newStartDate = moment(date).locale("en").format("YYYY-MM-DD");
 
                 // If it's a range event, update both start and end dates
@@ -34,16 +35,14 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                     "days"
                 );
                 eventToMove.date.start = newStartDate;
-                if(rangeDuration > 0){
+                if (rangeDuration > 0) {
                     eventToMove.date.end = moment(newStartDate, "YYYY-MM-DD")
                         .add(rangeDuration, "days")
                         .format("YYYY-MM-DD");
-                }else{
+                } else {
                     eventToMove.date.end = newStartDate;
                 }
 
-                console.log(eventToMove);
-                
                 if (
                     eventToMove.date.end !== "Invalid date" &&
                     eventToMove.date.start !== "Invalid date"
@@ -52,9 +51,7 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
 
                     // Remove the event from its current position and push it to the end
                     const item: any = clone.splice(find, 1);
-                    clone.forEach((item, index) => {
-                        clone[index].priority = undefined;
-                    });
+                    item.priority = undefined;
                     clone.push(item[0]);
                 } else {
                     console.log("calendar error", "the date is invalid!!");

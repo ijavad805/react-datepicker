@@ -16,6 +16,7 @@ const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith, events }) =
             {events?.map((item, index) => (
                 <RangeEvent
                     index={index}
+                    events={events}
                     item={item as any}
                     date={date}
                     cellIndexInWeek={cellIndexInWeek}
