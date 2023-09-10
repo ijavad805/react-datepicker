@@ -11,33 +11,15 @@ interface IProps {
     date: moment.MomentInput;
     cellIndexInWeek: number;
     cellWith: number;
-    events: any;
+    key: any;
 }
-const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cellWith, events }) => {
+const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cellWith, key }) => {
     const config = useContext(DatepickerContext);
     date = moment(date).locale("en").format("YYYY-MM-DD");
     const hide = cellIndexInWeek !== 0 && item.date.start !== date;
     const ref = useRef<HTMLDivElement>(null);
     const [, forceUpdate] = useState({ update: true });
-
-    const handlePriority = () => {
-        const find = config.events?.findIndex(i => i.id === item.id);
-        if (
-            find &&
-            find !== -1 &&
-            config.events &&
-            config.events[find].priority === undefined &&
-            !hide &&
-            item.date.start !== item.date.end
-        ) {
-            config.setEvents(prev => {
-                const clone = prev ? [...prev] : [];
-                clone[find].priority = index;
-
-                return clone;
-            });
-        }
-    };
+    const classEvent = `item-e-${item.id}`;
 
     const calcStyleForRange = (): React.CSSProperties => {
         const calcRight = () => {
@@ -49,22 +31,33 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
                 return 7 - cellIndexInWeek;
             }
         };
-        if (!hide && ref.current !== null) {
+        if (ref.current !== null) {
             return {
                 width: calcRight() * cellWith + "vw",
-                top: (ref.current?.offsetHeight + 5) * index,
+                top: (ref.current?.offsetHeight + 5) * (item?.priority ? item.priority : index),
             };
         }
 
         return {};
     };
 
+    const handleMouseHover = (leave: boolean) => (e: any) => {
+        const elm: any = document.querySelectorAll(`.${classEvent}`);
+
+        elm.forEach((item: HTMLDivElement) => {
+            if (leave) {
+                item.className = item.className.replace("hover", "");
+            } else {
+                item.className = item.className + ` hover`;
+            }
+        });
+    };
+
     useEffect(() => {
         if (ref.current !== null) {
             forceUpdate({ update: true });
-            handlePriority();
         }
-    }, [ref, item]);
+    }, [ref]);
 
     return (
         <div
@@ -82,9 +75,11 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
             key={`range-event-${index}`}
             className={`__calendar-table-td-body-events-item ${item?.className} ${
                 hide ? "hide" : ""
-            } `}
+            } ${classEvent}`}
             style={{ ...item?.style, ...calcStyleForRange() }}
             onClick={config.onClickEvent?.bind(this, item)}
+            onMouseEnter={handleMouseHover(false)}
+            onMouseLeave={handleMouseHover(true)}
             onDoubleClick={config.onDoubleClickEvent?.bind(this, item)}>
             {!item.icon ? (
                 <div

@@ -14,20 +14,21 @@ interface IProps {
     cellIndexInWeek: number;
 }
 const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
-    const { moment } = useDateTools();
+    const { moment: moment_ } = useDateTools();
     const config = useContext(DatepickerContext);
-    const { events } = useEvents(moment(date).locale("en").format("YYYY-MM-DD"));
+    const { events } = useEvents(moment_(date).locale("en").format("YYYY-MM-DD"));
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
-        e.stopPropagation()
+        e.stopPropagation();
+        const date_clone = moment_(date).locale("en").format("YYYY-MM-DD")
         const id: any = e.dataTransfer.getData("text");
         config.setEvents((prev: IEventLogic[]) => {
-            let clone = [...prev].map(i => ({ ...i, priority: undefined }));
+            let clone = [...prev];
             const find = prev.findIndex(i => i.id === parseInt(id));
             if (find !== -1) {
                 const eventToMove = clone[find];
-                const newStartDate = moment(date).locale("en").format("YYYY-MM-DD");
+                const newStartDate = moment(date_clone,"YYYY-MM-DD").locale("en").format("YYYY-MM-DD");
 
                 // If it's a range event, update both start and end dates
                 const rangeDuration = moment(eventToMove.date.end, "YYYY-MM-DD").diff(
@@ -35,13 +36,11 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                     "days"
                 );
                 eventToMove.date.start = newStartDate;
-                if (rangeDuration > 0) {
-                    eventToMove.date.end = moment(newStartDate, "YYYY-MM-DD")
-                        .add(rangeDuration, "days")
-                        .format("YYYY-MM-DD");
-                } else {
-                    eventToMove.date.end = newStartDate;
-                }
+
+                eventToMove.date.end = moment(newStartDate)
+                    .locale("en")
+                    .add(rangeDuration, "days")
+                    .format("YYYY-MM-DD");
 
                 if (
                     eventToMove.date.end !== "Invalid date" &&
@@ -51,10 +50,10 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
 
                     // Remove the event from its current position and push it to the end
                     const item: any = clone.splice(find, 1);
-                    item.priority = undefined;
                     clone.push(item[0]);
                 } else {
                     console.log("calendar error", "the date is invalid!!");
+                    return prev;
                 }
             }
 
@@ -68,10 +67,10 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
         if (disabled) {
             classes.push("__calender-disabled-cell");
         }
-        if (moment(date).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD")) {
+        if (moment_(date).format("YYYY-MM-DD") === moment_().format("YYYY-MM-DD")) {
             classes.push("__calender-today");
         }
-        if (moment(date).format("YYYY-MM-DD") < moment().format("YYYY-MM-DD")) {
+        if (moment_(date).format("YYYY-MM-DD") < moment_().format("YYYY-MM-DD")) {
             classes.push("__calender-past");
         }
         return classes.join(" ");
@@ -82,7 +81,7 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
         <td
             onClick={() => {
                 if (onClick) onClick();
-                if (config.onDateClick) config.onDateClick(moment(date));
+                if (config.onDateClick) config.onDateClick(moment_(date));
             }}
             className={`__calender-table-td  ${cellClasses()}`}
             onDragOver={e => {
@@ -91,11 +90,11 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
             onDrop={handleDrop}>
             <div className="__calendar-table-td-body">
                 <div className={`__calendar-table-td-body-date`}>
-                    {moment(date).format("MMMM DD")}
+                    {moment_(date).format("MMMM DD")}
                 </div>
 
                 <Events
-                    date={moment(date).locale("en").format("YYYY-MM-DD")}
+                    date={moment_(date).locale("en").format("YYYY-MM-DD")}
                     cellIndexInWeek={cellIndexInWeek}
                     cellWith={!!elm ? (elm.clientWidth / window.innerWidth) * 100 : 0}
                     events={events}

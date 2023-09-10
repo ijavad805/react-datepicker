@@ -56,17 +56,11 @@ Persian.args = {
             id: 1,
             title: "Holiday",
             date: "2023-9-09",
-            style: {
-                background: "rgba(0,0,0,0.125)",
-            },
         },
         {
             id: 2,
             title: "Holiday",
             date: "2023-9-10",
-            style: {
-                background: "red",
-            },
         },
         {
             id: 3,
