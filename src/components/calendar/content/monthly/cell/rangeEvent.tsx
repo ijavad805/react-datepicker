@@ -33,7 +33,7 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
         };
         if (ref.current !== null) {
             return {
-                width: calcRight() * cellWith + "vw",
+                width: `calc(${calcRight() * cellWith + "vw"} - 5px)`,
                 top:
                     (ref.current?.offsetHeight + 5) *
                     (item?.priority !== undefined ? item.priority : index),
@@ -48,9 +48,10 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
 
         elm.forEach((item: HTMLDivElement) => {
             if (leave) {
-                item.className = item.className.replace("hover", "");
+                item.classList.remove("hover");
             } else {
-                item.className = item.className + ` hover`;
+                item.classList.add("hover");
+
             }
         });
     };

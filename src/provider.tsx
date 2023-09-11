@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { createContext, useEffect, useState } from "react";
 import { IEvent, IEventLogic } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
+import { priorityStoreInit } from "./components/calendar/content/monthly/cell/priorityStore";
 var moment_jalali = require("jalali-moment");
 export interface IConfigDatePicker {
     lang: "fa" | "en";
@@ -81,6 +82,8 @@ const DatepickerProvider = ({
     closeWhenSelectADay,
 }: IProps) => {
     const moment_ = config.lang === "fa" ? moment_jalali : moment;
+    moment_.locale(config.lang);
+
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
     const [events, setEvents] = useState<IEventLogic[] | undefined>();
@@ -110,10 +113,8 @@ const DatepickerProvider = ({
     }, [value_]);
 
     useEffect(() => {
-        moment_jalali.locale(config.lang);
-    }, [config.lang]);
+        priorityStoreInit.clear();
 
-    useEffect(() => {
         setEvents(
             config.events?.map(item => {
                 return {
@@ -149,7 +150,10 @@ const DatepickerProvider = ({
                     setValue(i);
                 },
                 events,
-                setEvents,
+                setEvents: (events: IEventLogic[]) => {
+                    priorityStoreInit.clear();
+                    setEvents(events);
+                },
             }}>
             {children}
         </DatepickerContext.Provider>

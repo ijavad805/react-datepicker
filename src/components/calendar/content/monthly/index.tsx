@@ -122,7 +122,7 @@ const FillEnd = () => {
     return (
         <>
             {new Array(getMonthCountToEnd()).fill("d").map((i, index) => (
-                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={index}/>
+                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={(7 - getMonthCountToEnd()) + index}/>
             ))}
         </>
     );

@@ -8,19 +8,6 @@ const useDateTools = () => {
     const date = config.date.clone();
     const value = config.value;
 
-    const getMonth = (month?: number) => {
-        const cloneDate = date.clone();
-        if (month !== undefined) {
-            cloneDate.add(month, "M");
-        }
-
-        return {
-            countDay: cloneDate.daysInMonth(),
-            name: cloneDate.format("MMM"),
-            fullName: cloneDate.format("MMMM"),
-        };
-    };
-
     const getYear = (date_?: string) => {
         return date.format("YYYY");
     };
@@ -68,6 +55,19 @@ const useDateTools = () => {
         }
 
         return dayNames;
+    };
+
+    const getMonth = (month?: number) => {
+        const cloneDate = momentDatePicker()(date.clone());
+        if (month !== undefined) {
+            cloneDate.add(month, "M");
+        }
+
+        return {
+            countDay: cloneDate.daysInMonth(),
+            name: cloneDate.format("MMM"),
+            fullName: cloneDate.format("MMMM"),
+        };
     };
     return {
         getMonth,

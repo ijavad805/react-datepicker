@@ -1,5 +1,5 @@
 import "./style.scss";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import useDateTools from "../../../../../hooks/useDateTools";
 import { DatepickerContext } from "../../../../../provider";
@@ -19,6 +19,7 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
     const config = useContext(DatepickerContext);
     const { events } = useEvents(moment_(date).locale("en").format("YYYY-MM-DD"));
     const ref = useRef<any>(null);
+    const [, forceUpdate] = useState({ update: true });
     // Define a state variable to track the drag state
 
     const handleDrop = (e: React.DragEvent) => {
@@ -86,6 +87,19 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
 
     const elm = document.querySelector(".__calender-table-td") as HTMLDivElement;
 
+    useEffect(() => {
+        const forceRerenderPage = () => {
+            forceUpdate({ update: true });
+        };
+        // Add event listener to window resize event
+        window.addEventListener("resize", forceRerenderPage);
+
+        // Remove event listener when the component unmounts
+        return () => {
+            window.removeEventListener("resize", forceRerenderPage);
+        };
+    }, []);
+
     return (
         <td
             ref={ref}
@@ -106,7 +120,7 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                 <Events
                     date={moment_(date).locale("en").format("YYYY-MM-DD")}
                     cellIndexInWeek={cellIndexInWeek}
-                    cellWith={!!elm ? (elm.clientWidth / window.innerWidth) * 100 : 0}
+                    cellWith={!!elm ? (elm.offsetWidth / window.innerWidth) * 100 : 0}
                     events={events}
                 />
             </div>

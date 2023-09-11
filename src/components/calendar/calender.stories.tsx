@@ -67,7 +67,7 @@ Persian.args = {
             title: "Event Range 1",
             date: {
                 start: "2023-9-05",
-                end: "2023-9-09",
+                end: "2023-9-12",
             },
         },
         {

@@ -57,7 +57,7 @@ test("test with all attrs en", async () => {
         />
     );
 
-    expect(screen.getByPlaceholderText("datepicker")).toHaveValue(moment().locale("en").format("LLL"));
+    expect(screen.getByPlaceholderText("datepicker")).toHaveValue(moment().format("LLL"));
 });
 
 test("allow to set name attribute for input", async () => {
