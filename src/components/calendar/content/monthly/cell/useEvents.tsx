@@ -25,7 +25,7 @@ const useEvents = (date: string) => {
             selectedDate.locale("en").format("YYYY-MM-DD") <= endDate
         );
     };
-    const getUniquePriority = todayList => {
+    const getUniquePriority = (todayList: IEventLogic[]) => {
         // Collect all used priorities in a Set
         const usedPriorities = new Set(todayList.map(item => item.priority));
 
