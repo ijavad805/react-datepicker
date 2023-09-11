@@ -1,11 +1,12 @@
 import "./style.scss";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import moment from "moment";
 import useDateTools from "../../../../../hooks/useDateTools";
 import { DatepickerContext } from "../../../../../provider";
 import { IEvent, IEventLogic } from "../../..";
 import Events from "./events";
 import useEvents from "./useEvents";
+import { priorityStore, priorityStoreInit } from "./priorityStore";
 
 interface IProps {
     date: moment.MomentInput;
@@ -17,18 +18,24 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
     const { moment: moment_ } = useDateTools();
     const config = useContext(DatepickerContext);
     const { events } = useEvents(moment_(date).locale("en").format("YYYY-MM-DD"));
+    const ref = useRef<any>(null);
+    // Define a state variable to track the drag state
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        const date_clone = moment_(date).locale("en").format("YYYY-MM-DD")
+        const date_clone = moment_(date).locale("en").format("YYYY-MM-DD");
         const id: any = e.dataTransfer.getData("text");
+        priorityStoreInit.clear();
+
         config.setEvents((prev: IEventLogic[]) => {
             let clone = [...prev];
             const find = prev.findIndex(i => i.id === parseInt(id));
             if (find !== -1) {
                 const eventToMove = clone[find];
-                const newStartDate = moment(date_clone,"YYYY-MM-DD").locale("en").format("YYYY-MM-DD");
+                const newStartDate = moment(date_clone, "YYYY-MM-DD")
+                    .locale("en")
+                    .format("YYYY-MM-DD");
 
                 // If it's a range event, update both start and end dates
                 const rangeDuration = moment(eventToMove.date.end, "YYYY-MM-DD").diff(
@@ -57,8 +64,9 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
                 }
             }
 
-            return clone;
+            return clone.map(i => ({ ...i, priority: undefined }));
         });
+        ref.current.classList.remove("__calender-table-td-drag-hover");
     };
 
     const cellClasses = () => {
@@ -75,10 +83,12 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
         }
         return classes.join(" ");
     };
+
     const elm = document.querySelector(".__calender-table-td") as HTMLDivElement;
 
     return (
         <td
+            ref={ref}
             onClick={() => {
                 if (onClick) onClick();
                 if (config.onDateClick) config.onDateClick(moment_(date));

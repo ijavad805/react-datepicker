@@ -54,12 +54,12 @@ Persian.args = {
     events: [
         {
             id: 1,
-            title: "Holiday",
+            title: "Holiday 1",
             date: "2023-9-09",
         },
         {
             id: 2,
-            title: "Holiday",
+            title: "Holiday 2",
             date: "2023-9-10",
         },
         {

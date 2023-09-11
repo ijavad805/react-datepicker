@@ -13,16 +13,24 @@ interface IProps {
 const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith, events }) => {
     return (
         <div className={`__calendar-table-td-body-events`}>
-            {events?.map((item, index) => (
-                <RangeEvent
-                    index={index}
-                    item={item as any}
-                    date={date}
-                    cellIndexInWeek={cellIndexInWeek}
-                    cellWith={cellWith}
-                    key={`event-${item.id}-${item.priority}-${item.date}`}
-                />
-            ))}
+            {events
+                ?.sort((a, b) => {
+                    if (a?.priority && b?.priority) {
+                        return a?.priority - b?.priority;
+                    }
+
+                    return -1;
+                })
+                ?.map((item, index) => (
+                    <RangeEvent
+                        index={index}
+                        item={item as any}
+                        date={date}
+                        cellIndexInWeek={cellIndexInWeek}
+                        cellWith={cellWith}
+                        key={`event-${item.id}-${item.priority}-${item.date}`}
+                    />
+                ))}
         </div>
     );
 };

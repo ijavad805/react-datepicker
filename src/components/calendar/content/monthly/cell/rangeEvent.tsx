@@ -34,7 +34,9 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
         if (ref.current !== null) {
             return {
                 width: calcRight() * cellWith + "vw",
-                top: (ref.current?.offsetHeight + 5) * (item?.priority ? item.priority : index),
+                top:
+                    (ref.current?.offsetHeight + 5) *
+                    (item?.priority !== undefined ? item.priority : index),
             };
         }
 
