@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import "antd/dist/antd.css";
 import Calender from ".";
-import moment from "jalali-moment";
+import moment from "moment";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: "Calender",
@@ -12,7 +12,9 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Calender> = args => (
-    <Calender {...args} style={{ height: 600 }} />
+    <div style={{ direction: args.lang === "fa" ? "rtl" : "ltr" }}>
+        <Calender {...args} style={{ height: 600 }} />
+    </div>
 );
 
 export const English = Template.bind({});
@@ -55,7 +57,7 @@ Persian.args = {
         {
             id: 1,
             title: "Holiday 1",
-            date: "2023-9-09",
+            date: "2023-09-14T00:00:00+04:30",
         },
         {
             id: 2,
@@ -81,5 +83,12 @@ Persian.args = {
     ],
     onDropEvent: item => {
         console.log(item);
+    },
+    onDay: date => {
+        console.log(moment(date).format("YYYY"));
+
+        return {
+            className: "test",
+        };
     },
 };

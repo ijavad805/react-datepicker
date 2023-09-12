@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DatepickerContext } from "../../../../../provider";
 import useEvents from "./useEvents";
 import RangeEvent from "./rangeEvent";
@@ -11,8 +11,29 @@ interface IProps {
     events?: IEventLogic[];
 }
 const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith, events }) => {
+    const eventsUniqueClass = `__calendar-table-events-${date}`;
+    const [style, setStyle] = useState<React.CSSProperties>({});
+
+    useEffect(() => {
+        setTimeout(() => {
+            let defaultHeight = 15;
+            let height = 0;
+
+            const findThisEvent = document.querySelectorAll(
+                `.${eventsUniqueClass} .__calendar-table-td-body-events-item`
+            );
+            findThisEvent.forEach(i => {
+                height += ((i.clientHeight + 10) / window.innerHeight) * 100;
+            });
+
+            setStyle(() => ({
+                minHeight: `${defaultHeight > height ? defaultHeight : height}vh`,
+            }));
+        }, 100);
+    }, [events]);
+
     return (
-        <div className={`__calendar-table-td-body-events`}>
+        <div className={`__calendar-table-td-body-events ${eventsUniqueClass}`} style={style}>
             {events
                 ?.sort((a, b) => {
                     if (a?.priority && b?.priority) {

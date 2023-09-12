@@ -17,7 +17,15 @@ const MonthCalendar = () => {
         (mines: boolean, year: boolean = false) =>
         () => {
             if (config.setDate) {
-                config.setDate(date.add(mines ? -1 : 1, year ? "year" : "month"));
+                const newDate = date.add(mines ? -1 : 1, year ? "year" : "month");
+                config.setDate(newDate);
+
+                const clone = newDate.clone()
+                config.onMonthChange &&
+                    config.onMonthChange(
+                        clone.startOf("month").locale("en").format("YYYY-MM-DD"),
+                        clone.endOf("month").locale("en").format("YYYY-MM-DD")
+                    );
             }
         };
     return (
@@ -98,7 +106,7 @@ const FillStart = () => {
     return (
         <>
             {new Array(getMonthStartWith()).fill("d").map((i, index) => (
-                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={index}/>
+                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={index} />
             ))}
         </>
     );
@@ -122,7 +130,11 @@ const FillEnd = () => {
     return (
         <>
             {new Array(getMonthCountToEnd()).fill("d").map((i, index) => (
-                <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={(7 - getMonthCountToEnd()) + index}/>
+                <Cell
+                    date={getEndOfPrevMonth(index)}
+                    disabled={true}
+                    cellIndexInWeek={7 - getMonthCountToEnd() + index}
+                />
             ))}
         </>
     );

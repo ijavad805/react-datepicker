@@ -13,6 +13,8 @@
         .__calender-header-controllers {
             display: flex;
             align-items: center;
+            direction: ltr;
+            gap: 20px;
 
             .__calendar-controller {
                 display: flex;
@@ -20,7 +22,6 @@
                 align-items: center;
                 color: rgb(59, 59, 59);
                 user-select: none;
-                margin: 0 20px;
                 border: var(--border);
                 width: 25px;
                 border-radius: 3px;
@@ -45,5 +46,11 @@
 
     .__calender-content {
         height: 100%;
+    }
+
+    table {
+        th {
+            text-align: center;
+        }
     }
 }

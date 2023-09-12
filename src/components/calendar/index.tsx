@@ -22,22 +22,28 @@ export interface IEvent {
     // extraData?: any;
 }
 
-export interface IEventLogic extends IEvent{
+export interface IEventLogic extends IEvent {
     date: {
         start: string;
         end: string;
     };
     priority?: number;
 }
+
+export type IOnDateFunc = (date: string) => {
+    className?: string;
+};
 export interface IProps {
     lang?: "en" | "fa";
     theme?: "blue";
     events: IEvent[];
+    onDay?: IOnDateFunc;
     disabledDate?: (date: moment.Moment) => Boolean;
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
     onDropEvent?: (item: IEvent) => void;
-    onDateClick?: (date: moment.Moment) => void;
+    onDateClick?: (date: string) => void;
+    onMonthChange: (start: string, end: string) => void;
     style?: React.CSSProperties;
     // TODO :: hoverEventComponent?: React.ReactNode;
 }
@@ -51,6 +57,8 @@ const Calender = ({
     onDoubleClickEvent,
     style,
     onDateClick,
+    onDay,
+    onMonthChange,
 }: IProps) => {
     return (
         <DatepickerProvider
@@ -62,6 +70,8 @@ const Calender = ({
                 onClickEvent,
                 onDoubleClickEvent,
                 onDateClick,
+                onDay,
+                onMonthChange,
             }}>
             <div className={`__calendar __calendar-theme-${theme}`} style={style}>
                 <MonthCalendar />

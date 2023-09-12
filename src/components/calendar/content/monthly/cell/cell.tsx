@@ -69,6 +69,9 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
         });
         ref.current.classList.remove("__calender-table-td-drag-hover");
     };
+    const onThisDay = config.onDay
+        ? config.onDay(moment_(date).locale("en").format("YYYY-MM-DD"))
+        : {};
 
     const cellClasses = () => {
         const classes: string[] = [];
@@ -81,6 +84,12 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
         }
         if (moment_(date).format("YYYY-MM-DD") < moment_().format("YYYY-MM-DD")) {
             classes.push("__calender-past");
+        }
+        if (config.onDateClick) {
+            classes.push("__calender-table-td-clickable");
+        }
+        if (onThisDay) {
+            if (onThisDay.className) classes.push(onThisDay.className);
         }
         return classes.join(" ");
     };
@@ -105,9 +114,10 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
             ref={ref}
             onClick={() => {
                 if (onClick) onClick();
-                if (config.onDateClick) config.onDateClick(moment_(date));
+                if (config.onDateClick)
+                    config.onDateClick(moment_(date).locale("en").format("YYYY-MM-DD"));
             }}
-            className={`__calender-table-td  ${cellClasses()}`}
+            className={`__calender-table-td ${cellClasses()}`}
             onDragOver={e => {
                 e.preventDefault();
             }}

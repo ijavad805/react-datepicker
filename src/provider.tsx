@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { createContext, useEffect, useState } from "react";
-import { IEvent, IEventLogic } from "./components/calendar";
+import { IEvent, IEventLogic, IOnDateFunc } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 import { priorityStoreInit } from "./components/calendar/content/monthly/cell/priorityStore";
 var moment_jalali = require("jalali-moment");
@@ -27,7 +27,9 @@ export interface IConfigDatePicker {
     onClickEvent?: (item: IEvent) => void;
     onDoubleClickEvent?: (item: IEvent) => void;
     onDropEvent?: (item: IEvent) => void;
-    onDateClick?: (date: moment.Moment) => void;
+    onDateClick?: (date: string) => void;
+    onMonthChange?: (start: string, end: string) => void;
+    onDay?: IOnDateFunc;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -59,7 +61,9 @@ interface IProps {
         onClickEvent?: (item: IEvent) => void;
         onDoubleClickEvent?: (item: IEvent) => void;
         onDropEvent?: (item: IEvent) => void;
-        onDateClick?: (date: moment.Moment) => void;
+        onDateClick?: (date: string) => void;
+        onMonthChange?: (start: string, end: string) => void;
+        onDay?: IOnDateFunc;
     };
     input?: any;
     format?: string;

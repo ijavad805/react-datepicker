@@ -40,6 +40,7 @@
                 z-index: 10;
                 user-select: none;
                 border: 1px solid rgba($color: #000000, $alpha: 0.125);
+                height: 40px;
 
                 .__calendar-table-td-body-events-item-circle {
                     min-width: 3px;
@@ -47,6 +48,7 @@
                     border-radius: 10px;
                     background: rgba($color: #291afe, $alpha: 1);
                     margin-right: 5px;
+                    margin-left: 5px;
                 }
 
                 &.hover {
@@ -78,11 +80,17 @@
 
     &.__calender-today {
         outline: 1px solid var(--primary);
+        background-color: #e6f7ff;
         z-index: 2;
     }
 
-    &.__calender-table-td-drag-hover{
+    &.__calender-table-td-drag-hover,
+    &:hover {
         background-color: #ffffcc;
+    }
+
+    &.__calender-table-td-clickable {
+        cursor: pointer;
     }
 
 }
