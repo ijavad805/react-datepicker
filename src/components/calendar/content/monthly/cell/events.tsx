@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DatepickerContext } from "../../../../../provider";
 import useEvents from "./useEvents";
 import RangeEvent from "./rangeEvent";
@@ -12,28 +12,10 @@ interface IProps {
 }
 const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith, events }) => {
     const eventsUniqueClass = `__calendar-table-events-${date}`;
-    const [style, setStyle] = useState<React.CSSProperties>({});
-
-    useEffect(() => {
-        setTimeout(() => {
-            let defaultHeight = 15;
-            let height = 0;
-
-            const findThisEvent = document.querySelectorAll(
-                `.${eventsUniqueClass} .__calendar-table-td-body-events-item`
-            );
-            findThisEvent.forEach(i => {
-                height += ((i.clientHeight + 10) / window.innerHeight) * 100;
-            });
-
-            setStyle(() => ({
-                minHeight: `${defaultHeight > height ? defaultHeight : height}vh`,
-            }));
-        }, 100);
-    }, [events]);
+    const ref = useRef<HTMLDivElement>(null);
 
     return (
-        <div className={`__calendar-table-td-body-events ${eventsUniqueClass}`} style={style}>
+        <div className={`__calendar-table-td-body-events ${eventsUniqueClass}`} ref={ref}>
             {events
                 ?.sort((a, b) => {
                     if (a?.priority && b?.priority) {
@@ -50,6 +32,11 @@ const Events: React.FC<IProps> = ({ date, cellIndexInWeek, cellWith, events }) =
                         cellIndexInWeek={cellIndexInWeek}
                         cellWith={cellWith}
                         key={`event-${item.id}-${item.priority}-${item.date}`}
+                        setParentHeight={(h: any) => {
+                            if (ref.current !== null) {
+                                if (h > 15) ref.current.style.minHeight = `${h}vh`;
+                            }
+                        }}
                     />
                 ))}
         </div>

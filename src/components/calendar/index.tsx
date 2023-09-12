@@ -43,7 +43,7 @@ export interface IProps {
     onDoubleClickEvent?: (item: IEvent) => void;
     onDropEvent?: (item: IEvent) => void;
     onDateClick?: (date: string) => void;
-    onMonthChange: (start: string, end: string) => void;
+    onMonthChange?: (start: string, end: string) => void;
     style?: React.CSSProperties;
     // TODO :: hoverEventComponent?: React.ReactNode;
 }

@@ -12,8 +12,17 @@ interface IProps {
     cellIndexInWeek: number;
     cellWith: number;
     key: any;
+    setParentHeight?: any;
 }
-const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cellWith, key }) => {
+const RangeEvent: React.FC<IProps> = ({
+    index,
+    item,
+    cellIndexInWeek,
+    date,
+    cellWith,
+    key,
+    setParentHeight,
+}) => {
     const config = useContext(DatepickerContext);
     date = moment(date).locale("en").format("YYYY-MM-DD");
     const hide = cellIndexInWeek !== 0 && item.date.start !== date;
@@ -32,12 +41,18 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
             }
         };
         if (ref.current !== null) {
-            return {
+            const style = {
                 width: `calc(${calcRight() * cellWith + "vw"} - 5px)`,
                 top:
                     (ref.current?.offsetHeight + 5) *
                     (item?.priority !== undefined ? item.priority : index),
             };
+
+            setParentHeight &&
+                setParentHeight(
+                    ((ref.current.offsetHeight + 10 + style.top) / window.innerHeight) * 100
+                );
+            return style;
         }
 
         return {};
@@ -51,7 +66,6 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
                 item.classList.remove("hover");
             } else {
                 item.classList.add("hover");
-
             }
         });
     };
@@ -60,7 +74,7 @@ const RangeEvent: React.FC<IProps> = ({ index, item, cellIndexInWeek, date, cell
         if (ref.current !== null) {
             forceUpdate({ update: true });
         }
-    }, [ref]);
+    }, []);
 
     return (
         <div

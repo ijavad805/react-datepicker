@@ -57,7 +57,7 @@ Persian.args = {
         {
             id: 1,
             title: "Holiday 1",
-            date: "2023-09-14T00:00:00+04:30",
+            date: "2023-09-10",
         },
         {
             id: 2,
