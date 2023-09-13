@@ -30,8 +30,8 @@ const MonthCalendar = () => {
         };
     return (
         <Body
-            onNextClick={handleNextPrev(false)}
-            onPrevClick={handleNextPrev(true)}
+            onNextClick={handleNextPrev(true)}
+            onPrevClick={handleNextPrev(false)}
             onTodayClick={() => {
                 if (config.setDate) {
                     config.setDate(moment());
