@@ -17,33 +17,48 @@ const Template: ComponentStory<typeof Calender> = args => (
     </div>
 );
 
+const fakeEvents = [
+    {
+        id: 1,
+        title: "Holiday 1",
+        date: "2023-09-10",
+        style: {
+            background: "#FFCDD2",
+        },
+    },
+    {
+        id: 2,
+        title: "Holiday 2",
+        date: "2023-9-10",
+        style: {
+            background: "#FFCDD2",
+        },
+    },
+    {
+        id: 3,
+        title: "Event Range 1",
+        date: {
+            start: "2023-9-05",
+            end: "2023-9-12",
+        },
+        style: {
+            background: "#C8E6C9",
+        },
+    },
+    {
+        id: 4,
+        title: "Event Range 2",
+        date: {
+            start: "2023-9-06",
+            end: "2023-9-11",
+        },
+    },
+];
 export const English = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 English.args = {
     lang: "en",
-    events: [
-        {
-            id: 1,
-            title: "Holiday",
-            date: "2023-9-09",
-            style: {
-                background: "rgba(0,0,0,0.125)",
-            },
-        },
-        {
-            id: 2,
-            title: "Holiday",
-            date: "2023-9-09",
-        },
-        {
-            id: 3,
-            title: "Event Range",
-            date: {
-                start: "2023-9-05",
-                end: "2023-9-09",
-            },
-        },
-    ],
+    events: fakeEvents,
     onDropEvent: item => {
         console.log(item);
     },
@@ -53,34 +68,7 @@ export const Persian = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Persian.args = {
     lang: "fa",
-    events: [
-        {
-            id: 1,
-            title: "Holiday 1",
-            date: "2023-09-10",
-        },
-        {
-            id: 2,
-            title: "Holiday 2",
-            date: "2023-9-10",
-        },
-        {
-            id: 3,
-            title: "Event Range 1",
-            date: {
-                start: "2023-9-05",
-                end: "2023-9-12",
-            },
-        },
-        {
-            id: 4,
-            title: "Event Range 2",
-            date: {
-                start: "2023-9-06",
-                end: "2023-9-11",
-            },
-        },
-    ],
+    events: fakeEvents,
     onDropEvent: item => {
         console.log(item);
     },

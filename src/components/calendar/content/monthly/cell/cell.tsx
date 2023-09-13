@@ -124,7 +124,7 @@ const Cell = ({ date, disabled, onClick, cellIndexInWeek }: IProps) => {
             onDrop={handleDrop}>
             <div className="__calendar-table-td-body">
                 <div className={`__calendar-table-td-body-date`}>
-                    {moment_(date).format("MMMM DD")}
+                    {moment_(date).format("DD MMMM")}
                 </div>
 
                 <Events
