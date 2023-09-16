@@ -36,17 +36,18 @@
                 padding: 0 3px;
                 border-radius: 3px;
                 position: absolute;
-                background-color: #fff;
+                background-color: #001f3f;
                 z-index: 10;
                 user-select: none;
                 border: 1px solid rgba($color: #000000, $alpha: 0.125);
                 height: 25px;
+                color: #fff;
 
                 .__calendar-table-td-body-events-item-circle {
                     min-width: 3px;
                     min-height: 3px;
                     border-radius: 10px;
-                    background: rgba($color: #291afe, $alpha: 1);
+                    background: rgba($color: #f2f2f2, $alpha: 1);
                     margin-right: 5px;
                     margin-left: 5px;
                 }
@@ -92,7 +93,6 @@
     &.__calender-table-td-clickable {
         cursor: pointer;
     }
-
 }
 
 .__calender-month-header {
