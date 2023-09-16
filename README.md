@@ -1,7 +1,7 @@
 # react-datepicker
 
 ![alt text](./poster.jpg?raw=true)
-A cool datepicker for english and persian you can see some features here :
+A cool datepicker and calendar for english and persian you can see some features here :
 
  <ul>
  <li>You can choosing between 5 colors.</li>
@@ -15,6 +15,9 @@ A cool datepicker for english and persian you can see some features here :
  <li>Auto adjust position</li>
  <li>Calendar</li>
  </ul>
+ 
+![alt text](./calendar-fa-en.png?raw=true)
+
 
 &#127775; If you like this Datepicker, please bookmark it on your github with the star button.
 
@@ -82,63 +85,78 @@ function App() {
 }
 ```
 
-## Calendar ( BETA )
+## Calendar ( VERSION 1 )
 
-The first version of the calendar is ready but it is just v1 and, yes, it may have some bugs. Please report bugs. I will fix it. I am working on design in v2. You will see a beautiful calendar.
+## Calendar Properties
 
-### en
+The Calendar props interface provides configuration options for customizing the behavior and appearance of the `react-datepicker` component. Here's a summary of its properties:
 
-![alt text](./calendar-en.png?raw=true)
+| Property             | Type                                        | Description                                                                                                                                                                   |
+| -------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lang`               | `"en" \| "fa"`                              | Language for the calendar. Either "en" for English or "fa" for Farsi (Persian).                                                                                               |
+| `theme`              | `"blue"`                                    | Theme for the calendar. Currently, only "blue" is supported.                                                                                                                  |
+| `events`             | `IEvent[]`                                  | An array of `IEvent` objects representing the events to be displayed on the calendar.                                                                                         |
+| `onDay`              | `(date: string) => { className?: string; }` | A function to customize the appearance of a day. It takes a date string as input and should return an object with an optional `className` property to apply custom styles.    |
+| `disabledDate`       | `(date: moment.Moment) => boolean`          | A function that determines whether a date should be disabled. It takes a Moment.js date object as input and should return `true` to disable the date or `false` to enable it. |
+| `onClickEvent`       | `(item: IEvent) => void`                    | A function to handle event click events. It receives an `IEvent` object as its argument.                                                                                      |
+| `onDoubleClickEvent` | `(item: IEvent) => void`                    | A function to handle event double-click events. It receives an `IEvent` object as its argument.                                                                               |
+| `onDropEvent`        | `(item: IEvent) => void`                    | A function to handle event drop events. It receives an `IEvent` object as its argument, to enable drag and drop functionality, this prop should not be `undefined`                                                                                       |
+| `onDateClick`        | `(date: string) => void`                    | A function to handle date click events. It receives a date string as its argument.                                                                                            |
+| `onMonthChange`      | `(start: string, end: string) => void`      | A function to handle month change events. It receives two date strings, `start` and `end`, indicating the new visible date range on the calendar.                             |
+| `style`              | `React.CSSProperties`                       | Additional CSS styles to apply to the calendar component.                                                                                                                     |
 
-### fa
+These properties allow you to configure and customize the behavior and appearance of the `Calendar` component in your application.
 
-![alt text](./calendar-fa.png?raw=true)
+## `IEvent` Interface
 
-## Usage Calendar
+The `IEvent` interface represents an individual event that can be displayed on the calendar. It provides details about the event. Here's a summary of its properties:
+
+| Property    | Type                        | Description                                                                                       |
+| ----------- | --------------------------- | ------------------------------------------------------------------------------------------------- |
+| `id`        | `number`                    | A unique identifier for the event.                                                                |
+| `title`     | `React.ReactNode \| string` | The title of the event, which can be either a Component or a string.                              |
+| `date`      | `DateEvent`                 | The date of the event, which can be a date string or an object with `start` and `end` properties. |
+| `style`     | `React.CSSProperties`       | Additional CSS styles for the event.                                                              |
+| `className` | `string`                    | Additional CSS class for the event.                                                               |
+| `dotColor`  | `string`                    | Color for a dot associated with the event.                                                        |
+| `disabled`  | `boolean`                   | A flag indicating if the event is disabled.                                                       |
+| `icon`      | `React.ReactNode`           | A React node for an icon associated with the event.                                               |
+
+These properties allow you to specify the details and appearance of events to be displayed on the calendar.
 
 ```javascript
 const App = () => {
   return (
-      <Calendar
-         lang = "en"
-         theme = "blue"
-         events={[
-          {
-            id: 1, // it should unique
-            title: "Test",
-            date: "2022-12-27",
-            style: {
-              // what ever you want
-            }
-            className: "test",
-            dotColor: "#000",
-            disabled: false,
-            icon: "$", // also you can use component
-          }
-         ]}
-         onDropEvent={(item: IEvent) => {
-          console.log(item);
-         }}
-         onClickEvent={(item: IEvent) => console.log(item)}
-         onDoubleClickEvent={(item: IEvent) => console.log(item)}
-         style={{
-          height: 600
-         }}
-         onDateClick={(date: moment.Moment) => console.log(date)}
+    <Calendar
+      lang="en"
+      theme="blue"
+      events={[
+        {
+          id: 1, // it should unique
+          title: 'Test',
+          date: '2023-09-16',
+          className: 'test',
+          dotColor: '#000',
+          disabled: false,
+          icon: '$', // also you can use component
+          style: {
+            // what ever you want
+          },
+        },
+      ]}
+      onDropEvent={(item: IEvent) => { // for enabling drag and drop option you should pass this function
+        console.log(item);
+      }}
+      onClickEvent={(item: IEvent) => console.log(item)}
+      onDoubleClickEvent={(item: IEvent) => console.log(item)}
+      style={{
+        height: 600,
+      }}
+      onDateClick={(date: moment.Moment) => console.log(date)}
     />
-  )
-}
-
+  );
+};
 ```
-
-## Coming soon ...
-
-This is my todo list for feature :
-
-<ul>
-<li>Range picker</li>
-<li>Calender new ui</li>
-</ul>
 
 ## Report issues
 

@@ -39,37 +39,40 @@ const useEvents = (date: string) => {
     };
     useEffect(() => {
         const cloneEvents = config.events ? [...config.events] : [];
+        const thisDayEvents = cloneEvents
+            ?.filter(item => handleFilterEvents(item))
+            .map(item => {
+                const tryFindPriority = priorityStore.store.find(i => i.id === item.id);
 
-        cloneEvents.forEach((item, index1) => {
-            const tryFindPriority = priorityStore.store.find(i => i.id === item.id);
-            if (tryFindPriority === undefined) {
-                const findToDayEvents = [...cloneEvents]
-                    .filter(i => handleFilterEvents(i, date))
-                    .sort((a, b) => {
-                        if (a.priority !== undefined && b.priority !== undefined) {
-                            return a.priority - b.priority;
-                        } else {
-                            return 1;
-                        }
+                return {
+                    ...item,
+                    priority: tryFindPriority?.priority,
+                };
+            })
+            .sort((a, b) => {
+                if (a.priority !== undefined && b.priority !== undefined) {
+                    return a.priority - b.priority;
+                } else {
+                    return 1;
+                }
+            });
+
+        if (thisDayEvents.length > 0) {
+            thisDayEvents.forEach((item, index1) => {
+                const tryFindPriority = priorityStore.store.find(i => i.id === item.id);
+                if (tryFindPriority === undefined) {
+                    priorityStoreInit.add({
+                        id: item.id,
+                        priority: getUniquePriority(thisDayEvents),
                     });
+                    thisDayEvents[index1].priority = getUniquePriority(thisDayEvents);
+                } else {
+                    item.priority = tryFindPriority?.priority;
+                }
+            });
 
-                findToDayEvents.forEach((todayEvents, index) => {
-                    if (todayEvents.id === item.id) {
-                        priorityStoreInit.add({
-                            id: item.id,
-                            priority: getUniquePriority(findToDayEvents),
-                        });
-                        cloneEvents[index1].priority = getUniquePriority(findToDayEvents);
-                    }
-                });
-            } else {
-                item.priority = tryFindPriority?.priority;
-            }
-        });
-
-        const thisDayEvents = cloneEvents?.filter(item => handleFilterEvents(item));
-
-        setEvents([...thisDayEvents]);
+            setEvents([...thisDayEvents]);
+        }
     }, [config.events]);
 
     return { events };

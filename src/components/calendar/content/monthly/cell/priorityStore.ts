@@ -9,8 +9,6 @@ export class priorityStore {
     add(event: IEvent) {
         if (priorityStore.store.find(i => i.id === event.id) === undefined) {
             priorityStore.store.push(event);
-        } else {
-            console.log("event already exist");
         }
     }
 
