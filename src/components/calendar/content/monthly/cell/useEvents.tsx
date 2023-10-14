@@ -72,6 +72,8 @@ const useEvents = (date: string) => {
             });
 
             setEvents([...thisDayEvents]);
+        }else{
+            setEvents([])
         }
     }, [config.events]);
 

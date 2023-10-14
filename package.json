@@ -1,7 +1,7 @@
 {
   "name": "@ijavad805/react-datepicker",
-  "version": "2.1.15",
-  "description": "cool date picker and calendar for English and Persian",
+  "version": "2.1.18",
+  "description": "cool datepicker and calendar for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
     "test": "jest",
@@ -22,7 +22,10 @@
     "react-component",
     "persian",
     "shamsi",
-    "farsi"
+    "farsi",
+    "calendar",
+    "persian calendar",
+    "jalali calendar"
   ],
   "author": "Javad kazemzadeh",
   "license": "MIT",
