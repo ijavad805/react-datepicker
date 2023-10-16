@@ -20,7 +20,7 @@ const MonthCalendar = () => {
                 const newDate = date.add(mines ? -1 : 1, year ? "year" : "month");
                 config.setDate(newDate);
 
-                const clone = newDate.clone()
+                const clone = newDate.clone();
                 config.onMonthChange &&
                     config.onMonthChange(
                         clone.startOf("month").locale("en").format("YYYY-MM-DD"),
@@ -61,7 +61,7 @@ const MonthCalendar = () => {
 
                         return (
                             <tr>
-                                {index === 0 && <FillStart />}
+                                {index === 0 && <FillStart emptyCount={rangeOfDays.start * -1} />}
                                 {new Array(7).fill("d").map((i, index) => {
                                     const day = index + 1 + rangeOfDays.start;
                                     if (day <= getMonth().countDay && day > 0)
@@ -84,7 +84,10 @@ const MonthCalendar = () => {
     );
 };
 
-const FillStart = () => {
+interface IProps {
+    emptyCount: number;
+}
+const FillStart: React.FC<IProps> = ({ emptyCount }) => {
     const { getMonthStartWith, getMonth, date } = useDateTools();
 
     const getPrevMonthCount = () => {
@@ -97,15 +100,14 @@ const FillStart = () => {
     };
 
     const getEndOfPrevMonth = (index: number) => {
-        const day = getPrevMonthCount() - (getMonthStartWith() - (index + 1));
-        const date_ = date.clone().add(-1, "month");
+        const date_ = date.clone().add(-1, "month").endOf("month");
 
-        return date_.format("YYYY-MM-") + day;
+        return date_.add(index - emptyCount + 1, "day").format("YYYY-MM-DD");
     };
 
     return (
         <>
-            {new Array(getMonthStartWith()).fill("d").map((i, index) => (
+            {new Array(emptyCount).fill("d").map((i, index) => (
                 <Cell date={getEndOfPrevMonth(index)} disabled={true} cellIndexInWeek={index} />
             ))}
         </>
