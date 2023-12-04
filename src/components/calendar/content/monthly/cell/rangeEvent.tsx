@@ -94,7 +94,11 @@ const RangeEvent: React.FC<IProps> = ({
                 hide ? "hide" : ""
             } ${classEvent}`}
             style={{ ...item?.style, ...calcStyleForRange() }}
-            onClick={config.onClickEvent?.bind(this, item)}
+            onClick={e => {
+                e.stopPropagation();
+                e.preventDefault();
+                config.onClickEvent && config.onClickEvent(item);
+            }}
             onMouseEnter={handleMouseHover(false)}
             onMouseLeave={handleMouseHover(true)}
             onDoubleClick={config.onDoubleClickEvent?.bind(this, item)}>
