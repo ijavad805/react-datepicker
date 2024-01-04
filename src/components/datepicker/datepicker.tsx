@@ -114,9 +114,9 @@ const Datepicker = ({
                         onChange={(e: any) => {
                             let date;
                             if (typeof e === "string") {
-                                date = moment_(e);
+                                date = moment_(e.replace("/","-"));
                             } else if (e.target !== undefined) {
-                                date = moment_(e.target.value);
+                                date = moment_(e.target.value.replaceAll("/","-"));
                             }
 
                             if (date && date.isValid()) {

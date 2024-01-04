@@ -50,9 +50,6 @@ English.args = {
     lang: "en",
     modeTheme: "dark",
     input: <Input />,
-    onChange: val => {
-        console.log(val);
-    },
     footer: (moment, setValue) => {
         return (
             <>
@@ -75,6 +72,9 @@ Persian.args = {
     modeTheme: "dark",
     value: moment(),
     input: <Input />,
+    onChange: val => {
+        console.log(val);
+    },
     footer: (moment, setValue) => {
         return (
             <>
