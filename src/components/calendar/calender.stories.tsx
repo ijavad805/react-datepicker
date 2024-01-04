@@ -108,4 +108,10 @@ Persian.args = {
             };
         }
     },
+    onClickEvent: () => {
+        console.log("clicked on event");
+    },
+    onDateClick: () => {
+        console.log("clicked on date");
+    },
 };
