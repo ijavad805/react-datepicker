@@ -120,7 +120,10 @@ const Datepicker = ({
                             }
 
                             if (date && date.isValid()) {
-                                if (lang === "en" || date.year() >= 1000) setValue(date);
+                                if (lang === "en" || date.year() >= 1000) {
+                                    setValue(date);
+                                    if (onChange) onChange(date);
+                                }
                             }
                         }}
                         name={name ? name : cloneInputRef?.getAttribute("name")}
