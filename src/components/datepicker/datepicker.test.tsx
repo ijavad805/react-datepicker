@@ -65,3 +65,7 @@ test("allow to set name attribute for input", async () => {
 
     expect(container.querySelector("input")?.getAttribute("name")).toEqual("datepicker");
 });
+
+test("change the value manually should trigger onChange function", async () => {
+    const { container } = render(<Datepicker name={"datepicker"} />);
+});

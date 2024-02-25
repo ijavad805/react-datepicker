@@ -72,6 +72,9 @@ Persian.args = {
     modeTheme: "dark",
     value: moment(),
     input: <Input />,
+    onChange: val => {
+        console.log(val);
+    },
     footer: (moment, setValue) => {
         return (
             <>
