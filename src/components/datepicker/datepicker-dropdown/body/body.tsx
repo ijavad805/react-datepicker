@@ -9,6 +9,7 @@ interface IProps {
     headerText?: string | JSX.Element | JSX.Element[];
     onClick?: () => void;
     children?: JSX.Element[] | JSX.Element;
+    noStyle?: boolean;
 }
 const Body = ({
     onNext,
@@ -18,7 +19,9 @@ const Body = ({
     onNextDouble,
     onPrevDouble,
     onClick,
+    noStyle = false,
 }: IProps) => {
+    if (noStyle) return <>{children}</>;
     return (
         <div className={`__datepicker-dropdown-body`}>
             {headerText !== undefined && (

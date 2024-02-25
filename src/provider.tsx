@@ -4,6 +4,11 @@ import { IEvent, IEventLogic, IOnDateFunc } from "./components/calendar";
 import { EnumLang, EnumTheme } from "./components/datepicker/enum";
 import { priorityStoreInit } from "./components/calendar/content/monthly/cell/priorityStore";
 var moment_jalali = require("jalali-moment");
+
+export enum modeViewEnum {
+    Monthly = "Monthly",
+    Yearly = "Yearly",
+}
 export interface IConfigDatePicker {
     lang: "fa" | "en";
     theme: keyof typeof EnumTheme;
@@ -30,6 +35,7 @@ export interface IConfigDatePicker {
     onDateClick?: (date: string) => void;
     onMonthChange?: (start: string, end: string) => void;
     onDay?: IOnDateFunc;
+    view?: modeViewEnum;
 }
 
 const DatepickerContext = createContext<IConfigDatePicker>({
@@ -64,6 +70,7 @@ interface IProps {
         onDateClick?: (date: string) => void;
         onMonthChange?: (start: string, end: string) => void;
         onDay?: IOnDateFunc;
+        view?: modeViewEnum;
     };
     input?: any;
     format?: string;

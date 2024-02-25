@@ -1,0 +1,73 @@
+.__datepicker-events-list {
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    transform: scale(0);
+    border: var(--border);
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+    .__events-list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row-reverse;
+        padding: 5px;
+
+        .__events-back-button {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 5px;
+
+            svg {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+            }
+
+            &:hover{
+                background-color: rgba($color: #000000, $alpha: 0.125);
+            }
+        }
+
+    }
+
+    .__event-list-body {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        overflow-x: hidden;
+        padding: 2px;
+        gap: 2px;
+    }
+
+    &.visible {
+        z-index: 6;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+    .__event-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100% - 50px);
+
+        svg {
+            width: 50px;
+            height: 50px;
+            color: var(--primary);
+        }
+    }
+}

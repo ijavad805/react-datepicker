@@ -1,0 +1,47 @@
+.yearly-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 10px;
+    margin-top: 20px;
+
+    .month-container {
+        width: 250px;
+        position: relative;
+
+        .month-wrapper {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            .month-header {
+                position: relative;
+
+                &:before {
+                    content: "";
+                    display: block;
+                    width: 170%;
+                    height: 3px;
+                    border-radius: 10px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    background-color: var(--primary);
+                    z-index: 0;
+                    transform: translate(-50%, -50%);
+                }
+
+                span {
+                    background-color: #fff;
+                    position: relative;
+                    display: block;
+                    z-index: 2;
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+}
