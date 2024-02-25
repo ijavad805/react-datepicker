@@ -25,7 +25,7 @@ export const YearlyCalendar: React.FC<IProps> = props => {
             onNextClick={() => config.setDate && config.setDate(date.add(1, "year"))}
             onPrevClick={() => config.setDate && config.setDate(date.add(-1, "year"))}>
             <div className={`yearly-view`}>
-                {getMonths().map((month: string, index) => (
+                {getMonths().map((month: string, index: number) => (
                     <MonthView monthIndex={index} title={month} options={props.options} />
                 ))}
             </div>
