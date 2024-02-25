@@ -61,9 +61,22 @@ const updatedEvents = fakeEvents.map(event => {
     const startDate = moment(event.date.start);
     const endDate = moment(event.date.end);
 
-    if (startDate.format("YYYY-MM") !== currentMonth) {
-        startDate.add(1, "month");
-        endDate.add(1,"month")
+    // Check if the start date is in the current month
+    if (startDate.format("YYYY-MM") === currentMonth) {
+        // If it is, keep the start date as is
+        event.date.start = startDate.format("YYYY-MM-DD");
+    } else {
+        // If it's not, set the start date to the first day of the current month
+        event.date.start = currentDate.format("YYYY-MM-DD");
+    }
+
+    // Check if the end date is in the current month
+    if (endDate.format("YYYY-MM") === currentMonth) {
+        // If it is, keep the end date as is
+        event.date.end = endDate.format("YYYY-MM-DD");
+    } else {
+        // If it's not, set the end date to the last day of the current month
+        event.date.end = currentDate.format("YYYY-MM-DD");
     }
     event.date.start = startDate.format("YYYY-MM-DD");
     event.date.end = endDate.format("YYYY-MM-DD");
