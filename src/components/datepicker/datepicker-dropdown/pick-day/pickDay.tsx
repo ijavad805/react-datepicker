@@ -60,6 +60,7 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
                                 this,
                                 moment(date.format("YYYY-MM-") + (index + 1))
                             )}
+                            onlyView={onlyView}
                         />
                     ))}
                     <FillEndAndStart
