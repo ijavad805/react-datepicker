@@ -68,4 +68,5 @@ test("allow to set name attribute for input", async () => {
 
 test("change the value manually should trigger onChange function", async () => {
     const { container } = render(<Datepicker name={"datepicker"} />);
+    console.log(container);
 });

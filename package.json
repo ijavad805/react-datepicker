@@ -1,6 +1,6 @@
 {
   "name": "@ijavad805/react-datepicker",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "cool datepicker and calendar for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
@@ -48,7 +48,7 @@
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
-    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@types/react": "^18.0.17",
     "antd": "^4.23.0",

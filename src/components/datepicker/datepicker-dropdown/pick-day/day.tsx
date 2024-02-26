@@ -64,6 +64,7 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
 
     return (
         <div
+        data-testid={""}
             className={classes()}
             style={{
                 ...style,
@@ -75,7 +76,7 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
                     if ((config?.disabledDate && config?.disabledDate(moment(day))) || disabled) {
                         return false;
                     }
-                    if (onlyView) {
+                    if (!onlyView) {
                         config.setValue(moment(day));
                     }
                 }
