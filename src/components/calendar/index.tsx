@@ -47,7 +47,7 @@ export interface IProps {
     onDateClick?: (date: string) => void;
     onMonthChange?: (start: string, end: string) => void;
     style?: React.CSSProperties;
-    view?: modeViewEnum;
+    view?: "Yearly" | "Monthly";
     yearlyOptions?: IYearOption;
     className?: string;
     extra?: React.ReactNode;
@@ -85,10 +85,11 @@ const Calender = ({
             }}>
             <div className={`__calendar __calendar-theme-${theme} ${className}`} style={style}>
                 {view === modeViewEnum.Monthly && <MonthCalendar />}
-                {view === modeViewEnum.Yearly && <YearlyCalendar options={yearlyOptions} extra={extra}/>}
+                {view === modeViewEnum.Yearly && (
+                    <YearlyCalendar options={yearlyOptions} extra={extra} />
+                )}
             </div>
         </DatepickerProvider>
     );
 };
-
 export default Calender;
