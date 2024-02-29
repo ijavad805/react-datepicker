@@ -1,6 +1,6 @@
 {
   "name": "@ijavad805/react-datepicker",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "cool datepicker and calendar for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
