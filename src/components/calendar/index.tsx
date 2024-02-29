@@ -39,6 +39,11 @@ export interface IProps {
     lang?: "en" | "fa";
     theme?: "blue";
     events: IEvent[];
+    style?: React.CSSProperties;
+    view?: "Yearly" | "Monthly";
+    yearlyOptions?: IYearOption;
+    className?: string;
+    extra?: React.ReactNode;
     onDay?: IOnDateFunc;
     disabledDate?: (date: moment.Moment) => Boolean;
     onClickEvent?: (item: IEvent) => void;
@@ -46,11 +51,6 @@ export interface IProps {
     onDropEvent?: (item: IEvent) => void;
     onDateClick?: (date: string) => void;
     onMonthChange?: (start: string, end: string) => void;
-    style?: React.CSSProperties;
-    view?: "Yearly" | "Monthly";
-    yearlyOptions?: IYearOption;
-    className?: string;
-    extra?: React.ReactNode;
     // TODO :: hoverEventComponent?: React.ReactNode;
 }
 

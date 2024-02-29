@@ -55,6 +55,7 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
                     {new Array(getMonth()?.countDay).fill("DefaultValue").map((i, index) => (
                         <Day
                             day={date.format("YYYY-MM-") + (index + 1)}
+                            key={date.format("YYYY-MM-") + (index + 1)}
                             date={date}
                             onClick={onDayClick?.bind(
                                 this,

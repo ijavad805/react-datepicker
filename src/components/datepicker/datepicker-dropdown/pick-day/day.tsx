@@ -64,7 +64,7 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
 
     return (
         <div
-        data-testid={""}
+            data-testid={""}
             className={classes()}
             style={{
                 ...style,
