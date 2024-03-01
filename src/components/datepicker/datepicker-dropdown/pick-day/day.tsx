@@ -3,7 +3,7 @@ import { useContext } from "react";
 import useDateTools from "../../../../hooks/useDateTools";
 import usePersian from "../../../../hooks/usePersian";
 import { DatepickerContext } from "../../../../provider";
-
+import moment_ from "moment";
 interface IProps {
     day: string;
     date: moment.Moment;
@@ -23,23 +23,9 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
         );
     }, []);
 
-    const events = useMemo(() => {
-        return (
-            config.events?.filter(i => {
-                if (typeof i.date === "string") {
-                    return moment(i.date).format() === moment(day).locale("en").format();
-                } else if (typeof i.date === "object") {
-                    return (
-                        moment(day)
-                            .locale("en")
-                            .isBetween(moment(i.date.start), moment(i.date.end), null, "[]") ||
-                        moment(day).locale("en").format() === moment(i.date.start).format()
-                    );
-                }
-            }) || []
-        );
-    }, [config.events]);
+    const events = config.eventsGroup[moment(day, "YYYY-MM-DD").locale("en").format("YYYY-MM-DD")];
 
+    
     const classes = () => {
         let class_ = "__datepicker-days";
         if (day === moment().format("YYYY-MM-D")) {
@@ -65,11 +51,11 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
     return (
         <div
             data-testid={""}
-            className={classes()}
             style={{
                 ...style,
                 color: effect ? effect?.color : "",
             }}
+            className={classes()}
             onClick={() => {
                 if (config.setValue) {
                     if (onClick) onClick();

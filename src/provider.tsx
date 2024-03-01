@@ -9,6 +9,7 @@ export enum modeViewEnum {
     Monthly = "Monthly",
     Yearly = "Yearly",
 }
+
 export interface IConfigDatePicker {
     lang: "fa" | "en";
     theme: keyof typeof EnumTheme;
@@ -36,7 +37,9 @@ export interface IConfigDatePicker {
     onMonthChange?: (start: string, end: string) => void;
     onDay?: IOnDateFunc;
     view?: modeViewEnum;
+    eventsGroup: eventsGroupType;
 }
+export type eventsGroupType = { [key: string]: IEvent[] };
 
 const DatepickerContext = createContext<IConfigDatePicker>({
     lang: "en",
@@ -44,6 +47,7 @@ const DatepickerContext = createContext<IConfigDatePicker>({
     pick: "day",
     date: moment(),
     value: moment(),
+    eventsGroup: {},
 });
 
 interface IProps {
@@ -98,6 +102,7 @@ const DatepickerProvider = ({
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
     const [events, setEvents] = useState<IEventLogic[] | undefined>();
+    const [eventsGroup, setEventsGroup] = useState<eventsGroupType>({});
 
     const [value, setValue] = useState(
         defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
@@ -125,24 +130,40 @@ const DatepickerProvider = ({
 
     useEffect(() => {
         priorityStoreInit.clear();
+        const events_ = config.events?.map(item => {
+            return {
+                ...item,
+                date:
+                    typeof item.date === "string"
+                        ? {
+                              start: moment(item.date).format("YYYY-MM-DD"),
+                              end: moment(item.date).format("YYYY-MM-DD"),
+                          }
+                        : {
+                              start: moment(item.date?.start).format("YYYY-MM-DD"),
+                              end: moment(item.date?.end).format("YYYY-MM-DD"),
+                          },
+            };
+        });
+        setEvents(events_);
+        const events_map: eventsGroupType = {};
+        events_?.forEach(item => {
+            const startDate = moment(item.date.start);
+            const endDate = moment(item.date.end);
 
-        setEvents(
-            config.events?.map(item => {
-                return {
-                    ...item,
-                    date:
-                        typeof item.date === "string"
-                            ? {
-                                  start: moment(item.date).format("YYYY-MM-DD"),
-                                  end: moment(item.date).format("YYYY-MM-DD"),
-                              }
-                            : {
-                                  start: moment(item.date?.start).format("YYYY-MM-DD"),
-                                  end: moment(item.date?.end).format("YYYY-MM-DD"),
-                              },
-                };
-            })
-        );
+            const currentDate = startDate.clone(); // Start from the start date
+
+            while (currentDate.isSameOrBefore(endDate, "day")) {
+                // Loop through each day between start and end
+                const eventKey = currentDate.format("YYYY-MM-DD");
+                if (!events_map[eventKey]) {
+                    events_map[eventKey] = []; // Initializing an array for events on this date if it doesn't exist already
+                }
+                events_map[eventKey].push(item); // Adding the event to the array for this date
+                currentDate.add(1, "day"); // Move to the next day
+            }
+        });
+        setEventsGroup(events_map);
     }, [config.events]);
 
     return (
@@ -165,6 +186,7 @@ const DatepickerProvider = ({
                     priorityStoreInit.clear();
                     setEvents(events);
                 },
+                eventsGroup,
             }}>
             {children}
         </DatepickerContext.Provider>
