@@ -97,7 +97,7 @@ const DatepickerProvider = ({
     );
 
     useEffect(() => {
-        if (value && document.activeElement !== input.current && input) {
+        if (value && document.activeElement !== input?.current && input) {
             if (input !== null && input !== undefined) {
                 try {
                     input.current.value = value.format(format);

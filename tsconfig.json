@@ -17,7 +17,8 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
+    "lib": ["ES2015", "DOM"]
   },
-  "include": ["../jest-setup.ts","src/**/*.ts"],
+  "include": ["../jest-setup.ts","src/**/*.ts", "src/hooks/__tests__/useDateTools.test.tsx", "src/components/datepicker/datepicker-dropdown/pick-day/__tests__/day.test.tsx"],
   "exclude": ["node_modules"]
 }
