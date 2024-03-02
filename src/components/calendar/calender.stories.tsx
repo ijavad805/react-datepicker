@@ -138,4 +138,9 @@ YearView.args = {
         console.log("clicked on date");
     },
     view: "Yearly",
+    yearlyOptions: {
+        onYearChange: (start, end) => {
+            console.log(start, end);
+        },
+    },
 };

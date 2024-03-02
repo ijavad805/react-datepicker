@@ -9,21 +9,45 @@ import Body from "../body";
 
 export interface IYearOption {
     hideEventsList?: boolean;
+    onYearChange?: (start: string, end: string) => void;
 }
 interface IProps {
     options?: IYearOption;
     extra?: React.ReactNode;
 }
 export const YearlyCalendar: React.FC<IProps> = props => {
-    const { getMonths, date } = useDateTools();
+    const { getMonths, date, moment } = useDateTools();
     const config = useContext(DatepickerContext);
 
+    const handelChangeYear = (prev: boolean) => {
+        if (!config.setDate) return;
+        if (prev) {
+            config.setDate(date.add(-1, "year"));
+        } else {
+            config.setDate(date.add(1, "year"));
+        }
+
+        if (props.options?.onYearChange) {
+            if (config.lang === "en") {
+                props.options.onYearChange(
+                    date.startOf("year").format("YYYY-MM-DD"),
+                    date.endOf("year").format("YYYY-MM-DD")
+                );
+            } else {
+                const date_ = moment(date);
+                props.options.onYearChange(
+                    date_.startOf("jYear").locale("en").format("YYYY-MM-DD"),
+                    date_.endOf("jYear").locale("en").format("YYYY-MM-DD")
+                );
+            }
+        }
+    };
     return (
         <Body
             side={props.extra}
             header={date.year().toString()}
-            onNextClick={() => config.setDate && config.setDate(date.add(1, "year"))}
-            onPrevClick={() => config.setDate && config.setDate(date.add(-1, "year"))}>
+            onNextClick={handelChangeYear.bind(this, false)}
+            onPrevClick={handelChangeYear.bind(this, true)}>
             <div className={`yearly-view`}>
                 {getMonths().map((month: string, index: number) => (
                     <MonthView monthIndex={index} title={month} options={props.options} />
