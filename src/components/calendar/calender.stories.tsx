@@ -143,4 +143,5 @@ YearView.args = {
             console.log(start, end);
         },
     },
+    onAddEventClick: (date: string) => {},
 };

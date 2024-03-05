@@ -96,6 +96,13 @@ export const EventsList: React.FC<IProps> = props => {
                     </svg>
                 </div>
             )}
+            {config.onAddEventClick && props.date && (
+                <div
+                    className={"__add-event"}
+                    onClick={config.onAddEventClick.bind(this, props.date?.format())}>
+                    <div>+</div>
+                </div>
+            )}
         </div>
     );
 };
