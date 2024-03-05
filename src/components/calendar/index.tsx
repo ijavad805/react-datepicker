@@ -51,6 +51,7 @@ export interface IProps {
     onDropEvent?: (item: IEvent) => void;
     onDateClick?: (date: string) => void;
     onMonthChange?: (start: string, end: string) => void;
+    onAddEventClick?: (date: string) => void;
     // TODO :: hoverEventComponent?: React.ReactNode;
 }
 
@@ -69,6 +70,7 @@ const Calender = ({
     yearlyOptions,
     className,
     extra,
+    onAddEventClick,
 }: IProps) => {
     return (
         <DatepickerProvider
@@ -82,6 +84,7 @@ const Calender = ({
                 onDateClick,
                 onDay,
                 onMonthChange,
+                onAddEventClick,
             }}>
             <div className={`__calendar __calendar-theme-${theme} ${className}`} style={style}>
                 {view === modeViewEnum.Monthly && <MonthCalendar />}

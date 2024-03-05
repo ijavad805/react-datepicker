@@ -35,6 +35,7 @@ export interface IConfigDatePicker {
     onDropEvent?: (item: IEvent) => void;
     onDateClick?: (date: string) => void;
     onMonthChange?: (start: string, end: string) => void;
+    onAddEventClick?: (date: string) => void;
     onDay?: IOnDateFunc;
     view?: modeViewEnum;
     eventsGroup: eventsGroupType;
@@ -73,6 +74,7 @@ interface IProps {
         onDropEvent?: (item: IEvent) => void;
         onDateClick?: (date: string) => void;
         onMonthChange?: (start: string, end: string) => void;
+        onAddEventClick?: (date: string) => void;
         onDay?: IOnDateFunc;
         view?: modeViewEnum;
     };
