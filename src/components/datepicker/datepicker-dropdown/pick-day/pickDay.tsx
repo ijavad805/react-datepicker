@@ -56,7 +56,6 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
                         <Day
                             day={date.format("YYYY-MM-") + (index + 1)}
                             date={date}
-                            key={date.format("YYYY-MM-") + (index + 1)}
                             onClick={onDayClick?.bind(
                                 this,
                                 moment(date.format("YYYY-MM-") + (index + 1))

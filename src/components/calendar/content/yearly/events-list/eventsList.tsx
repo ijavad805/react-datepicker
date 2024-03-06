@@ -99,7 +99,7 @@ export const EventsList: React.FC<IProps> = props => {
             {config.onAddEventClick && props.date && (
                 <div
                     className={"__add-event"}
-                    onClick={config.onAddEventClick.bind(this, props.date?.format())}>
+                    onClick={config.onAddEventClick.bind(this, props.date?.locale("en").format())}>
                     <div>+</div>
                 </div>
             )}
