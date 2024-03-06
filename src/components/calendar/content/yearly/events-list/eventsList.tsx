@@ -39,7 +39,7 @@ export const EventsList: React.FC<IProps> = props => {
                 }
             }) || []
         );
-    }, [props.date, props.visible]);
+    }, [props.date, props.visible, config.events]);
 
     useEffect(() => {
         setTimeout(() => {

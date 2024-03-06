@@ -36,7 +36,10 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
             headerText={`${getMonth()?.name} ${convertNumbers(getYear())}`}
             noStyle={onlyView}
             onPrev={handleNextPrev(true)}>
-            <div className={`__datepicker-pick-day-container ${onlyView ? "only-view" : ""}`}>
+            <div
+                className={`__datepicker-pick-day-container ${onlyView ? "only-view" : ""} ${
+                    config.lang === "fa" ? "datepicker-rtl" : ""
+                }`}>
                 <div className="__datepicker-weak">
                     {getWeakDayName().map((item, index) => (
                         <div className={`__datepicker-weak-item`} key={index}>

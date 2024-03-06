@@ -94,6 +94,7 @@
         .__datepicker-pick-day {
             .__datepicker-days {
                 color: #777777;
+
                 &:hover {
                     background: #e8e8e8 !important;
                 }
@@ -103,6 +104,16 @@
                     border: 1px solid var(--primary);
                 }
             }
+        }
+    }
+
+    &.datepicker-rtl {
+        .__datepicker-weak {
+            direction: rtl;
+        }
+
+        .__datepicker-pick-day {
+            direction: rtl;
         }
     }
 }
