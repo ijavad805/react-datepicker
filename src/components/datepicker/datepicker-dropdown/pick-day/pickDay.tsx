@@ -61,7 +61,7 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
                             date={date}
                             onClick={onDayClick?.bind(
                                 this,
-                                moment(date.format("YYYY-MM-") + (index + 1))
+                                moment(date.format("YYYY-MM-") + (index + 1)).locale("en")
                             )}
                             onlyView={onlyView}
                         />
