@@ -66,7 +66,7 @@ export const EventsList: React.FC<IProps> = props => {
                         />
                     </svg>
                 </div>
-                <div className={"__event-day"}>{props.date?.format("LL")}</div>
+                <div className={"__event-day"}>{moment(props.date).locale("fa").format("LL")}</div>
             </div>
             <div className={"__event-list-body"}>
                 {events.map(event => (
