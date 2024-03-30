@@ -1,4 +1,4 @@
-# react-datepicker
+# react-datepicker [Demo](https://ijavad805.github.io/react-datepicker/?path=/story/datepicker--english)
 
 ![alt text](./poster.jpg?raw=true)
 A cool datepicker and calendar for english and persian you can see some features here :
@@ -85,7 +85,7 @@ function App() {
 }
 ```
 
-## Calendar ( VERSION 1 )
+## Calendar ( VERSION 1 ) [Demo](https://ijavad805.github.io/react-datepicker/?path=/story/calender--english)
 
 ## Calendar Properties
 

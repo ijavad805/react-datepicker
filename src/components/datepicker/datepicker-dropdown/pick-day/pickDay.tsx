@@ -1,18 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import useDateTools from "../../../../hooks/useDateTools";
 import usePersian from "../../../../hooks/usePersian";
 import { DatepickerContext } from "../../../../provider";
 import { Body } from "../body";
 import Day from "./day";
 import "./pickDay.scss";
+import { Moment } from "moment";
 
 interface IProps {
     onStep: Function;
+    onlyView?: boolean;
+    customMonth?: Moment;
+    onDayClick?: (date: Moment) => void;
 }
 
-const PickDay = ({ onStep }: IProps) => {
+const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) => {
     const config = useContext(DatepickerContext);
-    const { getMonth, getYear, date, getWeakDayName } = useDateTools();
+    const { getMonth, getYear, date, getWeakDayName, moment } = useDateTools(customMonth);
     const { convertNumbers } = usePersian();
 
     const handleNextPrev =
@@ -30,8 +34,12 @@ const PickDay = ({ onStep }: IProps) => {
             onPrevDouble={handleNextPrev(true, true)}
             onClick={() => onStep(1)}
             headerText={`${getMonth()?.name} ${convertNumbers(getYear())}`}
+            noStyle={onlyView}
             onPrev={handleNextPrev(true)}>
-            <div className={`__datepicker-pick-day-container`}>
+            <div
+                className={`__datepicker-pick-day-container ${onlyView ? "only-view" : ""} ${
+                    config.lang === "fa" ? "datepicker-rtl" : ""
+                }`}>
                 <div className="__datepicker-weak">
                     {getWeakDayName().map((item, index) => (
                         <div className={`__datepicker-weak-item`} key={index}>
@@ -44,14 +52,26 @@ const PickDay = ({ onStep }: IProps) => {
                         start={true}
                         onNext={handleNextPrev(true)}
                         onPrev={handleNextPrev(true)}
+                        empty={onlyView}
+                        customMonth={customMonth}
                     />
                     {new Array(getMonth()?.countDay).fill("DefaultValue").map((i, index) => (
-                        <Day day={date.format("YYYY-MM-") + (index + 1)} date={date} />
+                        <Day
+                            day={date.format("YYYY-MM-") + (index + 1)}
+                            date={date}
+                            onClick={onDayClick?.bind(
+                                this,
+                                moment(date.format("YYYY-MM-") + (index + 1)).locale("en")
+                            )}
+                            onlyView={onlyView}
+                        />
                     ))}
                     <FillEndAndStart
                         start={false}
                         onNext={handleNextPrev(false)}
                         onPrev={handleNextPrev(false)}
+                        empty={onlyView}
+                        customMonth={customMonth}
                     />
                 </div>
             </div>
@@ -63,9 +83,11 @@ interface IPropsFillEndAndStart {
     start: boolean;
     onNext: (e?: any) => void;
     onPrev: (e?: any) => void;
+    empty?: boolean;
+    customMonth?: Moment;
 }
-const FillEndAndStart = ({ start, onNext, onPrev }: IPropsFillEndAndStart) => {
-    const { getMonth, getMonthStartWith, date, value } = useDateTools();
+const FillEndAndStart = ({ start, onNext, onPrev, empty, customMonth }: IPropsFillEndAndStart) => {
+    const { getMonth, getMonthStartWith, date, value } = useDateTools(customMonth);
 
     const getPrevMonthCount = () => {
         const month = getMonth(-1);
@@ -91,15 +113,18 @@ const FillEndAndStart = ({ start, onNext, onPrev }: IPropsFillEndAndStart) => {
         <>
             {new Array(start ? getMonthStartWith() : getMonthCountToEnd())
                 .fill("DefaultValue")
-                .map((i, index) => (
-                    <Day
-                        onClick={start ? onPrev : onNext}
-                        disabled={true}
-                        date={date}
-                        day={day(index)}
-                        key={index}
-                    />
-                ))}
+                .map((i, index) => {
+                    return (
+                        <Day
+                            onClick={start ? onPrev : onNext}
+                            disabled={true}
+                            date={date}
+                            day={day(index)}
+                            key={index}
+                            style={{ visibility: empty ? "hidden" : "visible" }}
+                        />
+                    );
+                })}
         </>
     );
 };

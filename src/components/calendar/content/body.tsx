@@ -8,8 +8,8 @@ interface IProps {
     onPrevClick?: () => void;
     onTodayClick?: () => void;
     children?: JSX.Element[] | JSX.Element;
-    header?: JSX.Element[] | JSX.Element;
-    side?: JSX.Element[] | JSX.Element;
+    header?: React.ReactNode;
+    side?: React.ReactNode;
 }
 
 const Body = ({ children, onNextClick, onPrevClick, header, side, onTodayClick }: IProps) => {
@@ -23,9 +23,11 @@ const Body = ({ children, onNextClick, onPrevClick, header, side, onTodayClick }
                     <div className={`__calendar-controller`} onClick={onPrevClick}>
                         <CaretIcon color="rgba(59, 59, 59,0.8)" height="15px" width={"15px"} />
                     </div>
-                    <div className={`__calendar-header-today`} onClick={onTodayClick}>
-                        {_t("Today")}
-                    </div>
+                    {onTodayClick && (
+                        <div className={`__calendar-header-today`} onClick={onTodayClick}>
+                            {_t("Today")}
+                        </div>
+                    )}
                     <div className={`__calendar-controller`} onClick={onNextClick}>
                         <CaretIcon color="rgba(59, 59, 59,0.8)" height="15px" width={"15px"} />
                     </div>

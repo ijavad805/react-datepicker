@@ -19,7 +19,7 @@ const Template: ComponentStory<typeof Calender> = args => (
 
 const fakeEvents = [
     {
-        date: { start: "2023-09-12", end: "2023-09-12" },
+        date: { start: "2024-01-12", end: "2023-01-12" },
         id: 6478,
         title: "تعطیل",
         icon: null,
@@ -28,25 +28,25 @@ const fakeEvents = [
         },
     },
     {
-        date: { start: "2023-09-12", end: "2023-09-15" },
+        date: { start: "2024-01-12", end: "2024-01-15" },
         id: 641,
         title: "مرحله اول",
         icon: null,
     },
     {
-        date: { start: "2023-09-14", end: "2023-09-15" },
+        date: { start: "2024-01-14", end: "2024-01-15" },
         id: 642,
         title: "مرحله دوم",
         icon: null,
     },
     {
-        date: { start: "2023-09-17", end: "2023-09-20" },
+        date: { start: "2024-01-17", end: "2024-01-20" },
         id: 643,
         title: "مرحله سوم",
         icon: null,
     },
     {
-        date: { start: "2023-09-23", end: "2023-09-26" },
+        date: { start: "2024-01-23", end: "2024-01-26" },
         id: 644,
         title: "مرحله چهارم",
         icon: null,
@@ -114,4 +114,34 @@ Persian.args = {
     onDateClick: () => {
         console.log("clicked on date");
     },
+};
+
+export const YearView = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+YearView.args = {
+    lang: "fa",
+    events: updatedEvents,
+    onDropEvent: item => {
+        console.log(item);
+    },
+    onDay: date => {
+        if (moment(date).day() === 5) {
+            return {
+                className: "holiday",
+            };
+        }
+    },
+    onClickEvent: () => {
+        console.log("clicked on event");
+    },
+    onDateClick: () => {
+        console.log("clicked on date");
+    },
+    view: "Yearly",
+    yearlyOptions: {
+        onYearChange: (start, end) => {
+            console.log(start, end);
+        },
+    },
+    onAddEventClick: (date: string) => {},
 };
