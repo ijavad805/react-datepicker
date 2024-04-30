@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./body.scss";
+import { DatepickerContext } from "../../../../provider";
 
 interface IProps {
     onNext?: () => void;
@@ -21,9 +22,10 @@ const Body = ({
     onClick,
     noStyle = false,
 }: IProps) => {
+    const config = useContext(DatepickerContext);
     if (noStyle) return <>{children}</>;
     return (
-        <div className={`__datepicker-dropdown-body`}>
+        <div className={`__datepicker-dropdown-body ${config.lang}`}>
             {headerText !== undefined && (
                 <div className={`__datepicker-dropdown-body-header`}>
                     <div className={`__datepicker-dropdown-body-controller`}>

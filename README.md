@@ -104,6 +104,8 @@ The Calendar props interface provides configuration options for customizing the 
 | `onDateClick`        | `(date: string) => void`                    | A function to handle date click events. It receives a date string as its argument.                                                                                            |
 | `onMonthChange`      | `(start: string, end: string) => void`      | A function to handle month change events. It receives two date strings, `start` and `end`, indicating the new visible date range on the calendar.                             |
 | `style`              | `React.CSSProperties`                       | Additional CSS styles to apply to the calendar component.                                                                                                                     |
+| `allowClear`         | `boolean`                                   | allow user to clear the value
+
 
 These properties allow you to configure and customize the behavior and appearance of the `Calendar` component in your application.
 

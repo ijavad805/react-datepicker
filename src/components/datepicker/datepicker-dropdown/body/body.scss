@@ -58,4 +58,20 @@
             }
         }
     }
+
+    &.fa {
+        .__datepicker-dropdown-body-header {
+            flex-direction: row-reverse;
+
+            .__datepicker-dropdown-body-controller {
+                &:nth-child(1) {
+                    transform: rotate(180deg);
+                }
+
+                &:nth-child(3) {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+    }
 }

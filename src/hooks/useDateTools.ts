@@ -25,7 +25,6 @@ const useDateTools = (customDate?: moment.Moment) => {
             try {
                 return momentDatePicker()().locale("fa").localeData().jMonths();
             } catch (e) {
-                console.log("react-datepicker Error:", e);
                 return [
                     "فروردین",
                     "اردیبهشت",
