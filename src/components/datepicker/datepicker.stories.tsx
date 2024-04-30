@@ -42,6 +42,11 @@ const Template: ComponentStory<typeof Datepicker> = args => (
         <Datepicker {...args} />
     </div>
 );
+const TemplateRTL: ComponentStory<typeof Datepicker> = args => (
+    <div style={{ height: 400, direction: "rtl" }}>
+        <Datepicker {...args} />
+    </div>
+);
 
 export const English = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -64,7 +69,7 @@ English.args = {
     },
 };
 
-export const Persian = Template.bind({});
+export const Persian = TemplateRTL.bind({});
 
 Persian.args = {
     theme: "blue",
