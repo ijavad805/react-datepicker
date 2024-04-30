@@ -93,42 +93,32 @@ const DatepickerProvider = ({
     input,
     format,
     onChange,
-    value: value_,
+    value,
     defaultValue,
     setOpen,
     closeWhenSelectADay,
 }: IProps) => {
     const moment_ = config.lang === "fa" ? moment_jalali : moment;
     moment_.locale(config.lang);
-
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
     const [date, setDate] = useState(moment_());
     const [events, setEvents] = useState<IEventLogic[] | undefined>();
     const [eventsGroup, setEventsGroup] = useState<eventsGroupType>({});
 
-    const [value, setValue] = useState(
-        defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
-    );
-
     useEffect(() => {
-        if (value && document.activeElement !== input.current && input) {
+        if (document.activeElement !== input.current && input) {
             if (input !== null && input !== undefined) {
                 try {
-                    input.current.value = value.format(format);
+                    input.current.value =
+                        value !== null && value !== undefined ? value.format(format) : null;
                 } catch {
                     input.current.value = "Invalid Date";
                 }
-            } else {
-                console.log("input is null ", input);
             }
             if (closeWhenSelectADay && setOpen) setOpen(false);
         }
         if (value) setDate(value);
     }, [value]);
-
-    useEffect(() => {
-        if (value_) setValue(value_);
-    }, [value_]);
 
     useEffect(() => {
         priorityStoreInit.clear();
@@ -180,8 +170,7 @@ const DatepickerProvider = ({
                 },
                 value,
                 setValue: (i: moment.Moment) => {
-                    if (onChange && i !== undefined) onChange(i.clone().locale("en"));
-                    setValue(i);
+                    onChange && onChange(i ? i : undefined);
                 },
                 events,
                 setEvents: (events: IEventLogic[]) => {
