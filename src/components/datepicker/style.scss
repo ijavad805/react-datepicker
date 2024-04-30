@@ -69,7 +69,7 @@
             position: absolute;
             top: 50%;
             right: 5px;
-            color: #aaa;
+            color: #727272;
             transform: translate3d(0, -50%, 0);
             cursor: pointer;
             width: 20px;
@@ -78,6 +78,8 @@
             align-items: center;
             display: flex;
             border-radius: 10px;
+            -webkit-user-select: none;
+            user-select: none;
 
             &:hover {
                 background: #f7f7f7;
@@ -86,8 +88,11 @@
     }
 
     &.fa {
-        .__datepicker-clear-btn {
-            left: 5px;
+        .__datepicker-input {
+            .__datepicker-clear-btn {
+                left: 5px;
+                right: unset;
+            }
         }
     }
 }
