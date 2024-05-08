@@ -106,7 +106,7 @@ const DatepickerProvider = ({
     const [eventsGroup, setEventsGroup] = useState<eventsGroupType>({});
 
     useEffect(() => {
-        if (document.activeElement !== input.current && input) {
+        if (document.activeElement !== input?.current && input) {
             if (input !== null && input !== undefined) {
                 try {
                     input.current.value =
