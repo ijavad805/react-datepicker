@@ -1,6 +1,11 @@
 # react-datepicker
 
 ![alt text](./poster.jpg?raw=true)
+
+![NPM Version](https://img.shields.io/npm/v/%40ijavad805%2Freact-datepicker)
+![NPM Downloads](https://img.shields.io/npm/dt/%40ijavad805%2Freact-datepicker)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40ijavad805%2Freact-datepicker)
+
 A cool datepicker and calendar for english and persian you can see some features here :
 
  <ul>
