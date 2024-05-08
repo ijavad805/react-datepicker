@@ -1,8 +1,9 @@
 import moment from "moment";
 import React, { StyleHTMLAttributes } from "react";
-import { DatepickerProvider } from "../../provider";
+import { DatepickerProvider, modeViewEnum } from "../../provider";
 import MonthCalendar from "./content/monthly";
 import "./style.scss";
+import { IYearOption, YearlyCalendar } from "./content/yearly";
 
 type DateEvent =
     | string
@@ -33,10 +34,16 @@ export interface IEventLogic extends IEvent {
 export type IOnDateFunc = (date: string) => {
     className?: string;
 };
+
 export interface IProps {
     lang?: "en" | "fa";
     theme?: "blue";
     events: IEvent[];
+    style?: React.CSSProperties;
+    view?: "Yearly" | "Monthly";
+    yearlyOptions?: IYearOption;
+    className?: string;
+    extra?: React.ReactNode;
     onDay?: IOnDateFunc;
     disabledDate?: (date: moment.Moment) => Boolean;
     onClickEvent?: (item: IEvent) => void;
@@ -44,7 +51,7 @@ export interface IProps {
     onDropEvent?: (item: IEvent) => void;
     onDateClick?: (date: string) => void;
     onMonthChange?: (start: string, end: string) => void;
-    style?: React.CSSProperties;
+    onAddEventClick?: (date: string) => void;
     // TODO :: hoverEventComponent?: React.ReactNode;
 }
 
@@ -59,6 +66,11 @@ const Calender = ({
     onDateClick,
     onDay,
     onMonthChange,
+    view = modeViewEnum.Monthly,
+    yearlyOptions,
+    className,
+    extra,
+    onAddEventClick,
 }: IProps) => {
     return (
         <DatepickerProvider
@@ -72,12 +84,15 @@ const Calender = ({
                 onDateClick,
                 onDay,
                 onMonthChange,
+                onAddEventClick,
             }}>
-            <div className={`__calendar __calendar-theme-${theme}`} style={style}>
-                <MonthCalendar />
+            <div className={`__calendar __calendar-theme-${theme} ${className}`} style={style}>
+                {view === modeViewEnum.Monthly && <MonthCalendar />}
+                {view === modeViewEnum.Yearly && (
+                    <YearlyCalendar options={yearlyOptions} extra={extra} />
+                )}
             </div>
         </DatepickerProvider>
     );
 };
-
 export default Calender;

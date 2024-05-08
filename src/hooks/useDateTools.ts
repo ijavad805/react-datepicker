@@ -1,11 +1,11 @@
-import moment from "moment";
+import moment, { Moment } from "moment";
 import { useContext } from "react";
 import { DatepickerContext } from "../provider";
 var moment_jalali = require("jalali-moment");
 
-const useDateTools = () => {
+const useDateTools = (customDate?: moment.Moment) => {
     const config = useContext(DatepickerContext);
-    const date = config.date.clone();
+    const date = customDate ? customDate : config.date.clone();
     const value = config.value;
 
     const getYear = (date_?: string) => {
@@ -25,7 +25,6 @@ const useDateTools = () => {
             try {
                 return momentDatePicker()().locale("fa").localeData().jMonths();
             } catch (e) {
-                console.log("react-datepicker Error:", e);
                 return [
                     "فروردین",
                     "اردیبهشت",
@@ -57,16 +56,21 @@ const useDateTools = () => {
         return dayNames;
     };
 
-    const getMonth = (month?: number) => {
-        const cloneDate = momentDatePicker()(date.clone());
+    const getMonth = (month?: number, addMonth = true) => {
+        const cloneDate = momentDatePicker()(date.clone()) as Moment;
         if (month !== undefined) {
-            cloneDate.add(month, "M");
+            if (addMonth) {
+                cloneDate.add(month, "M");
+            } else {
+                cloneDate.month(month);
+            }
         }
 
         return {
             countDay: cloneDate.daysInMonth(),
             name: cloneDate.format("MMM"),
             fullName: cloneDate.format("MMMM"),
+            date: cloneDate,
         };
     };
     return {

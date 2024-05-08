@@ -5,9 +5,10 @@
     .__calendar-header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .__calender-header-children {
-            width: 130px;
+            font-size: 20px;
         }
 
         .__calender-header-controllers {

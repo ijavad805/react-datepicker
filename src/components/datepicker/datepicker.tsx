@@ -35,6 +35,7 @@ export interface IPropsDatepicker {
     onOpen?: Function;
     spinnerComponent?: JSX.Element | JSX.Element[];
     name?: string;
+    allowClear?: boolean;
 }
 
 const Datepicker = ({
@@ -42,24 +43,28 @@ const Datepicker = ({
     lang = EnumLang.fa,
     input = <input placeholder="datepicker" />,
     format = "YYYY/MM/DD",
+    modeTheme = "light",
+    adjustPosition = "auto",
+    closeWhenSelectADay = true,
+    value: value_,
     footer,
     onChange,
-    value: value_,
     defaultValue,
-    modeTheme = "light",
     dayEffects,
     disabled,
     disabledDate,
     loading,
-    closeWhenSelectADay = true,
     onOpen,
     spinnerComponent,
-    adjustPosition = "auto",
     name,
+    allowClear = true,
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
+    moment_.locale(lang);
     const [open, setOpen] = useState<boolean>(false);
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(
+        defaultValue !== undefined ? moment_(defaultValue.format()) : undefined
+    );
     const ref = useRef<any>(null);
     const [cloneInputRef, setCloneRef] = useState<any>();
     const refInput = useRef<any>(null);
@@ -94,13 +99,16 @@ const Datepicker = ({
             }}
             format={format}
             setOpen={setOpen}
-            onChange={onChange}
+            onChange={date => {
+                setValue(date);
+                onChange && onChange(date?.clone()?.locale("en"));
+            }}
             value={value}
             defaultValue={defaultValue}
             closeWhenSelectADay={closeWhenSelectADay}
             input={refInput}>
             <div
-                className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme} `}
+                className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme} ${lang}`}
                 ref={ref}>
                 <div className={"__datepicker-input"}>
                     {cloneInputRef === undefined && <div style={{ display: "none" }}>{input}</div>}
@@ -114,9 +122,9 @@ const Datepicker = ({
                         onChange={(e: any) => {
                             let date;
                             if (typeof e === "string") {
-                                date = moment_(e.replace("/","-"));
+                                date = moment_(e.replace("/", "-"));
                             } else if (e.target !== undefined) {
-                                date = moment_(e.target.value.replaceAll("/","-"));
+                                date = moment_(e.target.value.replaceAll("/", "-"));
                             }
 
                             if (date && date.isValid()) {
@@ -128,7 +136,16 @@ const Datepicker = ({
                         }}
                         name={name ? name : cloneInputRef?.getAttribute("name")}
                     />
-                    {/* TODO :: add delete icon if user select a date and if not show date icon */}
+                    {allowClear && value !== undefined && value !== null ? (
+                        <div
+                            className={"__datepicker-clear-btn"}
+                            onClick={() => {
+                                setValue(undefined);
+                                if (onChange) onChange(undefined);
+                            }}>
+                            X
+                        </div>
+                    ) : null}
                 </div>
                 {open && (
                     <DatepickerDropdown

@@ -1,26 +1,31 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useContext } from "react";
 import useDateTools from "../../../../hooks/useDateTools";
 import usePersian from "../../../../hooks/usePersian";
 import { DatepickerContext } from "../../../../provider";
-
+import moment_ from "moment";
 interface IProps {
     day: string;
     date: moment.Moment;
     onClick?: () => void;
     disabled?: boolean;
+    style?: React.CSSProperties;
+    onlyView?: boolean;
 }
-const Day = ({ day, date, disabled, onClick }: IProps) => {
+const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
     const config = useContext(DatepickerContext);
     const { moment } = useDateTools();
     const { convertNumbers } = usePersian();
 
-    const findEffect = () => {
+    const effect = useMemo(() => {
         return config.dayEffects?.find(
             item => moment(item.day).format("YYYY-MM-D") === moment(day).format("YYYY-MM-D")
         );
-    };
+    }, []);
 
+    const events = config.eventsGroup[moment(day, "YYYY-MM-DD").locale("en").format("YYYY-MM-DD")];
+
+    
     const classes = () => {
         let class_ = "__datepicker-days";
         if (day === moment().format("YYYY-MM-D")) {
@@ -33,30 +38,47 @@ const Day = ({ day, date, disabled, onClick }: IProps) => {
             class_ += " __datepicker-day-disabled";
         }
 
+        if (config?.onDay) {
+            const dayClass = config.onDay(moment(day).locale("en").format("YYYY-MM-DD"))?.className;
+            if (dayClass) {
+                class_ += ` ${dayClass}`;
+            }
+        }
+
         return class_;
     };
 
     return (
         <div
-            className={classes()}
+            data-testid={""}
             style={{
-                color: findEffect() ? findEffect()?.color : "",
+                ...style,
+                color: effect ? effect?.color : "",
             }}
+            className={classes()}
             onClick={() => {
                 if (config.setValue) {
                     if (onClick) onClick();
                     if ((config?.disabledDate && config?.disabledDate(moment(day))) || disabled) {
                         return false;
                     }
-                    config.setValue(moment(day));
+                    if (!onlyView) {
+                        config.setValue(moment(day));
+                    }
                 }
             }}
-            title={findEffect()?.title}>
+            title={effect?.title}>
             {convertNumbers(moment(day).format("D"))}
-            {findEffect() && (
+            {effect && (
                 <span
                     className="__datepicker-day-effect"
-                    style={{ background: findEffect()?.dotColor }}
+                    style={{ background: effect?.dotColor }}
+                />
+            )}
+            {events?.length > 0 && (
+                <span
+                    className="__datepicker-day-effect"
+                    style={{ background: "var(--primary)" }}
                 />
             )}
         </div>
