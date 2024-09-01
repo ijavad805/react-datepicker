@@ -1,6 +1,6 @@
 {
   "name": "@ijavad805/react-datepicker",
-  "version": "2.2.16",
+  "version": "2.2.17",
   "description": "cool datepicker and calendar for English and Persian",
   "scripts": {
     "rollup": "rollup -c",
@@ -82,6 +82,7 @@
     "react-dom": ">=16.9.0"
   },
   "dependencies": {
+    "@ijavad805/react-datepicker": "file:",
     "jalali-moment": "^3.3.11",
     "moment": "^2.29.4"
   }
