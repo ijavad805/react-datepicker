@@ -1,11 +1,12 @@
-import React, { BaseSyntheticEvent, useEffect, useRef, useState } from "react";
+import React, {BaseSyntheticEvent, useEffect, useRef, useState} from "react";
 import DatepickerDropdown from "./datepicker-dropdown/datepickerDropdown";
-import { DatepickerProvider } from "../../provider";
-import { useOutsideClick } from "../../hooks/useOutSideClick";
+import {DatepickerProvider} from "../../provider";
+import {useOutsideClick} from "../../hooks/useOutSideClick";
 import moment from "moment";
 import "./style.scss";
-import { EnumLang, EnumTheme } from "./enum";
-import { EDropdownPositions } from "./datepicker-dropdown/useDropdownRoles";
+import {EnumLang, EnumTheme} from "./enum";
+import {EDropdownPositions} from "./datepicker-dropdown/useDropdownRoles";
+
 var moment_jalali = require("jalali-moment");
 
 export interface IPropsDatepicker {
@@ -40,27 +41,27 @@ export interface IPropsDatepicker {
 }
 
 const Datepicker = ({
-    theme = EnumTheme.blue,
-    lang = EnumLang.fa,
-    input = <input placeholder="datepicker" />,
-    format = "YYYY/MM/DD",
-    modeTheme = "light",
-    adjustPosition = "auto",
-    closeWhenSelectADay = true,
-    value: value_,
-    footer,
-    onChange,
-    defaultValue,
-    dayEffects,
-    disabled,
-    disabledDate,
-    loading,
-    onOpen,
-    spinnerComponent,
-    name,
-    allowClear = true,
-    onChangeMonth,
-}: IPropsDatepicker) => {
+                        theme = EnumTheme.blue,
+                        lang = EnumLang.fa,
+                        input = <input placeholder="datepicker"/>,
+                        format = "YYYY/MM/DD",
+                        modeTheme = "light",
+                        adjustPosition = "auto",
+                        closeWhenSelectADay = true,
+                        value: value_,
+                        footer,
+                        onChange,
+                        defaultValue,
+                        dayEffects,
+                        disabled,
+                        disabledDate,
+                        loading,
+                        onOpen,
+                        spinnerComponent,
+                        name,
+                        allowClear = true,
+                        onChangeMonth,
+                    }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     moment_.locale(lang);
     const [open, setOpen] = useState<boolean>(false);
@@ -114,12 +115,17 @@ const Datepicker = ({
                 className={`__datepicker __datepicker-theme-${theme} __datepicker-theme-mode-${modeTheme} ${lang}`}
                 ref={ref}>
                 <div className={"__datepicker-input"}>
-                    {cloneInputRef === undefined && <div style={{ display: "none" }}>{input}</div>}
+                    {cloneInputRef === undefined && <div style={{display: "none"}}>{input}</div>}
                     <input
                         ref={refInput}
                         className={cloneInputRef?.getAttribute("class")}
                         placeholder={cloneInputRef?.getAttribute("placeholder")}
-                        onFocus={() => setOpen(true)}
+                        onFocus={() => {
+                            setOpen(true);
+                            if (adjustPosition === "modal") {
+                                if (refInput.current) refInput.current?.blur();
+                            }
+                        }}
                         autoComplete={"disabled"}
                         disabled={disabled}
                         onChange={(e: any) => {
