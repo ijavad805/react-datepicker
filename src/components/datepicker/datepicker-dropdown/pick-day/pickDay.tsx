@@ -23,7 +23,15 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
         (mines: boolean, year: boolean = false) =>
         () => {
             if (config.setDate) {
-                config.setDate(date.add(mines ? -1 : 1, year ? "year" : "month"));
+                const newDate = date.add(mines ? -1 : 1, year ? "year" : "month");
+                config.setDate(newDate);
+
+                const clone = newDate;
+                config.onMonthChange &&
+                    config.onMonthChange(
+                        clone.clone().startOf("month").locale("en").format("YYYY-MM-DD"),
+                        clone.clone().endOf("month").locale("en").format("YYYY-MM-DD")
+                    );
             }
         };
 

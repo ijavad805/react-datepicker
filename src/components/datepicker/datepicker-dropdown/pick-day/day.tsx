@@ -21,11 +21,10 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
         return config.dayEffects?.find(
             item => moment(item.day).format("YYYY-MM-D") === moment(day).format("YYYY-MM-D")
         );
-    }, []);
+    }, [day, config.dayEffects]);
 
     const events = config.eventsGroup[moment(day, "YYYY-MM-DD").locale("en").format("YYYY-MM-DD")];
 
-    
     const classes = () => {
         let class_ = "__datepicker-days";
         if (day === moment().format("YYYY-MM-D")) {

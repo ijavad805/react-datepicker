@@ -36,6 +36,7 @@ export interface IPropsDatepicker {
     spinnerComponent?: JSX.Element | JSX.Element[];
     name?: string;
     allowClear?: boolean;
+    onChangeMonth?: (start: string, end: string) => void;
 }
 
 const Datepicker = ({
@@ -58,6 +59,7 @@ const Datepicker = ({
     spinnerComponent,
     name,
     allowClear = true,
+    onChangeMonth,
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     moment_.locale(lang);
@@ -96,6 +98,7 @@ const Datepicker = ({
                 theme: theme,
                 disabledDate,
                 dayEffects,
+                onMonthChange: onChangeMonth
             }}
             format={format}
             setOpen={setOpen}
