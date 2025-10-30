@@ -6,7 +6,6 @@
     "rollup": "rollup -c",
     "test": "npx jest --watch",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o ./docs",
     "prepublish": "npm run rollup"
   },
   "private": false,
