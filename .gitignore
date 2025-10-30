@@ -3,3 +3,4 @@
 .npmrc
 /src/stories
 .idea
+package-lock.json
