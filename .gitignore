@@ -2,3 +2,4 @@
 /dist
 .npmrc
 /src/stories
+.idea
