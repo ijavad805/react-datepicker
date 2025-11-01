@@ -5,10 +5,10 @@
   "scripts": {
     "rollup": "rollup -c",
     "test": "npx jest --watch",
-    "docs:start": "npm --pre documents start",
-    "docs:build": "docusaurus build",
-    "docs:deploy": "docusaurus deploy",
-    "docs:swizzle": "docusaurus swizzle",
+    "docs:start": "npm --prefix ./documents start",
+    "docs:build": "npm --prefix ./documents build",
+    "docs:deploy": "npm --prefix ./documents deploy",
+    "docs:swizzle": "npm --prefix ./documents  swizzle",
     "prepublish": "npm run rollup"
   },
   "private": false,
