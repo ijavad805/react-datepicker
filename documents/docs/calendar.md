@@ -4,6 +4,24 @@ title: Calendar
 
 The `Calendar` component offers an interactive month view with extensive customization options, including localization, event rendering, and drag-and-drop support.
 
+## Quick Start
+
+1. Install the package:
+
+   ```bash
+   npm install @ijavad805/react-datepicker
+   ```
+
+2. Render a calendar with default styling and an empty event list:
+
+   ```tsx
+   import { Calendar } from '@ijavad805/react-datepicker';
+
+   function AppSimple() {
+     return <Calendar events={[]} />;
+   }
+   ```
+
 ## Usage Example
 
 ```tsx

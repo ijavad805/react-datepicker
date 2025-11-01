@@ -18,25 +18,23 @@ The `@ijavad805/react-datepicker` package provides a feature-rich datepicker com
 - Provide a custom footer for the datepicker.
 - Automatic or manual positioning modes.
 
-## Installation
+## Quick Start
 
-Install the package using npm:
+1. Install the package:
 
-```bash
-npm install @ijavad805/react-datepicker
-```
+   ```bash
+   npm install @ijavad805/react-datepicker
+   ```
 
-## Basic Usage
+2. Import the component and render it with the default configuration:
 
-Import the component and render it with default settings:
+   ```tsx
+   import { Datepicker } from '@ijavad805/react-datepicker';
 
-```tsx
-import { Datepicker } from '@ijavad805/react-datepicker';
-
-function AppSimple() {
-  return <Datepicker />;
-}
-```
+   function AppSimple() {
+     return <Datepicker />;
+   }
+   ```
 
 ## Advanced Usage
 
