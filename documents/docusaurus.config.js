@@ -10,8 +10,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'React Datepicker',
+  tagline: 'Documentation for the React Datepicker and Calendar components',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -27,8 +27,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'react-datepicker', // Usually your GitHub org/user name.
+  projectName: 'react-datepicker', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -83,9 +83,9 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'My Site',
+        title: 'React Datepicker',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'React Datepicker logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -93,11 +93,10 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/Hacker0x01/react-datepicker',
             label: 'GitHub',
             position: 'right',
           },
@@ -110,8 +109,12 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Datepicker',
+                to: '/docs/datepicker',
+              },
+              {
+                label: 'Calendar',
+                to: '/docs/calendar',
               },
             ],
           },
@@ -120,15 +123,15 @@ const config = {
             items: [
               {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                href: 'https://stackoverflow.com/questions/tagged/react-datepicker',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.com/invite/HKSkHsc',
               },
               {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
+                label: 'GitHub Discussions',
+                href: 'https://github.com/Hacker0x01/react-datepicker/discussions',
               },
             ],
           },
@@ -136,17 +139,13 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/Hacker0x01/react-datepicker',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} React Datepicker contributors. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
