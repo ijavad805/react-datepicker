@@ -19,8 +19,13 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            to="/docs/datepicker">
+            Explore the Datepicker docs
+          </Link>
+          <Link
+            className="button button--link button--lg"
+            to="/docs/calendar">
+            View the Calendar guide →
           </Link>
         </div>
       </div>
@@ -32,8 +37,8 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title} documentation`}
+      description="Comprehensive guides for installing and using the React Datepicker and Calendar components.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
