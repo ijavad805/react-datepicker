@@ -35,6 +35,9 @@
   "homepage": "https://ijavad805.github.io/react-datepicker/",
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^13.3.0",
