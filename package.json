@@ -5,7 +5,10 @@
   "scripts": {
     "rollup": "rollup -c",
     "test": "npx jest --watch",
-    "storybook": "start-storybook -p 6006",
+    "docs:start": "docusaurus start",
+    "docs:build": "docusaurus build",
+    "docs:deploy": "docusaurus deploy",
+    "docs:swizzle": "docusaurus swizzle",
     "prepublish": "npm run rollup"
   },
   "private": false,
@@ -42,6 +45,9 @@
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
+    "@docusaurus/core": "^3.3.2",
+    "@docusaurus/module-type-aliases": "^3.3.2",
+    "@docusaurus/preset-classic": "^3.3.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@types/react": "^18.0.17",
