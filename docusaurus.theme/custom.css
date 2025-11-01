@@ -1,0 +1,22 @@
+:root {
+  --ifm-color-primary: #1890ff;
+  --ifm-color-primary-dark: #1476d4;
+  --ifm-color-primary-darker: #1061ad;
+  --ifm-color-primary-light: #40a9ff;
+  --ifm-code-font-size: 95%;
+}
+
+div[class^="hero"] {
+  background: linear-gradient(135deg, #1890ff 0%, #722ed1 100%);
+  color: white;
+}
+
+div[class^="hero"] .button.button--secondary.button--outline {
+  color: white;
+  border-color: white;
+}
+
+.markdown img {
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}

@@ -1,4 +1,4 @@
-# react-datepicker [Demo Live](https://ijavad805.github.io/react-datepicker/?path=/story/datepicker--english)
+# react-datepicker [Documentation](https://ijavad805.github.io/react-datepicker/docs/intro)
 
 ![alt text](./poster.jpg?raw=true)
 
@@ -90,7 +90,15 @@ function App() {
 }
 ```
 
-## Calendar ( VERSION 1 ) [Demo](https://ijavad805.github.io/react-datepicker/?path=/story/calender--english)
+## Documentation
+
+Documentation is now powered by [Docusaurus](https://docusaurus.io/).
+
+- `npm run docs:start` – start the local docs site with live reload.
+- `npm run docs:build` – create a production static build in `build/`.
+- `npm run docs:deploy` – publish the site to GitHub Pages using the configuration in `docusaurus.config.js`.
+
+## Calendar ( VERSION 1 ) [Documentation](https://ijavad805.github.io/react-datepicker/docs/components)
 
 ## Calendar Properties
 
