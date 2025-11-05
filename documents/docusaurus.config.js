@@ -20,10 +20,10 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://ijavad805.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/react-datepicker',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -101,7 +101,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://github.com/Hacker0x01/react-datepicker',
+            href: 'https://github.com/ijavad805/react-datepicker',
             label: 'GitHub',
             position: 'right',
           },
@@ -140,7 +140,7 @@ const config = {
               },
               {
                 label: 'GitHub Discussions',
-                href: 'https://github.com/Hacker0x01/react-datepicker/discussions',
+                href: 'https://github.com/ijavad805/react-datepicker/discussions',
               },
             ],
           },
@@ -149,7 +149,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Hacker0x01/react-datepicker',
+                href: 'https://github.com/ijavad805/react-datepicker',
               },
             ],
           },

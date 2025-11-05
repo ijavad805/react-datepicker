@@ -2,7 +2,7 @@ import React, {useEffect, useId, useMemo, useState} from 'react';
 import moment, {Moment} from 'moment';
 import jalaliMoment from 'jalali-moment';
 
-import {Datepicker} from '@site/../dist/esm/index.js';
+import {Datepicker} from '../../../../dist/esm/index.js';
 
 import styles from './styles.module.css';
 
