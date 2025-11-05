@@ -96,6 +96,11 @@ const config = {
             label: 'Docs',
           },
           {
+            to: '/docs/playground',
+            label: 'Playground',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/Hacker0x01/react-datepicker',
             label: 'GitHub',
             position: 'right',
@@ -115,6 +120,10 @@ const config = {
               {
                 label: 'Calendar',
                 to: '/docs/calendar',
+              },
+              {
+                label: 'Playground',
+                to: '/docs/playground',
               },
             ],
           },

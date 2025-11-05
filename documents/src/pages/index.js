@@ -27,6 +27,11 @@ function HomepageHeader() {
             to="/docs/calendar">
             View the Calendar guide →
           </Link>
+          <Link
+            className="button button--outline button--lg"
+            to="/docs/playground">
+            Try the live playground
+          </Link>
         </div>
       </div>
     </header>
