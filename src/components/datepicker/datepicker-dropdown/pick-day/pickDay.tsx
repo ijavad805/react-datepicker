@@ -41,7 +41,7 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
             onNextDouble={handleNextPrev(false, true)}
             onPrevDouble={handleNextPrev(true, true)}
             onClick={() => onStep(1)}
-            headerText={`${getMonth()?.name} ${convertNumbers(getYear())}`}
+            headerText={`${getMonth()?.fullName} ${convertNumbers(getYear())}`}
             noStyle={onlyView}
             onPrev={handleNextPrev(true)}>
             <div
