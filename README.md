@@ -1,3 +1,4 @@
+![React Datepicker](./poster.jpg)
 # React Datepicker
 
 A customizable datepicker and calendar component library with English and Persian support for React applications.
