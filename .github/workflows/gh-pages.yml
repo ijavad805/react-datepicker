@@ -32,6 +32,14 @@ jobs:
 
       - name: Install docs deps
         run: npm i
+        working-directory: ./
+        
+      - name: Install docs deps
+        run: npm run rollup
+        working-directory: ./
+        
+      - name: Install docs deps
+        run: npm i
         working-directory: ./documents
 
       - name: Build Docusaurus
