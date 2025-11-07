@@ -13,6 +13,8 @@
     "declaration": true,
     "declarationDir": "types",
     "sourceMap": true,
+    "inlineSources": true,
+    "declarationMap": false,
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

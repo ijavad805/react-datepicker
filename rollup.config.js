@@ -3,7 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
-import { terser } from "rollup-plugin-terser";
+import {terser} from "rollup-plugin-terser";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import image from '@rollup/plugin-image';
 
@@ -29,7 +29,7 @@ export default [
             image(),
             resolve(),
             commonjs(),
-            typescript({ tsconfig: "./tsconfig.json" }),
+            typescript({tsconfig: "./tsconfig.json", sourceMap: true, inlineSources: true}),
             postcss(),
 
             terser(),
@@ -37,7 +37,7 @@ export default [
     },
     {
         input: "dist/esm/index.d.ts",
-        output: [{ file: "dist/index.d.ts", format: "esm" }],
+        output: [{file: "dist/index.d.ts", format: "esm"}],
         plugins: [dts()],
         external: [/\.scss$/],
     },
