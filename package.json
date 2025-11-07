@@ -5,8 +5,10 @@
   "scripts": {
     "rollup": "rollup -c",
     "test": "npx jest --watch",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o ./docs",
+    "docs:start": "npm --prefix ./documents start",
+    "docs:build": "npm --prefix ./documents build",
+    "docs:deploy": "npm --prefix ./documents deploy",
+    "docs:swizzle": "npm --prefix ./documents  swizzle",
     "prepublish": "npm run rollup"
   },
   "private": false,
@@ -36,21 +38,15 @@
   "homepage": "https://ijavad805.github.io/react-datepicker/",
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.4",
-    "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-interactions": "^6.5.10",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/builder-webpack5": "^6.5.10",
-    "@storybook/manager-webpack5": "^6.5.10",
-    "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.5.10",
-    "@storybook/testing-library": "^0.0.13",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^18.0.17",
     "antd": "^4.23.0",
     "babel-loader": "^8.2.5",
@@ -82,8 +78,15 @@
     "react-dom": ">=16.9.0"
   },
   "dependencies": {
-    "@ijavad805/react-datepicker": "file:",
     "jalali-moment": "^3.3.11",
     "moment": "^2.29.4"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
   }
 }

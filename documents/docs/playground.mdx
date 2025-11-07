@@ -1,0 +1,25 @@
+---
+title: Playground
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import DatepickerPlayground from '@site/src/components/Playground/DatepickerPlayground';
+
+# Playground
+
+Experiment with the React Datepicker component directly in your browser. Use the
+controls below to toggle themes, switch between English and Persian locales, or
+flip the widget into dark mode without leaving the documentation.
+
+<BrowserOnly fallback={<div className="alert alert--secondary">Loading the playground…</div>}>
+  {() => <DatepickerPlayground />}
+</BrowserOnly>
+
+## What to try next
+
+- Explore the [Datepicker guide](./datepicker.md) for a complete list of props
+  and customization options.
+- Review the [Calendar guide](./calendar.md) to coordinate picker and calendar
+  behaviors across your application.
+- File an [issue on GitHub](https://github.com/ijavad805/react-datepicker/issues)
+  if you run into a bug or have feedback about the playground experience.
