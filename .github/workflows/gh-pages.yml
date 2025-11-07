@@ -31,7 +31,7 @@ jobs:
           if [ -f package-lock.json ]; then npm ci; fi
 
       - name: Install docs deps
-        run: npm ci
+        run: npm i
         working-directory: ./documents
 
       - name: Build Docusaurus
