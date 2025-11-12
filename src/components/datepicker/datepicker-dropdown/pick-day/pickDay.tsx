@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import useDateTools from "../../../../hooks/useDateTools";
 import usePersian from "../../../../hooks/usePersian";
-import { DatepickerContext } from "../../../../provider";
-import { Body } from "../body";
+import {DatepickerContext} from "../../../../provider";
+import {Body} from "../body";
 import Day from "./day";
 import "./pickDay.scss";
-import { Moment } from "moment";
+import {Moment} from "moment";
 
 interface IProps {
     onStep: Function;
@@ -14,26 +14,26 @@ interface IProps {
     onDayClick?: (date: Moment) => void;
 }
 
-const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) => {
+const PickDay = ({onStep, onlyView = false, customMonth, onDayClick}: IProps) => {
     const config = useContext(DatepickerContext);
-    const { getMonth, getYear, date, getWeakDayName, moment } = useDateTools(customMonth);
-    const { convertNumbers } = usePersian();
+    const {getMonth, getYear, date, getWeakDayName, moment} = useDateTools(customMonth);
+    const {convertNumbers} = usePersian();
 
     const handleNextPrev =
         (mines: boolean, year: boolean = false) =>
-        () => {
-            if (config.setDate) {
-                const newDate = date.add(mines ? -1 : 1, year ? "year" : "month");
-                config.setDate(newDate);
+            () => {
+                if (config.setDate) {
+                    const newDate = date.add(mines ? -1 : 1, year ? "year" : "month");
+                    config.setDate(newDate);
 
-                const clone = newDate;
-                config.onMonthChange &&
+                    const clone = newDate;
+                    config.onMonthChange &&
                     config.onMonthChange(
                         clone.clone().startOf("month").locale("en").format("YYYY-MM-DD"),
                         clone.clone().endOf("month").locale("en").format("YYYY-MM-DD")
                     );
-            }
-        };
+                }
+            };
 
     return (
         <Body
@@ -50,7 +50,7 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
                 }`}>
                 <div className="__datepicker-weak">
                     {getWeakDayName().map((item, index) => (
-                        <div className={`__datepicker-weak-item`} key={index}>
+                        <div className={`__datepicker-weak-item`} key={`week-${index}`}>
                             {item}
                         </div>
                     ))}
@@ -72,6 +72,7 @@ const PickDay = ({ onStep, onlyView = false, customMonth, onDayClick }: IProps) 
                                 moment(date.format("YYYY-MM-") + (index + 1)).locale("en")
                             )}
                             onlyView={onlyView}
+                            key={`day-${index}`}
                         />
                     ))}
                     <FillEndAndStart
@@ -94,8 +95,9 @@ interface IPropsFillEndAndStart {
     empty?: boolean;
     customMonth?: Moment;
 }
-const FillEndAndStart = ({ start, onNext, onPrev, empty, customMonth }: IPropsFillEndAndStart) => {
-    const { getMonth, getMonthStartWith, date, value } = useDateTools(customMonth);
+
+const FillEndAndStart = ({start, onNext, onPrev, empty, customMonth}: IPropsFillEndAndStart) => {
+    const {getMonth, getMonthStartWith, date} = useDateTools(customMonth);
 
     const getPrevMonthCount = () => {
         const month = getMonth(-1);
@@ -128,8 +130,8 @@ const FillEndAndStart = ({ start, onNext, onPrev, empty, customMonth }: IPropsFi
                             disabled={true}
                             date={date}
                             day={day(index)}
-                            key={index}
-                            style={{ visibility: empty ? "hidden" : "visible" }}
+                            key={`fill-${start ? "start" : "end"}-${index}`}
+                            style={{visibility: empty ? "hidden" : "visible"}}
                         />
                     );
                 })}
