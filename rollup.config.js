@@ -30,7 +30,14 @@ export default [
             resolve(),
             commonjs(),
             typescript({tsconfig: "./tsconfig.json", sourceMap: true, inlineSources: true}),
-            postcss(),
+            postcss({
+                use: ["sass"],
+                autoModules: true,
+                modules: {
+                    generateScopedName: "[name]__[local]___[hash:base64:5]",
+                },
+                sourceMap: true,
+            }),
 
             terser(),
         ],
