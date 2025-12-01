@@ -33,6 +33,7 @@ export interface IPropsDatepicker {
     name?: string;
     allowClear?: boolean;
     closeIcon?: JSX.Element;
+    closeIconClasses?: string;
     onChange?: (val?: moment.Moment) => void;
     disabledDate?: (date: moment.Moment) => Boolean;
     onChangeMonth?: (start: string, end: string) => void;
@@ -65,7 +66,8 @@ const Datepicker = ({
     allowClear = true,
     onChangeMonth,
     closeIcon,
-    onClear
+    onClear,
+    closeIconClasses = ""
 }: IPropsDatepicker) => {
     const moment_ = lang === "fa" ? moment_jalali : moment;
     moment_.locale(lang);
@@ -152,7 +154,7 @@ const Datepicker = ({
                     />
                     {allowClear && value !== undefined && value !== null ? (
                         <div
-                            className={"__datepicker-clear-btn"}
+                            className={`__datepicker-clear-btn ${closeIconClasses}`}
                             onClick={() => {
                                 setValue(undefined);
                                 if (onChange) onChange(undefined);
