@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Datepicker from "./datepicker";
 import React from "react";
 import moment from "moment";
@@ -69,3 +70,37 @@ test("allow to set name attribute for input", async () => {
 test("change the value manually should trigger onChange function", async () => {
     const { container } = render(<Datepicker name={"datepicker"} />);
 });
+
+/**
+ * Regression test for issue #43:
+ * Selecting a date and then clearing the input incorrectly sets the value to 2001.
+ */
+test("clearing the input after selecting a date must not reset it to 2001", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<Datepicker name="datepicker" />);
+
+    const input = screen.getByPlaceholderText("datepicker");
+
+    await user.click(input);
+
+    const dayElement = Array.from(
+        container.querySelectorAll(".__datepicker-days")
+    ).find(el => !el.classList.contains("__datepicker-day-disabled"));
+
+    expect(dayElement).toBeDefined();
+
+    if (dayElement) {
+        await user.click(dayElement);
+    }
+
+    await waitFor(() => expect(input).not.toHaveValue(""));
+
+    await user.clear(input);
+    await waitFor(() => expect(input).toHaveValue(""));
+    
+    await user.click(input);
+    const headerText = container.querySelector(".__datepicker-dropdown-header-text");
+
+    expect(headerText?.textContent).not.toContain("2001");
+});
+

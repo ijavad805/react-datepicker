@@ -72,9 +72,14 @@ function App() {
       onOpen={() => {
         console.log('datepicker is open');
       }}
+      onClear={() => {
+        console.log('datepicker cleared');
+      }}
       lang="en"
       loading={false}
       modeTheme="dark"
+      closeIcon={<span aria-hidden>×</span>}
+      closeIconClasses="my-clear-btn"
       theme="blue"
       defaultValue={moment()}
       adjustPosition="auto"
@@ -85,6 +90,12 @@ function App() {
   );
 }
 ```
+
+### Additional Props
+
+- `closeIcon`: Custom React node rendered inside the clear control when `allowClear` is enabled. Useful for matching your design system iconography.
+- `onClear`: Callback fired when the input is cleared (either via the clear control or programmatically). Receives no arguments.
+- `closeIconClasses`: Additional class names applied to the clear control container so you can style the clear button without overriding global styles.
 
 ## Reporting Issues
 
