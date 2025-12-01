@@ -136,7 +136,7 @@ const Datepicker = ({
                                 date = moment_(e.target.value.replaceAll("/", "-"));
                             }
 
-                            if (date && date.isValid()) {
+                            if (date && date.isValid() && e.target.value.length >= 7) {
                                 if (lang === "en" || date.year() >= 1000) {
                                     setValue(date);
                                     if (onChange) onChange(date);

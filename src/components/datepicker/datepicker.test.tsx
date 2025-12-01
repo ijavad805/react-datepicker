@@ -101,6 +101,6 @@ test("clearing the input after selecting a date must not reset it to 2001", asyn
     await user.click(input);
     const headerText = container.querySelector(".__datepicker-dropdown-header-text");
 
-    expect(headerText).not.toContain("2001");
+    expect(headerText?.textContent).not.toContain("2001");
 });
 
