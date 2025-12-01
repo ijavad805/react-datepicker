@@ -77,10 +77,6 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
-  "dependencies": {
-    "jalali-moment": "^3.3.11",
-    "moment": "^2.29.4"
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -88,5 +84,9 @@
       "require": "./dist/cjs/index.js"
     },
     "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "date-fns-jalali": "^4.1.0-0"
   }
 }

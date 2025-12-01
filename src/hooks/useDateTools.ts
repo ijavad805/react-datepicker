@@ -1,90 +1,96 @@
-import moment, { Moment } from "moment";
-import { useContext } from "react";
-import { DatepickerContext } from "../provider";
-var moment_jalali = require("jalali-moment");
+import moment, {Moment} from "moment";
+import {useContext, useMemo} from "react";
+import {DatepickerContext} from "../provider";
+import dateFnsJalali from "date-fns-jalali";
+import * as dateFns from "date-fns";
 
-const useDateTools = (customDate?: moment.Moment) => {
+const useDateTools = (customDate?: Date) => {
     const config = useContext(DatepickerContext);
-    const date = customDate ? customDate : config.date.clone();
+    const tools = useMemo(() => config.lang === "en" ? dateFns : dateFnsJalali, [config.lang]);
+    const date = customDate ? new Date(customDate) : config.value;
     const value = config.value;
 
-    const getYear = (date_?: string) => {
-        return date.format("YYYY");
+    const format = (date: Date | string, format: string) => {
+        return dateFnsJalali.format(date, format)
+    }
+
+    const isSameDay = (date: Date | string, to: Date | string) => {
+        return dateFns.isSameDay(date, to)
+    }
+
+    const year = (date_: string | Date) => {
+        return format(date_, "YYYY");
     };
 
     const getMonthStartWith = () => {
-        return date.startOf("month").weekday();
+        if (date)
+            return tools.startOfWeek(tools.startOfMonth(date)); //
+        return null;
     };
 
-    const momentDatePicker = () => {
-        if (config.lang === "en") return moment;
-        return moment_jalali;
+    const getMonths = (): string[] => {
+        const seed = new Date(2024, 0, 1);
+        return Array.from({length: 12}, (_, i) => {
+            return tools.format(tools.setMonth(seed, i), config.lang === "fa" ? "LLLL" : "LLL");
+        });
     };
-    const getMonths = () => {
+
+    const getWeekDayName = (
+        minName: boolean = true,
+    ) => {
+        // Build one full ISO week (Mon-Sun)
+        const days = tools.eachDayOfInterval({
+            start: new Date(2021, 0, 4), // Monday
+            end: new Date(2021, 0, 10)   // Sunday
+        });
+
+        // Pick the right token for short vs long names
+        const token = minName ? "EEEEE" : "EEEE";
+
+        let dayNames = days.map(d => format(d, token));
+
         if (config.lang === "fa") {
-            try {
-                return momentDatePicker()().locale("fa").localeData().jMonths();
-            } catch (e) {
-                return [
-                    "فروردین",
-                    "اردیبهشت",
-                    "خرداد",
-                    "تیر",
-                    "مرداد",
-                    "شهریور",
-                    "مهر",
-                    "ابان",
-                    "اذر",
-                    "دی",
-                    "بهمن",
-                    "اسفند",
-                ];
-            }
-        }
-
-        return momentDatePicker()().localeData().monthsShort();
-    };
-
-    const getWeakDayName = (minName: boolean = true) => {
-        let dayNames = [
-            ...(minName ? date.localeData().weekdaysMin() : date.localeData().weekdays()),
-        ];
-        if (config.lang === "fa") {
-            dayNames.unshift(dayNames.pop() as any);
+            dayNames.unshift(dayNames.pop() as string);
         }
 
         return dayNames;
     };
 
-    const getMonth = (month?: number, addMonth = true) => {
-        const cloneDate = momentDatePicker()(date.clone()) as Moment;
+    const getMonth = (
+        baseDate: Date,
+        month?: number,
+        addMonth: boolean = true,
+    ) => {
+        let date = baseDate;
+
         if (month !== undefined) {
             if (addMonth) {
-                cloneDate.add(month, "M");
+                date = tools.addMonths(baseDate, month);
             } else {
-                cloneDate.month(month);
+                date = tools.setMonth(baseDate, month);
             }
         }
 
         return {
-            countDay: cloneDate.daysInMonth(),
-            name: cloneDate.format("MMM"),
-            fullName: cloneDate.format("MMMM"),
-            date: cloneDate,
+            countDay: tools.getDaysInMonth(date),
+            name: format(date, "MMM"),
+            fullName: format(date, "MMMM"),
+            date
         };
     };
     return {
+        format,
+        isSameDay,
         getMonth,
         maxMonth: 12,
         maxWeak: 7,
-        getYear,
+        year,
         getMonthStartWith,
         date: date,
         value,
         getMonths,
         setValue: config.setValue,
-        moment: momentDatePicker(),
-        getWeakDayName,
+        getWeekDayName,
     };
 };
 

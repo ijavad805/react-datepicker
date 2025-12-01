@@ -1,39 +1,41 @@
-import React, { useMemo } from "react";
-import { useContext } from "react";
+import React, {useMemo} from "react";
+import {useContext} from "react";
 import useDateTools from "../../../../hooks/useDateTools";
 import usePersian from "../../../../hooks/usePersian";
-import { DatepickerContext } from "../../../../provider";
+import {DatepickerContext} from "../../../../provider";
 import moment_ from "moment";
+
 interface IProps {
     day: string;
-    date: moment.Moment;
+    date: Date;
     onClick?: () => void;
     disabled?: boolean;
     style?: React.CSSProperties;
     onlyView?: boolean;
 }
-const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
+
+const Day = ({day, date, disabled, onClick, style, onlyView}: IProps) => {
     const config = useContext(DatepickerContext);
-    const { moment } = useDateTools();
-    const { convertNumbers } = usePersian();
+    const dateTools = useDateTools();
+    const {convertNumbers} = usePersian();
 
     const effect = useMemo(() => {
         return config.dayEffects?.find(
-            item => moment(item.day).format("YYYY-MM-D") === moment(day).format("YYYY-MM-D")
+            item => dateTools.isSameDay(item.day, day)
         );
     }, [day, config.dayEffects]);
 
-    const events = config.eventsGroup[moment(day, "YYYY-MM-DD").locale("en").format("YYYY-MM-DD")];
+    const events = config.eventsGroup[dateTools.format(day, "YYYY-MM-DD")];
 
     const classes = () => {
         let class_ = "__datepicker-days";
-        if (day === moment().format("YYYY-MM-D")) {
+        if (day === dateTools.format(new Date(), "YYYY-MM-D")) {
             class_ += " __datepicker-today";
         }
-        if (day === config.value?.format("YYYY-MM-D")) {
+        if (config.value && day === dateTools.format(config.value, "YYYY-MM-D")) {
             class_ += " __datepicker-selected";
         }
-        if ((config?.disabledDate && config?.disabledDate(moment(day))) || disabled) {
+        if ((config?.disabledDate && config?.disabledDate(day)) || disabled) {
             class_ += " __datepicker-day-disabled";
         }
 
@@ -71,13 +73,13 @@ const Day = ({ day, date, disabled, onClick, style, onlyView }: IProps) => {
             {effect && (
                 <span
                     className="__datepicker-day-effect"
-                    style={{ background: effect?.dotColor }}
+                    style={{background: effect?.dotColor}}
                 />
             )}
             {events?.length > 0 && (
                 <span
                     className="__datepicker-day-effect"
-                    style={{ background: "var(--primary)" }}
+                    style={{background: "var(--primary)"}}
                 />
             )}
         </div>

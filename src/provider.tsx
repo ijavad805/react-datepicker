@@ -1,8 +1,10 @@
 import moment from "moment";
-import React, { createContext, useEffect, useState } from "react";
-import { IEvent, IEventLogic, IOnDateFunc } from "./components/calendar";
-import { EnumLang, EnumTheme } from "./components/datepicker/enum";
-import { priorityStoreInit } from "./components/calendar/content/monthly/cell/priorityStore";
+import React, {createContext, useEffect, useState} from "react";
+import {IEvent, IEventLogic, IOnDateFunc} from "./components/calendar";
+import {EnumLang, EnumTheme} from "./components/datepicker/enum";
+import {priorityStoreInit} from "./components/calendar/content/monthly/cell/priorityStore";
+import useDateTools from "./hooks/useDateTools";
+
 var moment_jalali = require("jalali-moment");
 
 export enum modeViewEnum {
@@ -15,17 +17,16 @@ export interface IConfigDatePicker {
     theme: keyof typeof EnumTheme;
     pick?: "day" | "month" | "year";
     setPick?: (val: "day" | "month" | "year") => void;
-    date: moment.Moment;
     setDate?: Function;
     setValue?: Function;
-    value?: moment.Moment;
+    value?: Date;
     dayEffects?: {
         title?: string;
         color?: string;
         dotColor?: string;
         day: string;
     }[];
-    disabledDate?: (date: moment.Moment) => Boolean;
+    disabledDate?: (date: Date | string) => Boolean;
 
     // calendar
     events?: IEventLogic[];
@@ -40,14 +41,14 @@ export interface IConfigDatePicker {
     view?: modeViewEnum;
     eventsGroup: eventsGroupType;
 }
+
 export type eventsGroupType = { [key: string]: IEvent[] };
 
 const DatepickerContext = createContext<IConfigDatePicker>({
     lang: "en",
     theme: EnumTheme.blue,
     pick: "day",
-    date: moment(),
-    value: moment(),
+    value: new Date(),
     eventsGroup: {},
 });
 
@@ -57,7 +58,7 @@ interface IProps {
         // share
         lang: keyof typeof EnumLang;
         theme: keyof typeof EnumTheme;
-        disabledDate?: (date: moment.Moment) => Boolean;
+        disabledDate?: (date: Date | string) => Boolean;
 
         // datepicker
         dayEffects?: {
@@ -80,61 +81,49 @@ interface IProps {
     };
     input?: any;
     format?: string;
-    onChange?: (val?: moment.Moment) => void;
-    value?: moment.Moment;
-    defaultValue?: moment.Moment;
+    onChange?: (val?: Date) => void;
+    value?: Date;
+    defaultValue?: Date;
     closeWhenSelectADay?: boolean;
     setOpen?: Function;
 }
 
-const DatepickerProvider = ({
-    children,
-    config,
-    input,
-    format,
-    onChange,
-    value,
-    defaultValue,
-    setOpen,
-    closeWhenSelectADay,
-}: IProps) => {
-    const moment_ = config.lang === "fa" ? moment_jalali : moment;
-    moment_.locale(config.lang);
+const DatepickerProvider = (config: IProps) => {
+    const [value, setValue] = useState(config.value);
     const [pick, setPick] = useState<"day" | "month" | "year">("day");
-    const [date, setDate] = useState(moment_());
     const [events, setEvents] = useState<IEventLogic[] | undefined>();
     const [eventsGroup, setEventsGroup] = useState<eventsGroupType>({});
+    const dateTools = useDateTools();
 
     useEffect(() => {
-        if (document.activeElement !== input?.current && input) {
-            if (input !== null && input !== undefined) {
+        if (document.activeElement !== config.input?.current && config.input) {
+            if (config.input !== null && config.input !== undefined) {
                 try {
-                    input.current.value =
-                        value !== null && value !== undefined ? value.format(format) : null;
+                    config.input.current.value =
+                        value !== null && value !== undefined ? dateTools.format(value, config.format ?? "YYYY-MM-DD") : null;
                 } catch {
-                    input.current.value = "Invalid Date";
+                    config.input.current.value = "Invalid Date";
                 }
             }
-            if (closeWhenSelectADay && setOpen) setOpen(false);
+            if (config.closeWhenSelectADay && config.setOpen) config.setOpen(false);
         }
-        if (value) setDate(value);
     }, [value]);
 
     useEffect(() => {
         priorityStoreInit.clear();
-        const events_ = config.events?.map(item => {
+        const events_ = events?.map(item => {
             return {
                 ...item,
                 date:
                     typeof item.date === "string"
                         ? {
-                              start: moment(item.date).format("YYYY-MM-DD"),
-                              end: moment(item.date).format("YYYY-MM-DD"),
-                          }
+                            start: moment(item.date).format("YYYY-MM-DD"),
+                            end: moment(item.date).format("YYYY-MM-DD"),
+                        }
                         : {
-                              start: moment(item.date?.start).format("YYYY-MM-DD"),
-                              end: moment(item.date?.end).format("YYYY-MM-DD"),
-                          },
+                            start: moment(item.date?.start).format("YYYY-MM-DD"),
+                            end: moment(item.date?.end).format("YYYY-MM-DD"),
+                        },
             };
         });
         setEvents(events_);
@@ -156,21 +145,18 @@ const DatepickerProvider = ({
             }
         });
         setEventsGroup(events_map);
-    }, [config.events]);
+    }, [events]);
 
     return (
         <DatepickerContext.Provider
             value={{
-                ...config,
+                ...config.config,
                 setPick,
                 pick,
-                date: date.clone(),
-                setDate: (i: moment.Moment) => {
-                    setDate(i);
-                },
                 value,
-                setValue: (i: moment.Moment) => {
-                    onChange && onChange(i ? i : undefined);
+                setValue: (i: Date) => {
+                    setValue(i);
+                    config.onChange && config.onChange(i);
                 },
                 events,
                 setEvents: (events: IEventLogic[]) => {
@@ -179,9 +165,9 @@ const DatepickerProvider = ({
                 },
                 eventsGroup,
             }}>
-            {children}
+            {config.children}
         </DatepickerContext.Provider>
     );
 };
 
-export { DatepickerProvider, DatepickerContext };
+export {DatepickerProvider, DatepickerContext};
