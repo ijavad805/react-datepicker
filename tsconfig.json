@@ -20,6 +20,6 @@
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
   },
-  "include": ["../jest-setup.ts","src/**/*.ts"],
+  "include": ["../jest-setup.ts","src/**/*"],
   "exclude": ["node_modules"]
 }
